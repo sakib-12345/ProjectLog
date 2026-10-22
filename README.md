@@ -22,6 +22,22 @@ ProjectLog is a desktop application built with Electron, HTML, CSS, and JavaScri
 - **Desktop Experience** — Run as a standalone Electron application on Windows.
 
 > Feature availability may depend on the version of ProjectLog you are using.
+## Download ProjectLog
+
+Get ProjectLog for Windows from the GitHub Releases page.
+
+[**Download ProjectLog for Windows**](https://github.com/sakib-12345/ProjectLog/releases/latest)
+
+1. Open the latest release.
+2. Download the `.exe` installer from the **Assets** section.
+3. Run the installer and follow the setup instructions.
+4. Launch ProjectLog from the Start menu or desktop shortcut, if created.
+
+**System requirements**
+- Windows 10 or Windows 11
+- No separate Node.js installation required for the packaged application
+
+
 
 ## Tech Stack
 
