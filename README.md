@@ -62,12 +62,6 @@ screenshots/
 └── folder-scanner.png
 ```
 
-For example, after adding your screenshots to the repository:
-
-```markdown
-![ProjectLog Dashboard](screenshots/dashboard.png)
-```
-
 ## Getting Started
 
 ### Prerequisites
