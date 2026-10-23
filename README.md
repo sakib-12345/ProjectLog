@@ -51,16 +51,6 @@ Get ProjectLog for Windows from the GitHub Releases page.
 | Electron IPC     | Communication between the interface and main process |
 | Electron Builder | Application packaging and distribution               |
 
-## Screenshots
-
-Add screenshots of your application here.
-
-```text
-screenshots/
-├── dashboard.png
-├── project-details.png
-└── folder-scanner.png
-```
 
 ## Getting Started
 
