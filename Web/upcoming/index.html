@@ -8,6 +8,33 @@
 <style>
 :root{color-scheme:dark;--bg:#0b0b0b;--panel:#111;--line:#2b2b2b;--text:#f5f5f5;--muted:#a1a1a1}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:14px/1.6 Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}a{color:inherit;text-decoration:none}.shell{max-width:1000px;margin:auto;padding:0 28px}.topbar{height:65px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}.brand{display:flex;align-items:center;gap:10px;font-weight:750}.logo{width:29px;height:29px;border-radius:8px;background:#eee;color:#111;display:grid;place-items:center;font-weight:900}.meta,.eyebrow,.kicker,.tag,.phase time{font:10px ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.09em;text-transform:uppercase}.meta{color:#888}.hero{padding:46px 0 30px}.eyebrow{display:inline-flex;align-items:center;gap:8px;border:1px solid #343434;background:#141414;color:#ccc;padding:6px 10px;border-radius:6px}.dot{width:6px;height:6px;border-radius:50%;background:#eee}h1{font-size:clamp(36px,6vw,56px);letter-spacing:-.065em;line-height:1.04;margin:18px 0 13px}h1 span{color:#858585}.lead{max-width:650px;color:var(--muted);line-height:1.8;margin:0}.versions{display:grid;gap:12px;margin-top:26px}.release{border:1px solid #343434;background:linear-gradient(140deg,#191919,#101010);border-radius:12px;padding:22px}.release.future{background:#101010}.release.future .version{color:#e2e2e2}.release-top{display:flex;align-items:flex-start;justify-content:space-between;gap:15px}.kicker{color:#999}.version{font-size:27px;font-weight:750;letter-spacing:-.05em;margin-top:4px}.status{border:1px solid #444;border-radius:5px;padding:5px 8px;font-size:10px;color:#ddd}.desc{font-size:12px;color:#aaa;margin:10px 0 0;max-width:680px}.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}.chip{border:1px solid #303030;background:#151515;border-radius:5px;padding:5px 8px;font-size:10px;color:#bbb}.section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:15px;margin:34px 0 14px}.section-head h2{font-size:19px;letter-spacing:-.04em;margin:0}.section-head p{font-size:11px;color:#777;margin:4px 0 0}.filters{display:flex;gap:6px;flex-wrap:wrap}.filters button{background:#111;border:1px solid #303030;color:#999;padding:6px 9px;border-radius:6px;font-size:10px;cursor:pointer}.filters button.active,.filters button:hover{background:#eee;border-color:#eee;color:#111}.features{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.feature{border:1px solid var(--line);border-radius:10px;background:#111;padding:17px}.feature-top{display:flex;gap:12px;align-items:flex-start}.ico{flex:0 0 34px;height:34px;display:grid;place-items:center;border:1px solid #383838;background:#202020;border-radius:8px;color:#eee;font-size:15px}.feature h3{font-size:13px;margin:0 0 4px}.feature p{font-size:11px;line-height:1.75;color:#999;margin:0}.tag{display:inline-block;margin-top:12px;border:1px solid #333;border-radius:4px;padding:3px 6px;color:#aaa;font-size:9px}.timeline{border:1px solid var(--line);border-radius:10px;background:#101010;padding:4px 17px}.phase{display:grid;grid-template-columns:85px 1fr;gap:15px;padding:15px 0;border-bottom:1px solid #252525}.phase:last-child{border:0}.phase time{color:#888;padding-top:2px}.phase b{font-size:12px;display:block;margin-bottom:3px}.phase p{font-size:11px;color:#999;margin:0;line-height:1.7}.note{display:flex;gap:12px;border:1px solid #2c2c2c;background:#141414;border-radius:9px;padding:15px;margin-top:17px}.note-mark{font:14px ui-monospace,monospace}.note strong{font-size:11px;display:block;margin-bottom:3px}.note p{font-size:10px;color:#999;margin:0;line-height:1.7}.footer{border-top:1px solid var(--line);margin-top:36px;padding:18px 0 25px;display:flex;justify-content:space-between;gap:12px;color:#777;font-size:10px}.footer a{color:#ccc}@media(max-width:650px){.shell{padding:0 17px}.meta{display:none}.hero{padding-top:34px}.release{padding:17px}.features{grid-template-columns:1fr}.section-head{align-items:flex-start;flex-direction:column}.phase{grid-template-columns:65px 1fr;gap:10px}.footer{flex-direction:column}}
+
+/* Compact app demo with an adjacent product-details card */
+.demo-section{padding:22px 0 54px}
+.demo-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin:0 auto 24px}
+.demo-heading h2{font-size:clamp(27px,4vw,42px);line-height:1.1;letter-spacing:-.055em;margin:0}
+.demo-heading p{max-width:390px;color:var(--muted);font-size:13px;line-height:1.7;margin:0}
+.demo-layout{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(250px,.8fr);gap:18px;align-items:stretch}
+.demo-frame{min-width:0;padding:1px;border-radius:17px;background:linear-gradient(135deg,#ffffff35,#77777718,#ffffff24);box-shadow:0 24px 65px #0007}
+.demo-inner{height:100%;overflow:hidden;border:1px solid #292929;border-radius:16px;background:#111;display:flex;flex-direction:column}
+.demo-topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 15px;border-bottom:1px solid #292929;background:#151515}
+.demo-topbar strong{font-size:12px}.demo-topbar span{font:9px 'DM Mono',monospace;color:#999;letter-spacing:.08em}
+.demo-gif{display:block;width:100%;height:auto;max-height:430px;object-fit:contain;object-position:top;background:#080808}
+.demo-caption{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:12px 15px;border-top:1px solid #292929;color:#999;font-size:10px;margin-top:auto}
+.demo-caption a{color:#eee;text-decoration:underline;text-underline-offset:3px}
+.demo-info{border:1px solid #292929;border-radius:17px;background:linear-gradient(145deg,#171717,#101010);padding:25px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;min-width:0}
+.demo-info-icon{width:62px;height:62px;border:1px solid #383838;background:#222;border-radius:16px;padding:9px;object-fit:contain;margin-bottom:22px}
+.demo-info .section-kicker{margin-bottom:9px}
+.demo-info h3{font-size:23px;line-height:1.2;letter-spacing:-.045em;margin:0 0 11px}
+.demo-info p{font-size:12px;line-height:1.8;color:var(--muted);margin:0}
+.demo-points{list-style:none;padding:0;margin:19px 0 23px;display:grid;gap:11px}
+.demo-points li{font-size:11px;color:#d0d0d0;display:flex;gap:9px;align-items:flex-start}
+.demo-points li span{color:#f5f5f5;font-weight:700}
+.demo-info .btn{margin-top:auto}
+@media(max-width:760px){.demo-layout{grid-template-columns:1fr}.demo-info{padding:22px}.demo-gif{max-height:500px}.demo-info-icon{width:54px;height:54px;margin-bottom:15px}}
+@media(max-width:650px){.demo-section{padding:12px 0 30px}.demo-heading{align-items:flex-start;flex-direction:column;gap:10px}.demo-topbar{padding:12px}.demo-caption{align-items:flex-start;flex-direction:column}.demo-info h3{font-size:21px}}
+
+
 </style>
 </head>
 <body>
@@ -17,6 +44,21 @@
 <div class="eyebrow"><span class="dot"></span> What’s next</div>
 <h1>Built today.<br><span>Better tomorrow.</span></h1>
 <p class="lead">A transparent look at what may be coming to ProjectLog next. This roadmap is a plan, not a promise—priorities can change as features are tested and improved.</p>
+  <div class="demo-layout">
+      <div class="demo-frame">
+        <div class="demo-inner">
+          <div class="demo-topbar"><strong>ProjectLog · Product demo</strong><span>DESKTOP WALKTHROUGH</span></div>
+          <img class="demo-gif"
+               src="demo_app.gif"
+               alt="Animated demonstration of the ProjectLog desktop app"
+               loading="lazy"
+               decoding="async">
+          <div class="demo-caption">
+            <span>Animated app preview</span>
+            <a href="https://github.com/sakib-12345/ProjectLog" target="_blank" rel="noopener">View source ↗</a>
+          </div>
+        </div>
+      </div>
 <div class="versions">
 <article class="release">
 <div class="release-top"><div><div class="kicker">Next planned release</div><div class="version">ProjectLog v1.2.0</div></div><span class="status">PLANNED</span></div>
