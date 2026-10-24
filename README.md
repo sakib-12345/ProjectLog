@@ -4,6 +4,12 @@
 
 ProjectLog is a desktop application built with Electron, HTML, CSS, and JavaScript. It provides a dedicated space to maintain project notes, track development progress, organize resources, and keep important project information accessible in one place.
 
+
+<p align="center">
+  <img src="assets/demo_v1.0.0.gif" alt="ProjectLog Demo" width="800">
+</p>
+
+
 ## Features
 
 - **Project Management** — Create and maintain project records in one workspace.
