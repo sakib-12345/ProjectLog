@@ -1,61 +1,64 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#212121">
-  <title>Coming Soon — ProjectLog</title>
-  <style>
-    :root {
-      color-scheme: dark;
-      --bg: #212121;
-      --text: #f5f5f5;
-      --muted: #a7a7a7;
-      --line: #414141;
-    }
-    * { box-sizing: border-box; }
-    html, body { width: 100%; min-height: 100%; margin: 0; }
-    body {
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      padding: 24px;
-      background: var(--bg);
-      color: var(--text);
-      font: 14px/1.5 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }
-    main { text-align: center; }
-    h1 {
-      margin: 0;
-      font-size: clamp(34px, 7vw, 64px);
-      line-height: 1.1;
-      letter-spacing: -0.055em;
-      font-weight: 750;
-    }
-    p {
-      margin: 14px 0 0;
-      color: var(--muted);
-      font-size: 14px;
-    }
-    .mark {
-      display: grid;
-      place-items: center;
-      width: 42px;
-      height: 42px;
-      margin: 0 auto 22px;
-      border: 1px solid var(--line);
-      border-radius: 13px;
-      color: var(--text);
-      font-size: 20px;
-      font-weight: 800;
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b0b0b">
+<title>Upcoming · ProjectLog</title>
+<style>
+:root{color-scheme:dark;--bg:#0b0b0b;--panel:#111;--line:#2b2b2b;--text:#f5f5f5;--muted:#a1a1a1}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:14px/1.6 Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}a{color:inherit;text-decoration:none}.shell{max-width:1000px;margin:auto;padding:0 28px}.topbar{height:65px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}.brand{display:flex;align-items:center;gap:10px;font-weight:750}.logo{width:29px;height:29px;border-radius:8px;background:#eee;color:#111;display:grid;place-items:center;font-weight:900}.meta,.eyebrow,.kicker,.tag,.phase time{font:10px ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.09em;text-transform:uppercase}.meta{color:#888}.hero{padding:46px 0 30px}.eyebrow{display:inline-flex;align-items:center;gap:8px;border:1px solid #343434;background:#141414;color:#ccc;padding:6px 10px;border-radius:6px}.dot{width:6px;height:6px;border-radius:50%;background:#eee}h1{font-size:clamp(36px,6vw,56px);letter-spacing:-.065em;line-height:1.04;margin:18px 0 13px}h1 span{color:#858585}.lead{max-width:650px;color:var(--muted);line-height:1.8;margin:0}.versions{display:grid;gap:12px;margin-top:26px}.release{border:1px solid #343434;background:linear-gradient(140deg,#191919,#101010);border-radius:12px;padding:22px}.release.future{background:#101010}.release.future .version{color:#e2e2e2}.release-top{display:flex;align-items:flex-start;justify-content:space-between;gap:15px}.kicker{color:#999}.version{font-size:27px;font-weight:750;letter-spacing:-.05em;margin-top:4px}.status{border:1px solid #444;border-radius:5px;padding:5px 8px;font-size:10px;color:#ddd}.desc{font-size:12px;color:#aaa;margin:10px 0 0;max-width:680px}.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}.chip{border:1px solid #303030;background:#151515;border-radius:5px;padding:5px 8px;font-size:10px;color:#bbb}.section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:15px;margin:34px 0 14px}.section-head h2{font-size:19px;letter-spacing:-.04em;margin:0}.section-head p{font-size:11px;color:#777;margin:4px 0 0}.filters{display:flex;gap:6px;flex-wrap:wrap}.filters button{background:#111;border:1px solid #303030;color:#999;padding:6px 9px;border-radius:6px;font-size:10px;cursor:pointer}.filters button.active,.filters button:hover{background:#eee;border-color:#eee;color:#111}.features{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.feature{border:1px solid var(--line);border-radius:10px;background:#111;padding:17px}.feature-top{display:flex;gap:12px;align-items:flex-start}.ico{flex:0 0 34px;height:34px;display:grid;place-items:center;border:1px solid #383838;background:#202020;border-radius:8px;color:#eee;font-size:15px}.feature h3{font-size:13px;margin:0 0 4px}.feature p{font-size:11px;line-height:1.75;color:#999;margin:0}.tag{display:inline-block;margin-top:12px;border:1px solid #333;border-radius:4px;padding:3px 6px;color:#aaa;font-size:9px}.timeline{border:1px solid var(--line);border-radius:10px;background:#101010;padding:4px 17px}.phase{display:grid;grid-template-columns:85px 1fr;gap:15px;padding:15px 0;border-bottom:1px solid #252525}.phase:last-child{border:0}.phase time{color:#888;padding-top:2px}.phase b{font-size:12px;display:block;margin-bottom:3px}.phase p{font-size:11px;color:#999;margin:0;line-height:1.7}.note{display:flex;gap:12px;border:1px solid #2c2c2c;background:#141414;border-radius:9px;padding:15px;margin-top:17px}.note-mark{font:14px ui-monospace,monospace}.note strong{font-size:11px;display:block;margin-bottom:3px}.note p{font-size:10px;color:#999;margin:0;line-height:1.7}.footer{border-top:1px solid var(--line);margin-top:36px;padding:18px 0 25px;display:flex;justify-content:space-between;gap:12px;color:#777;font-size:10px}.footer a{color:#ccc}@media(max-width:650px){.shell{padding:0 17px}.meta{display:none}.hero{padding-top:34px}.release{padding:17px}.features{grid-template-columns:1fr}.section-head{align-items:flex-start;flex-direction:column}.phase{grid-template-columns:65px 1fr;gap:10px}.footer{flex-direction:column}}
+</style>
 </head>
 <body>
-  <main>
-    <div class="mark" aria-hidden="true">P</div>
-    <h1>Coming Soon</h1>
-    <p>Something new is on the way.</p>
-  </main>
+<header class="topbar shell"><a class="brand" href="#"><span class="logo">P</span>ProjectLog</a><span class="meta">CURRENT VERSION · 1.1.0</span></header>
+<main class="shell">
+<section class="hero">
+<div class="eyebrow"><span class="dot"></span> What’s next</div>
+<h1>Built today.<br><span>Better tomorrow.</span></h1>
+<p class="lead">A transparent look at what may be coming to ProjectLog next. This roadmap is a plan, not a promise—priorities can change as features are tested and improved.</p>
+<div class="versions">
+<article class="release">
+<div class="release-top"><div><div class="kicker">Next planned release</div><div class="version">ProjectLog v1.2.0</div></div><span class="status">PLANNED</span></div>
+<p class="desc">Improve everyday project tracking with faster navigation, more useful notes, and a clearer view of project progress.</p>
+<div class="chips"><span class="chip">Search improvements</span><span class="chip">Markdown notes</span><span class="chip">Activity history</span></div>
+</article>
+<article class="release future">
+<div class="release-top"><div><div class="kicker">Future release</div><div class="version">ProjectLog v1.7.0</div></div><span class="status">IDEA STAGE</span></div>
+<p class="desc">A broader productivity update focused on smoother workflows, more flexible organization, and quality-of-life improvements shaped by user feedback.</p>
+<div class="chips"><span class="chip">Workflow upgrades</span><span class="chip">Customization</span><span class="chip">Quality of life</span></div>
+</article>
+<article class="release future">
+<div class="release-top"><div><div class="kicker">Major milestone</div><div class="version">ProjectLog v2.0.0</div></div><span class="status">LONG-TERM VISION</span></div>
+<p class="desc">A potential major redesign of the ProjectLog experience, with a more capable project workspace and stronger tools for managing a project's full lifecycle.</p>
+<div class="chips"><span class="chip">Workspace redesign</span><span class="chip">Project organization</span><span class="chip">Long-term vision</span></div>
+</article>
+</div>
+</section>
+<section>
+<div class="section-head"><div><h2>v1.2.0 feature details</h2><p>Proposed features for the next planned release</p></div><div class="filters" role="group" aria-label="Filter roadmap features"><button class="active" data-filter="all">All</button><button data-filter="core">Core workflow</button><button data-filter="quality">Quality of life</button></div></div>
+<div class="features">
+<article class="feature" data-category="core"><div class="feature-top"><span class="ico">⌕</span><div><h3>Faster project search</h3><p>Search projects and key details from one place, with clearer results and fewer clicks.</p></div></div><span class="tag">CORE WORKFLOW</span></article>
+<article class="feature" data-category="core"><div class="feature-top"><span class="ico">▤</span><div><h3>Better Markdown notes</h3><p>Make notes easier to read and structure with headings, lists, code blocks, and links.</p></div></div><span class="tag">CORE WORKFLOW</span></article>
+<article class="feature" data-category="core"><div class="feature-top"><span class="ico">↺</span><div><h3>Project activity history</h3><p>Review important project changes over time, so decisions and progress are easier to trace.</p></div></div><span class="tag">CORE WORKFLOW</span></article>
+<article class="feature" data-category="core"><div class="feature-top"><span class="ico">◇</span><div><h3>Roadmap improvements</h3><p>Refine milestone and task planning so upcoming work is easier to scan and prioritize.</p></div></div><span class="tag">CORE WORKFLOW</span></article>
+<article class="feature" data-category="quality"><div class="feature-top"><span class="ico">⌨</span><div><h3>Keyboard shortcuts</h3><p>Add shortcuts for common actions to make everyday project management feel faster.</p></div></div><span class="tag">QUALITY OF LIFE</span></article>
+<article class="feature" data-category="quality"><div class="feature-top"><span class="ico">⇧</span><div><h3>Safer backup workflow</h3><p>Improve backup and restore, with clearer feedback before existing data is replaced.</p></div></div><span class="tag">QUALITY OF LIFE</span></article>
+</div>
+</section>
+<section>
+<div class="section-head"><div><h2>Development plan</h2><p>Work will move through these stages</p></div></div>
+<div class="timeline">
+<div class="phase"><time>PHASE 01</time><div><b>Plan & prioritize</b><p>Choose the highest-value improvements and define how each should behave before implementation.</p></div></div>
+<div class="phase"><time>PHASE 02</time><div><b>Build & test</b><p>Implement features in small steps, test existing projects and JSON import/export compatibility, and fix regressions.</p></div></div>
+<div class="phase"><time>PHASE 03</time><div><b>Release & listen</b><p>Publish the installer and update metadata, document changes, and use feedback to guide the next iteration.</p></div></div>
+</div>
+<div class="note"><span class="note-mark">i</span><div><strong>Roadmap status</strong><p>Versions and features shown here are roadmap ideas, not promises or currently available functionality. The final scope and release dates may change; confirmed changes will be published in the official GitHub release notes.</p></div></div>
+</section>
+<footer class="footer"><span>ProjectLog · Keep your work moving.</span><a href="https://github.com/sakib-12345/ProjectLog/releases" target="_blank" rel="noopener">View official releases ↗</a></footer>
+</main>
+<script>
+document.querySelectorAll('[data-filter]').forEach(function(button){button.addEventListener('click',function(){document.querySelectorAll('[data-filter]').forEach(function(item){item.classList.remove('active')});button.classList.add('active');var filter=button.getAttribute('data-filter');document.querySelectorAll('.feature').forEach(function(card){card.hidden=filter!=='all'&&card.getAttribute('data-category')!==filter})})});
+</script>
 </body>
 </html>
