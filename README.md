@@ -6,7 +6,7 @@ ProjectLog is a desktop application built with Electron, HTML, CSS, and JavaScri
 
 
 <p align="center">
-  <img src="Web/demo-v1.1.0.gif" alt="ProjectLog Demo" width="800">
+  <img src="Web/demo-app-v1.1.0.gif" alt="ProjectLog Demo" width="800">
 </p>
 
 
