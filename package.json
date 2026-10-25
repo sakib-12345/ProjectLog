@@ -1,7 +1,6 @@
-
 {
   "name": "projectlog-desktop",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "ProjectLog - A modern desktop project journal",
   "author": {
     "name": "Shakib Hossain Tahmid"
@@ -34,7 +33,9 @@
       "target": [
         {
           "target": "nsis",
-          "arch": ["x64"]
+          "arch": [
+            "x64"
+          ]
         }
       ]
     },
@@ -44,6 +45,17 @@
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
       "shortcutName": "ProjectLog"
-    }
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "sakib-12345",
+        "repo": "ProjectLog",
+        "releaseType": "release"
+      }
+    ]
+  },
+  "dependencies": {
+    "electron-updater": "^6.8.11"
   }
 }
