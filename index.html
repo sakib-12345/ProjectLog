@@ -65,6 +65,77 @@ aside{position:relative;transition:padding .22s ease;overflow:hidden}
 .app.sidebar-collapsed aside .brand{width:100%;gap:0}
 .app.sidebar-collapsed aside .brandmark{flex:0 0 42px;margin:0 auto}
 
+
+
+/* ProjectLog 1.1.0 app views and theme */
+.app-view{min-height:calc(100vh - 0px);background:var(--bg);color:var(--text)}
+.app.show-settings .topbar,.app.show-settings .content,.app.show-upcoming .topbar,.app.show-upcoming .content{display:none}
+.app.show-settings #settingsView,.app.show-upcoming #upcomingView{display:block!important}
+.settings-wrap{max-width:850px;margin:0 auto;padding:clamp(24px,5vw,58px)}
+.settings-wrap h1{font-size:34px;letter-spacing:-1px;margin:7px 0}
+.settings-intro{color:var(--muted);margin:0 0 28px}
+.settings-card{display:flex;flex-direction:column;gap:16px;background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:20px;margin:14px 0}
+.settings-card h2{font-size:15px;margin:0 0 4px}.settings-card p{font-size:12px;color:var(--muted);margin:0}
+.theme-options{display:flex;gap:9px}.theme-options button{min-width:110px}.theme-options button.selected{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset}
+.settings-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.settings-facts div{padding:12px;border:1px solid var(--line);border-radius:9px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.settings-facts span{color:var(--muted);font-size:12px}.settings-facts strong{font-size:12px}
+.settings-hint{font-size:11px!important}.settings-footer{color:var(--muted);font-size:11px;margin-top:25px}
+.upcoming-view{height:100vh;width:100%;overflow:hidden;position:relative}.upcoming-view webview{display:flex;width:100%;height:100%;border:0;background:var(--bg)}.upcoming-error{position:absolute;inset:0;display:none;align-items:center;justify-content:center;text-align:center;padding:28px;background:var(--bg);color:var(--text);z-index:2}.upcoming-error.visible{display:flex}.upcoming-error-inner{max-width:460px}.upcoming-error p{color:var(--muted)}
+:root[data-theme="light"]{color-scheme:light;--bg:#f5f7fa;--panel:#ffffff;--panel2:#eef1f5;--line:#dce1e8;--text:#18202b;--muted:#687386;--accent:#242a35;--purple:#6b5ce7;--red:#c83e52;--yellow:#946200;--green:#18834c}
+:root[data-theme="light"] aside{background:#fff}
+:root[data-theme="light"] button{background:#fff;color:var(--text)}
+:root[data-theme="light"] .navitem.active,:root[data-theme="light"] .project-item.active{background:#e9edf3;color:#111;border-color:#d3dae4}
+:root[data-theme="light"] .shell-head,:root[data-theme="light"] .shell{background:var(--panel)}
+:root[data-theme="light"] .notes,:root[data-theme="light"] .input,:root[data-theme="light"] select,:root[data-theme="light"] .search,:root[data-theme="light"] .details-grid textarea{background:#fff;color:var(--text);border-color:var(--line)}
+:root[data-theme="light"] .topbar{background:#fff}
+:root[data-theme="light"] .stat,:root[data-theme="light"] .settings-card{background:#fff}
+
+/* Light theme: override legacy dark-only surfaces and text throughout the workspace. */
+:root[data-theme="light"] .app{background:var(--bg);color:var(--text)}
+:root[data-theme="light"] aside{background:#ffffff;color:var(--text)}
+:root[data-theme="light"] .brandmark{background:#18202b;color:#ffffff}
+:root[data-theme="light"] .navitem,:root[data-theme="light"] .project-item{color:#465164}
+:root[data-theme="light"] .navitem:hover,:root[data-theme="light"] .project-item:hover{background:#f0f3f7;color:#18202b}
+:root[data-theme="light"] .project-add{background:#f8fafc;color:#465164;border-color:#cbd3df}
+:root[data-theme="light"] .shell-head{background:#f0f3f7;border-bottom-color:var(--line)}
+:root[data-theme="light"] .shell-num{background:#e0e6ee;color:#334155}
+:root[data-theme="light"] .fieldlabel,:root[data-theme="light"] .roadmap-index{color:#596579}
+:root[data-theme="light"] .notes,:root[data-theme="light"] .input,:root[data-theme="light"] select,:root[data-theme="light"] .search,:root[data-theme="light"] .details-grid textarea{background:#ffffff;color:#18202b;border-color:#cbd3df}
+:root[data-theme="light"] .markdown-preview{color:#263244}
+:root[data-theme="light"] .markdown-preview code{color:#5143b8}
+:root[data-theme="light"] .markdown-preview pre{background:#eef1f6;color:#18202b}
+:root[data-theme="light"] .markdown-preview blockquote{color:#4b5567}
+:root[data-theme="light"] .markdown-preview th{background:#edf1f6;color:#18202b}
+:root[data-theme="light"] .roadmap-node{background:#ffffff;color:#18202b;border-color:var(--node-color,#cbd3df);box-shadow:inset 3px 0 0 var(--node-color,#cbd3df),0 2px 8px #18202b0a}
+:root[data-theme="light"] .roadmap-node p{color:#596579}
+:root[data-theme="light"] .roadmap-connector{color:#64748b}
+:root[data-theme="light"] .roadmap-node:focus{outline-color:#334155}
+:root[data-theme="light"] .roadmap-node.drop-target{outline-color:#334155}
+:root[data-theme="light"] .shell-foot{color:#687386}
+:root[data-theme="light"] .textbtn{color:#465164}
+:root[data-theme="light"] .history-panel{background:#f5f7fa}
+:root[data-theme="light"] .history-entry{border-color:var(--line)}
+:root[data-theme="light"] .resource-list{background:#f0f3f7;color:#334155}
+:root[data-theme="light"] .details-modal,:root[data-theme="light"] .modal-panel{background:#ffffff;color:#18202b;border-color:var(--line)}
+:root[data-theme="light"] .scan-status,:root[data-theme="light"] .resource-list{color:#465164}
+:root[data-theme="light"] .attachment{background:#f1f4f8;border-color:var(--line)}
+:root[data-theme="light"] .attachment img{background:#e8edf4}
+:root[data-theme="light"] .video-preview{background:#e8edf4}
+:root[data-theme="light"] .file-icon{background:#e8edf4;color:#465164}
+:root[data-theme="light"] .file-name{color:#334155}
+:root[data-theme="light"] .remove-file{background:#334155;color:#ffffff}
+:root[data-theme="light"] .toast{background:#ffffff;border-color:#b9c4d3;color:#18202b}
+:root[data-theme="light"] .modal{background:#0008}
+:root[data-theme="light"] .details-grid textarea{color:#18202b}
+:root[data-theme="light"] .status-working{color:#166534;background:#dcfce7;border-color:#86efac}
+:root[data-theme="light"] .status-broken{color:#991b1b;background:#fee2e2;border-color:#fca5a5}
+:root[data-theme="light"] .status-fix{color:#854d0e;background:#fef3c7;border-color:#fcd34d}
+:root[data-theme="light"] .color-choice{color:#465164}
+:root[data-theme="light"] .color-choice input{accent-color:#334155}
+:root[data-theme="light"] .project-count,:root[data-theme="light"] .sidefoot,:root[data-theme="light"] .bottom-note{color:#687386}
+
+@media(max-width:650px){.settings-facts{grid-template-columns:1fr}.settings-wrap{padding:22px 16px}}
 </style>
 </head>
 <body>
@@ -73,9 +144,9 @@ aside{position:relative;transition:padding .22s ease;overflow:hidden}
   <div class="brand"><div class="brandmark">P</div><div><strong>ProjectLog</strong><small>Developer journal</small></div></div>
   <div><div class="side-label">Workspace</div><button class="navitem active" id="overviewBtn"><span>▦</span> Project overview</button><button class="navitem" id="focusEntries"><span>▤</span> Development shells</button></div>
   <div><div class="side-label">Your projects</div><div class="project-list" id="projectList"></div><button class="project-add" id="createProject">＋ Create project</button></div>
-  <div><div class="side-label">Data & exports</div><button class="navitem" id="exportJsonSide">⇩ Export JSON</button><button class="navitem" id="exportHtmlSide">▤ Export readable HTML</button><button class="navitem" id="importJsonSide">⇧ Import JSON</button></div>
+  <div><div class="side-label">Application</div><button class="navitem" id="settingsNav"><span>⚙</span> Settings</button><button class="navitem" id="upcomingNav"><span>↗</span> Upcoming</button></div>
   <div class="sidefoot">
-    <div class="sidefoot-copy">PROJECTLOG v1.0.0<br>by Shakib</div>
+    <div class="sidefoot-copy">PROJECTLOG v1.1.0<br>by Shakib</div>
     <div class="social-links" aria-label="Developer links">
       <a class="social-link" href="https://github.com/sakib-12345" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .9a11.1 11.1 0 0 0-3.51 21.63c.55.1.76-.24.76-.54v-2.13c-3.1.67-3.76-1.32-3.76-1.32-.5-1.28-1.23-1.62-1.23-1.62-1.01-.69.08-.68.08-.68 1.12.08 1.71 1.15 1.71 1.15.99 1.7 2.6 1.21 3.23.93.1-.72.39-1.21.7-1.49-2.47-.28-5.07-1.24-5.07-5.5 0-1.22.44-2.22 1.15-3-.12-.28-.5-1.42.11-2.96 0 0 .94-.3 3.05 1.14a10.6 10.6 0 0 1 5.55 0c2.11-1.44 3.05-1.14 3.05-1.14.61 1.54.23 2.68.11 2.96.72.78 1.15 1.78 1.15 3.01 0 4.27-2.61 5.21-5.1 5.49.4.35.75 1.02.75 2.06v3.05c0 .3.2.65.77.54A11.1 11.1 0 0 0 12 .9Z"/></svg>GitHub
@@ -98,6 +169,15 @@ aside{position:relative;transition:padding .22s ease;overflow:hidden}
 <section id="shellSection"><div class="section-head"><div><h2>Development history</h2><p>Each shell is a compact, dated checkpoint. Click Edit to change it.</p></div></div><div class="shells" id="shells"></div></section>
 <div class="bottom-note"><span id="saveState">● Local storage ready</span><span>Markdown · Attachments · Project-based history</span></div>
 </div>
+<section id="settingsView" class="app-view hidden" aria-label="Settings">
+  <div class="settings-wrap"><div class="eyebrow">Preferences</div><h1>Settings</h1><p class="settings-intro">Make ProjectLog work the way you do.</p>
+    <section class="settings-card"><div><h2>Appearance</h2><p>Choose the interface theme.</p></div><div class="theme-options"><button id="darkThemeBtn" type="button">☾ Dark</button><button id="lightThemeBtn" type="button">☀ Light</button></div></section>
+    <section class="settings-card"><div><h2>Application</h2><p>Version, local storage and update status.</p></div><div class="settings-facts"><div><span>Version</span><strong>1.1.0</strong></div><div><span>Data storage</span><strong>On this device</strong></div><div><span>Autosave</span><strong>Enabled</strong></div><div><span>Update status</span><strong id="updateStatus">Ready to check</strong></div></div><button class="primary" id="checkUpdatesBtn">Check for updates</button><p class="settings-hint" id="updateHint">Updates are checked against the published GitHub release when running the installed app.</p></section>
+    <section class="settings-card"><div><h2>Data & privacy</h2><p>Your projects stay in local browser storage. Export a JSON backup regularly.</p></div><button id="settingsExportBtn">Export backup (JSON)</button></section>
+    <div class="settings-footer">ProjectLog Desktop · Built for focused project tracking</div>
+  </div>
+</section>
+<section id="upcomingView" class="app-view upcoming-view hidden" aria-label="Upcoming"><webview id="upcomingFrame" title="ProjectLog Upcoming" src="https://projectlog-desktop.vercel.app/upcoming" partition="persist:projectlog-upcoming" webpreferences="contextIsolation=yes,nodeIntegration=no,sandbox=yes"></webview><div id="upcomingError" class="upcoming-error"><div class="upcoming-error-inner"><h2>Upcoming could not load</h2><p id="upcomingErrorMessage">Check your internet connection and try again.</p><button type="button" class="primary" id="retryUpcomingBtn">Retry</button></div></div></section>
 </main>
 </div>
 <div class="create-project-modal" id="createProjectModal" role="dialog" aria-modal="true" aria-labelledby="createProjectTitle"><form class="create-project-dialog" id="createProjectForm"><h2 id="createProjectTitle">Create a project</h2><p>Give this project a name. You can rename it later.</p><input id="newProjectName" maxlength="100" placeholder="e.g. My AI Art Studio" autocomplete="off" required><div class="create-project-actions"><button type="button" id="cancelCreateProject">Cancel</button><button type="submit" class="primary">Create project</button></div></form></div>
@@ -262,8 +342,8 @@ $('search').addEventListener('input',render);$('addShellTop').addEventListener('
 $('focusEntries').addEventListener('click',()=>$('shellSection').scrollIntoView({behavior:'smooth'}));$('overviewBtn').addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
 $('createProject').addEventListener('click',openCreateProject);$('createProjectForm').addEventListener('submit',createProject);$('cancelCreateProject').addEventListener('click',closeCreateProject);$('createProjectModal').addEventListener('click',e=>{if(e.target===$('createProjectModal'))closeCreateProject();});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeCreateProject();});
 $('projectList').addEventListener('click',async e=>{const b=e.target.closest('[data-project]');if(!b)return;const target=state.projects.find(p=>p.id===b.dataset.project);if(!target)return;const editing=current().shells.find(s=>s.editing);if(editing&&!confirm('You have an open shell editor. Switch projects and discard unsaved edits?'))return;state.activeProjectId=target.id;render();});
-$('exportJsonBtn').addEventListener('click',exportJSON);$('exportJsonSide').addEventListener('click',exportJSON);$('exportHtmlBtn').addEventListener('click',()=>exportReadableHTML());$('exportHtmlSide').addEventListener('click',()=>exportReadableHTML());
-$('importJsonBtn').addEventListener('click',()=>$('jsonPicker').click());$('importJsonSide').addEventListener('click',()=>$('jsonPicker').click());$('jsonPicker').addEventListener('change',async e=>{const f=e.target.files?.[0];if(f)await importJSONFile(f);e.target.value='';});
+$('exportJsonBtn').addEventListener('click',exportJSON);$('exportHtmlBtn').addEventListener('click',()=>exportReadableHTML());
+$('importJsonBtn').addEventListener('click',()=>$('jsonPicker').click());$('jsonPicker').addEventListener('change',async e=>{const f=e.target.files?.[0];if(f)await importJSONFile(f);e.target.value='';});
 $('shells').addEventListener('input',e=>{const el=e.target.closest('[data-shell]');if(!el)return;const sh=findShell(el.dataset.shell);if(!sh||!sh.editing)return;const field=e.target.dataset.field;if(!field)return;if(field==='date'){if(e.target.value)sh.date=new Date(e.target.value).toISOString();}else sh[field]=e.target.value;if(field==='notes'){const p=el.querySelector('[data-preview="notes"]');if(p)p.innerHTML=markdown(sh.notes);}if(field==='status'){const b=el.querySelector('.status');b.className='status '+statusClass(sh.status);b.textContent=statusLabel(sh.status);}if(field==='color'){const colors={normal:'#555555',blue:'#6ea8fe',purple:'#b39aff',green:'#78c99e',amber:'#e4bd69',red:'#e88787'};el.style.setProperty('--shell-color',colors[sh.color]||colors.normal);}});
 $('shells').addEventListener('change',e=>{const el=e.target.closest('[data-shell]');if(!el)return;const sh=findShell(el.dataset.shell);if(!sh||!sh.editing)return;const field=e.target.dataset.field;if(field==='date'&&e.target.value)sh.date=new Date(e.target.value).toISOString();if(field==='status')sh.status=e.target.value;if(field==='color')sh.color=e.target.value;});
 $('shells').addEventListener('click',async e=>{
@@ -321,6 +401,61 @@ $('exportAiBtn').addEventListener('click',()=>{
  downloadData(md,fileSafeName(p.name)+'.ai-handoff.md','text/markdown;charset=utf-8');notify('AI handoff exported');
 });
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){$('galleryModal').classList.remove('open');$('subprojectModal').classList.remove('open');$('projectDetailsModal').classList.remove('open');}});
+
+
+function setTheme(theme){
+  const safe=theme==='light'?'light':'dark';
+  document.documentElement.dataset.theme=safe;
+  try{localStorage.setItem('projectlog-theme',safe)}catch{}
+  $('darkThemeBtn')?.classList.toggle('selected',safe==='dark');
+  $('lightThemeBtn')?.classList.toggle('selected',safe==='light');
+}
+function showAppView(view){
+  const appEl=document.querySelector('.app');
+  appEl.classList.toggle('show-settings',view==='settings');
+  appEl.classList.toggle('show-upcoming',view==='upcoming');
+  document.querySelectorAll('.navitem').forEach(b=>b.classList.remove('active'));
+  if(view==='settings')$('settingsNav')?.classList.add('active');
+  else if(view==='upcoming')$('upcomingNav')?.classList.add('active');
+  else $('overviewBtn')?.classList.add('active');
+}
+try{setTheme(localStorage.getItem('projectlog-theme')||'dark')}catch{setTheme('dark')}
+$('settingsNav')?.addEventListener('click',()=>showAppView('settings'));
+$('upcomingNav')?.addEventListener('click',()=>showAppView('upcoming'));
+
+const upcomingFrame=$('upcomingFrame');
+const upcomingError=$('upcomingError');
+function loadUpcoming(){
+  if(!upcomingFrame)return;
+  upcomingError?.classList.remove('visible');
+  try{upcomingFrame.src='https://projectlog-desktop.vercel.app/upcoming';}catch(err){
+    if(upcomingError){$('upcomingErrorMessage').textContent=err?.message||'This page is only available in the desktop app.';upcomingError.classList.add('visible');}
+  }
+}
+upcomingFrame?.addEventListener('did-finish-load',()=>upcomingError?.classList.remove('visible'));
+upcomingFrame?.addEventListener('did-fail-load',event=>{
+  if(event.errorCode===-3)return;
+  if(upcomingError){$('upcomingErrorMessage').textContent=`Unable to load the Upcoming website (${event.errorDescription||event.errorCode}). Check your connection and retry.`;upcomingError.classList.add('visible');}
+});
+$('retryUpcomingBtn')?.addEventListener('click',loadUpcoming);
+
+$('overviewBtn')?.addEventListener('click',()=>showAppView('workspace'));
+$('focusEntries')?.addEventListener('click',()=>{showAppView('workspace');setTimeout(()=>$('shells')?.scrollIntoView({behavior:'smooth',block:'start'}),0)});
+$('darkThemeBtn')?.addEventListener('click',()=>setTheme('dark'));
+$('lightThemeBtn')?.addEventListener('click',()=>setTheme('light'));
+$('settingsExportBtn')?.addEventListener('click',()=>$('exportJsonBtn')?.click());
+$('checkUpdatesBtn')?.addEventListener('click',async()=>{
+  const status=$('updateStatus'),hint=$('updateHint'),btn=$('checkUpdatesBtn');
+  status.textContent='Checking…';hint.textContent='Contacting the update service…';btn.disabled=true;
+  try{
+    if(window.projectLog?.checkForUpdates){
+      const result=await window.projectLog.checkForUpdates();
+      status.textContent=result?.status==='available'?'Update available':result?.status==='current'?'Up to date':result?.status==='unsupported'?'Unavailable in this build':'Check complete';
+      hint.textContent=result?.message||'Update check finished.';
+    }else{status.textContent='Unavailable';hint.textContent='Update checking is available in the installed desktop app.'}
+  }catch(e){status.textContent='Could not check';hint.textContent=e?.message||'Please check your internet connection and try again.'}
+  finally{btn.disabled=false}
+});
 
 init();
 })();
