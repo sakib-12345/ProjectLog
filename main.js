@@ -6,6 +6,7 @@ const {
   Menu,
   shell,
 } = require("electron");
+const { autoUpdater } = require("electron-updater");
 const path = require("path");
 const fs = require("fs");
 const os = require("os");
@@ -24,6 +25,7 @@ function createWindow() {
       contextIsolation: true,
       nodeIntegration: false,
       sandbox: true,
+      webviewTag: true,
     },
   });
 
@@ -209,6 +211,22 @@ function scanDirectory(root) {
 }
 
 app.whenReady().then(() => {
+  ipcMain.handle("projectlog:check-for-updates", async () => {
+    if (!app.isPackaged || process.platform !== "win32") {
+      return { status: "unsupported", message: "Update checks are available in the installed Windows version, not in development mode." };
+    }
+    try {
+      const result = await autoUpdater.checkForUpdates();
+      const latest = result?.updateInfo?.version;
+      const current = app.getVersion();
+      if (latest && latest !== current) {
+        return { status: "available", message: `Installed version ${current}. Release version ${latest} is available. The updater will ask before downloading.` };
+      }
+      return { status: "current", message: `ProjectLog ${current} is installed. If a newer release exists, the updater will prompt you.` };
+    } catch (error) {
+      return { status: "error", message: error?.message || "Could not reach GitHub Releases." };
+    }
+  });
   // Hide the default application menu.
   Menu.setApplicationMenu(null);
 
@@ -313,6 +331,83 @@ app.whenReady().then(() => {
   );
 
   createWindow();
+
+  // User-approved GitHub Releases updater. Never downloads or installs silently.
+  if (app.isPackaged && process.platform === "win32") {
+    autoUpdater.autoDownload = false;
+    autoUpdater.autoInstallOnAppQuit = false;
+
+    let updatePromptOpen = false;
+    let downloadInProgress = false;
+
+    autoUpdater.on("update-available", async (info) => {
+      if (updatePromptOpen) return;
+      updatePromptOpen = true;
+      try {
+        const choice = await dialog.showMessageBox({
+          type: "info",
+          title: "ProjectLog update available",
+          message: `ProjectLog ${info.version} is available.`,
+          detail: "Would you like to download this update now? Your saved projects and data are kept separate from the app installation and will not be intentionally removed by updating.",
+          buttons: ["Download update", "Not now"],
+          defaultId: 0,
+          cancelId: 1,
+          noLink: true,
+        });
+
+        if (choice.response === 0 && !downloadInProgress) {
+          downloadInProgress = true;
+          await autoUpdater.downloadUpdate();
+        }
+      } catch (error) {
+        dialog.showMessageBox({
+          type: "warning",
+          title: "Update download failed",
+          message: "ProjectLog could not download the update.",
+          detail: error?.message || "Please try again later.",
+          buttons: ["OK"],
+        });
+      } finally {
+        updatePromptOpen = false;
+      }
+    });
+
+    autoUpdater.on("update-not-available", () => {
+      // No dialog when the installed version is current.
+    });
+
+    autoUpdater.on("download-progress", (progress) => {
+      // Progress is available for a future in-app progress UI; no modal spam.
+      app.setAppUserModelId("com.shakib.projectlog");
+    });
+
+    autoUpdater.on("update-downloaded", async (info) => {
+      const choice = await dialog.showMessageBox({
+        type: "info",
+        title: "Update ready to install",
+        message: `ProjectLog ${info.version} has been downloaded.`,
+        detail: "Restart ProjectLog to install the update now, or choose Later to keep using this version. Your app data should remain intact; as with any update, keeping a backup of important exports is recommended.",
+        buttons: ["Restart and install", "Later"],
+        defaultId: 0,
+        cancelId: 1,
+        noLink: true,
+      });
+      if (choice.response === 0) {
+        autoUpdater.quitAndInstall(false, true);
+      }
+    });
+
+    autoUpdater.on("error", (error) => {
+      console.error("ProjectLog updater error:", error);
+    });
+
+    // Allow the main window to appear before checking GitHub Releases.
+    setTimeout(() => {
+      autoUpdater.checkForUpdates().catch((error) => {
+        console.error("ProjectLog update check failed:", error);
+      });
+    }, 5000);
+  }
 
   app.on("activate", () => {
     if (!BrowserWindow.getAllWindows().length) {
