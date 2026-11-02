@@ -1,441 +1,1427 @@
-
-<!doctype html>
+```html
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0b0b0b">
 <link rel="icon" type="image/png" href="icon.png?raw=true">
-<link rel="apple-touch-icon" href="icon.png?raw=true">
-<title>Roadmap · ProjectLog</title>
+<title>Upcoming · ProjectLog</title>
 
 <style>
-:root{color-scheme:dark;--bg:#0b0b0b;--panel:#111;--line:#2b2b2b;--text:#f5f5f5;--muted:#a1a1a1}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:25px}
-body{margin:0;background:var(--bg);color:var(--text);font:14px/1.6 Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-a{color:inherit;text-decoration:none}
-a:focus-visible,button:focus-visible{outline:2px solid #fff;outline-offset:3px;border-radius:6px}
-.shell{max-width:1000px;margin:auto;padding:0 28px}
-.meta,.eyebrow,.kicker,.tag,.phase time,.mono{font:10px ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.09em;text-transform:uppercase}
-
-/* Heading */
-.page-heading{padding:30px 0 20px}
-.brand{display:inline-flex;align-items:center;gap:10px;font-weight:750;margin-bottom:22px}
-.logo{width:29px;height:29px;border-radius:8px;background:#eee;color:#111;display:grid;place-items:center;font-weight:900}
-.eyebrow{display:inline-flex;align-items:center;gap:8px;border:1px solid #343434;background:#141414;color:#ccc;padding:6px 10px;border-radius:6px}
-.dot{width:6px;height:6px;border-radius:50%;background:#eee}
-h1{font-size:clamp(36px,6vw,56px);letter-spacing:-.065em;line-height:1.04;margin:18px 0 13px}
-h1 span{color:#858585}
-.lead{max-width:650px;color:var(--muted);line-height:1.8;margin:0}
-
-/* Navigation */
-.jump{display:flex;gap:8px;flex-wrap:wrap;margin:22px 0 26px}
-.jump a{border:1px solid #303030;background:#111;color:#bbb;padding:7px 11px;border-radius:7px;font-size:11px;transition:.2s}
-.jump a:hover{background:#eee;color:#111;border-color:#eee}
-
-/* Track */
-.track{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);border-radius:12px;background:#101010;overflow:hidden}
-.track div{padding:15px 17px;border-right:1px solid var(--line)}
-.track div:last-child{border:0}
-.track small{display:block;color:#777;font-size:10px}
-.track b{font-size:15px;letter-spacing:-.03em}
-.track .now{background:#171717}
-.track .now b::after{content:" ●";font-size:8px;vertical-align:middle}
-
-.versions{display:grid;gap:12px;margin-top:14px}
-.release{border:1px solid #343434;background:linear-gradient(140deg,#191919,#101010);border-radius:12px;padding:22px}
-.release.future{background:#101010}
-.release.big{border-color:#4a4a4a;background:radial-gradient(ellipse at 100% 0%,#ffffff10,transparent 50%),linear-gradient(140deg,#1b1b1b,#101010)}
-.release-top{display:flex;align-items:flex-start;justify-content:space-between;gap:15px}
-.kicker{color:#999}
-.version{font-size:27px;font-weight:750;letter-spacing:-.05em;margin-top:4px}
-.status{border:1px solid #444;border-radius:5px;padding:5px 8px;font-size:10px;color:#ddd;white-space:nowrap}
-.desc{font-size:12px;color:#aaa;margin:10px 0 0;max-width:680px}
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
-.chip{border:1px solid #303030;background:#151515;border-radius:5px;padding:5px 8px;font-size:10px;color:#bbb}
-.chip.hot{background:#eee;color:#111;border-color:#eee;font-weight:700}
-
-/* Sections */
-.section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:15px;margin:44px 0 14px}
-.section-head h2{font-size:19px;letter-spacing:-.04em;margin:0}
-.section-head p{font-size:11px;color:#777;margin:4px 0 0}
-.filters{display:flex;gap:6px;flex-wrap:wrap}
-.filters button{background:#111;border:1px solid #303030;color:#999;padding:6px 9px;border-radius:6px;font-size:10px;cursor:pointer}
-.filters button.active,.filters button:hover{background:#eee;border-color:#eee;color:#111}
-.features{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
-.feature{border:1px solid var(--line);border-radius:10px;background:#111;padding:17px}
-.feature-top{display:flex;gap:12px;align-items:flex-start}
-.ico{flex:0 0 34px;height:34px;display:grid;place-items:center;border:1px solid #383838;background:#202020;border-radius:8px;color:#eee;font-size:15px}
-.feature h3{font-size:13px;margin:0 0 4px}
-.feature p{font-size:11px;line-height:1.75;color:#999;margin:0}
-.tag{display:inline-block;margin-top:12px;border:1px solid #333;border-radius:4px;padding:3px 6px;color:#aaa;font-size:9px}
-
-/* Vision */
-.spot{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.spot-card{border:1px solid #444;border-radius:14px;padding:24px;background:radial-gradient(ellipse at 100% 0%,#ffffff10,transparent 55%),linear-gradient(145deg,#1a1a1a,#101010)}
-.spot-card .ico{width:42px;height:42px;flex:none;font-size:18px;margin-bottom:18px}
-.spot-card h3{font-size:19px;letter-spacing:-.04em;margin:0 0 8px}
-.spot-card>p{font-size:12px;color:#aaa;margin:0 0 16px;line-height:1.8}
-.spot-card ul{list-style:none;margin:0;padding:15px 0 0;border-top:1px solid #2a2a2a;display:grid;gap:9px}
-.spot-card li{font-size:11px;color:#d0d0d0;display:flex;gap:9px}
-.spot-card li::before{content:"✓";font-weight:700;color:#fff}
-.flow{margin-top:12px;border:1px solid var(--line);border-radius:12px;background:#0f0f0f;padding:18px 20px;display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:12px;align-items:center;text-align:center}
-.flow div{border:1px solid #303030;background:#151515;border-radius:9px;padding:12px 10px}
-.flow b{display:block;font-size:12px}
-.flow small{font-size:10px;color:#888}
-.flow span{color:#777;font-size:16px}
-.flow-cap{font-size:11px;color:#777;margin:10px 2px 0}
-.safe{margin-top:12px;display:grid;grid-template-columns:repeat(3,1fr);gap:11px}
-.safe div{border:1px solid var(--line);border-radius:10px;padding:15px;background:#111}
-.safe b{font-size:12px;display:block;margin-bottom:3px}
-.safe p{font-size:11px;color:#999;margin:0;line-height:1.7}
-
-/* Timeline */
-.timeline{border:1px solid var(--line);border-radius:10px;background:#101010;padding:4px 17px}
-.phase{display:grid;grid-template-columns:85px 1fr;gap:15px;padding:15px 0;border-bottom:1px solid #252525}
-.phase:last-child{border:0}
-.phase time{color:#888;padding-top:2px}
-.phase b{font-size:12px;display:block;margin-bottom:3px}
-.phase p{font-size:11px;color:#999;margin:0;line-height:1.7}
-.note{display:flex;gap:12px;border:1px solid #2c2c2c;background:#141414;border-radius:9px;padding:15px;margin-top:17px}
-.note-mark{font:14px ui-monospace,monospace}
-.note strong{font-size:11px;display:block;margin-bottom:3px}
-.note p{font-size:10px;color:#999;margin:0;line-height:1.7}
-
-/* CTA */
-.cta{margin-top:44px;border:1px solid #303030;border-radius:16px;padding:30px;display:flex;align-items:center;justify-content:space-between;gap:22px;background:radial-gradient(ellipse at 90% 0%,#ffffff0b,transparent 45%),linear-gradient(130deg,#171717,#101010)}
-.cta h2{font-size:22px;letter-spacing:-.04em;margin:0 0 6px}
-.cta p{font-size:12px;color:#999;margin:0;max-width:430px}
-.btns{display:flex;gap:9px;flex-wrap:wrap}
-.btn{border:1px solid #333;border-radius:10px;padding:11px 15px;font-size:12px;font-weight:700;white-space:nowrap;transition:.2s}
-.btn:hover{transform:translateY(-2px);border-color:#666}
-.btn.p{background:#f5f5f5;color:#111;border-color:#f5f5f5}
-.footer{border-top:1px solid var(--line);margin-top:36px;padding:18px 0 25px;display:flex;justify-content:space-between;gap:12px;color:#777;font-size:10px}
-.footer a{color:#ccc}
-
-@media(max-width:760px){
-.spot{grid-template-columns:1fr}
-.safe{grid-template-columns:1fr}
-.track{grid-template-columns:1fr 1fr}
-.track div:nth-child(2){border-right:0}
-.track div:nth-child(-n+2){border-bottom:1px solid var(--line)}
+:root {
+  color-scheme: dark;
+  --bg: #0b0b0b;
+  --panel: #111;
+  --panel2: #151515;
+  --line: #292929;
+  --text: #f5f5f5;
+  --muted: #999;
+  --accent: #00e5c3;
 }
-@media(max-width:650px){
-.shell{padding:0 17px}
-.features{grid-template-columns:1fr}
-.section-head{align-items:flex-start;flex-direction:column}
-.phase{grid-template-columns:65px 1fr;gap:10px}
-.footer{flex-direction:column}
-.cta{flex-direction:column;align-items:flex-start;padding:22px}
-.flow{grid-template-columns:1fr}
-.flow span{transform:rotate(90deg)}
+
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
 }
-@media(prefers-reduced-motion:reduce){
-html{scroll-behavior:auto}
-*{transition:none!important}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 14px/1.6 Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+button, a {
+  font: inherit;
+}
+
+button:focus-visible, a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* APP HEADER */
+
+.app-header {
+  height: 58px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 22px;
+  background: #101010;
+  border-bottom: 1px solid var(--line);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo {
+  width: 29px;
+  height: 29px;
+  border-radius: 7px;
+  background: #eee;
+  color: #111;
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+  font-size: 15px;
+}
+
+.brand-name {
+  font-weight: 750;
+  font-size: 13px;
+}
+
+.brand-divider {
+  color: #444;
+  margin: 0 3px;
+}
+
+.brand-page {
+  color: #888;
+  font-size: 12px;
+}
+
+.version {
+  font: 11px ui-monospace, monospace;
+  color: #bbb;
+  background: #181818;
+  border: 1px solid #333;
+  border-radius: 5px;
+  padding: 4px 9px;
+}
+
+/* TABS */
+
+.tab-bar {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding: 0 20px;
+  background: #101010;
+  border-bottom: 1px solid var(--line);
+  overflow-x: auto;
+  scrollbar-width: none;
+  flex-shrink: 0;
+}
+
+.tab-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.tab {
+  position: relative;
+  border: 0;
+  background: transparent;
+  color: #888;
+  padding: 14px 15px;
+  font-size: 11px;
+  font-weight: 550;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color .2s;
+}
+
+.tab:hover {
+  color: #eee;
+}
+
+.tab.active {
+  color: #fff;
+}
+
+.tab.active::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 12px;
+  right: 12px;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 3px 3px 0 0;
+}
+
+/* MAIN CONTENT */
+
+.content {
+  width: 100%;
+  max-width: 1050px;
+  margin: 0 auto;
+  padding: 25px 25px 40px;
+  flex: 1;
+}
+
+.tab-panel {
+  display: none;
+  animation: appear .2s ease;
+}
+
+.tab-panel.active {
+  display: block;
+}
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.page-title {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -.045em;
+  margin: 0;
+}
+
+.page-description {
+  font-size: 11px;
+  color: #888;
+  margin: 4px 0 20px;
+}
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 15px;
+  margin: 0 0 15px;
+}
+
+.section-head h2 {
+  font-size: 17px;
+  letter-spacing: -.04em;
+  margin: 0;
+}
+
+.section-head p {
+  font-size: 11px;
+  color: #777;
+  margin: 4px 0 0;
+}
+
+/* RELEASE TRACK */
+
+.track {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  background: #101010;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.track-item {
+  padding: 15px 17px;
+  border-right: 1px solid var(--line);
+}
+
+.track-item:last-child {
+  border: 0;
+}
+
+.track-item small {
+  display: block;
+  color: #777;
+  font-size: 10px;
+}
+
+.track-item b {
+  font-size: 16px;
+  letter-spacing: -.03em;
+}
+
+.track-item.current {
+  background: #171717;
+}
+
+.track-item.current b::after {
+  content: " ●";
+  color: var(--accent);
+  font-size: 8px;
+  vertical-align: middle;
+}
+
+/* RELEASE CARDS */
+
+.versions {
+  display: grid;
+  gap: 12px;
+}
+
+.release {
+  border: 1px solid #343434;
+  background: linear-gradient(140deg, #191919, #101010);
+  border-radius: 11px;
+  padding: 21px;
+}
+
+.release.future {
+  background: #101010;
+}
+
+.release.highlight {
+  border-color: #444;
+  background:
+    radial-gradient(ellipse at 100% 0%, #ffffff10, transparent 50%),
+    linear-gradient(140deg, #1b1b1b, #101010);
+}
+
+.release-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.kicker {
+  color: #999;
+  font: 10px ui-monospace, monospace;
+  text-transform: uppercase;
+  letter-spacing: .09em;
+}
+
+.release-version {
+  font-size: 25px;
+  font-weight: 750;
+  letter-spacing: -.05em;
+  margin-top: 4px;
+}
+
+.status {
+  border: 1px solid #444;
+  border-radius: 5px;
+  padding: 4px 8px;
+  font-size: 9px;
+  color: #ccc;
+  white-space: nowrap;
+}
+
+.status.success {
+  color: var(--accent);
+  border-color: #14594f;
+}
+
+.desc {
+  font-size: 12px;
+  color: #aaa;
+  margin: 10px 0 0;
+  max-width: 700px;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 15px;
+}
+
+.chip {
+  border: 1px solid #303030;
+  background: #151515;
+  border-radius: 5px;
+  padding: 5px 8px;
+  font-size: 10px;
+  color: #bbb;
+}
+
+.chip.hot {
+  background: #eee;
+  color: #111;
+  border-color: #eee;
+  font-weight: 700;
+}
+
+/* FEATURE CARDS */
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 11px;
+}
+
+.feature {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #111;
+  padding: 17px;
+}
+
+.feature-top {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.ico {
+  flex: 0 0 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #383838;
+  background: #202020;
+  border-radius: 8px;
+  color: #eee;
+  font-size: 15px;
+}
+
+.feature h3 {
+  font-size: 13px;
+  margin: 0 0 4px;
+}
+
+.feature p {
+  font-size: 11px;
+  line-height: 1.75;
+  color: #999;
+  margin: 0;
+}
+
+.tag {
+  display: inline-block;
+  margin-top: 12px;
+  border: 1px solid #333;
+  border-radius: 4px;
+  padding: 3px 6px;
+  color: #aaa;
+  font: 9px ui-monospace, monospace;
+}
+
+/* AI NOTE */
+
+.note {
+  display: flex;
+  gap: 12px;
+  border: 1px solid #2c2c2c;
+  background: #141414;
+  border-radius: 9px;
+  padding: 15px;
+  margin-top: 16px;
+}
+
+.note-mark {
+  font: 14px ui-monospace, monospace;
+  color: var(--accent);
+}
+
+.note strong {
+  font-size: 11px;
+  display: block;
+  margin-bottom: 3px;
+}
+
+.note p {
+  font-size: 10px;
+  color: #999;
+  margin: 0;
+  line-height: 1.7;
+}
+
+/* V2 VISION */
+
+.spot {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.spot-card {
+  border: 1px solid #444;
+  border-radius: 12px;
+  padding: 23px;
+  background:
+    radial-gradient(ellipse at 100% 0%, #ffffff10, transparent 55%),
+    linear-gradient(145deg, #1a1a1a, #101010);
+}
+
+.spot-card .ico {
+  width: 42px;
+  height: 42px;
+  margin-bottom: 17px;
+}
+
+.spot-card h3 {
+  font-size: 18px;
+  letter-spacing: -.04em;
+  margin: 0 0 8px;
+}
+
+.spot-card > p {
+  font-size: 12px;
+  color: #aaa;
+  margin: 0 0 16px;
+  line-height: 1.8;
+}
+
+.spot-card ul {
+  list-style: none;
+  margin: 0;
+  padding: 15px 0 0;
+  border-top: 1px solid #2a2a2a;
+  display: grid;
+  gap: 9px;
+}
+
+.spot-card li {
+  font-size: 11px;
+  color: #d0d0d0;
+  display: flex;
+  gap: 9px;
+}
+
+.spot-card li::before {
+  content: "✓";
+  color: var(--accent);
+}
+
+.flow {
+  margin-top: 12px;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  background: #0f0f0f;
+  padding: 18px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr;
+  gap: 12px;
+  align-items: center;
+  text-align: center;
+}
+
+.flow div {
+  border: 1px solid #303030;
+  background: #151515;
+  border-radius: 8px;
+  padding: 12px 10px;
+}
+
+.flow b {
+  display: block;
+  font-size: 12px;
+}
+
+.flow small {
+  font-size: 10px;
+  color: #888;
+}
+
+.flow > span {
+  color: var(--accent);
+}
+
+.flow-cap {
+  font-size: 10px;
+  color: #777;
+  margin: 10px 2px 0;
+}
+
+.safe {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 11px;
+}
+
+.safe div {
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  padding: 15px;
+  background: #111;
+}
+
+.safe b {
+  font-size: 12px;
+  display: block;
+  margin-bottom: 3px;
+}
+
+.safe p {
+  font-size: 11px;
+  color: #999;
+  margin: 0;
+  line-height: 1.7;
+}
+
+/* DEVELOPMENT TIMELINE */
+
+.timeline {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #101010;
+  padding: 4px 17px;
+}
+
+.phase {
+  display: grid;
+  grid-template-columns: 85px 1fr;
+  gap: 15px;
+  padding: 15px 0;
+  border-bottom: 1px solid #252525;
+}
+
+.phase:last-child {
+  border: 0;
+}
+
+.phase time {
+  color: #888;
+  font: 10px ui-monospace, monospace;
+  padding-top: 2px;
+}
+
+.phase b {
+  font-size: 12px;
+  display: block;
+  margin-bottom: 3px;
+}
+
+.phase p {
+  font-size: 11px;
+  color: #999;
+  margin: 0;
+  line-height: 1.7;
+}
+
+/* FOOTER */
+
+.footer {
+  border-top: 1px solid var(--line);
+  margin-top: 35px;
+  padding: 17px 0 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: #777;
+  font-size: 10px;
+}
+
+.footer a {
+  color: #ccc;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  color: var(--accent);
+}
+
+/* RESPONSIVE */
+
+@media(max-width:760px) {
+  .spot { grid-template-columns: 1fr; }
+  .safe { grid-template-columns: 1fr; }
+}
+
+@media(max-width:650px) {
+  .app-header { padding: 0 14px; }
+  .tab-bar { padding: 0 8px; }
+  .tab { padding: 13px 11px; }
+  .content { padding: 19px 14px 30px; }
+  .features { grid-template-columns: 1fr; }
+  .track { grid-template-columns: 1fr 1fr; }
+  .track-item:nth-child(2) { border-right: 0; }
+  .track-item:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+  .phase { grid-template-columns: 65px 1fr; gap: 10px; }
+  .footer { flex-direction: column; }
+  .flow { grid-template-columns: 1fr; }
+  .flow > span { transform: rotate(90deg); }
+}
+
+@media(prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
 }
 </style>
 </head>
 
 <body>
-<main class="shell">
 
-<!-- PAGE HEADING -->
-<header class="page-heading">
-<a class="brand" href="https://projectlog-desktop.vercel.app/">
-<span class="logo">P</span>
-<span>ProjectLog</span>
-</a>
+<div class="app">
 
-<div>
-<div class="eyebrow"><span class="dot"></span> PRODUCT ROADMAP · v1.5.0</div>
-<h1>ProjectLog <span>Roadmap.</span></h1>
-<p class="lead">
-See what's new, what's coming next, and the long-term direction of ProjectLog.
-From improved AI capabilities to a future MCP server, follow the development journey.
-</p>
-</div>
+<!-- COMPACT APP HEADER -->
+
+<header class="app-header">
+  <div class="brand">
+    <div class="logo">P</div>
+    <div>
+      <span class="brand-name">ProjectLog</span>
+      <span class="brand-divider">/</span>
+      <span class="brand-page">Upcoming</span>
+    </div>
+  </div>
+
+  <span class="version">v1.5.0</span>
 </header>
 
-<!-- PAGE NAVIGATION -->
-<nav class="jump" aria-label="Roadmap navigation">
-<a href="#releases">Release Overview</a>
-<a href="#v150">v1.5.0 Current</a>
-<a href="#v17">v1.7.0 Upcoming</a>
-<a href="#v20">v2.0.0 Vision</a>
-<a href="#plan">Development Plan</a>
+<!-- APP NAVIGATION TABS -->
+
+<nav class="tab-bar" role="tablist" aria-label="Roadmap sections">
+
+  <button class="tab active" role="tab"
+    id="tab-overview" aria-selected="true"
+    aria-controls="panel-overview" data-tab="overview">
+    Overview
+  </button>
+
+  <button class="tab" role="tab"
+    id="tab-v150" aria-selected="false"
+    aria-controls="panel-v150" data-tab="v150">
+    v1.5.0
+  </button>
+
+  <button class="tab" role="tab"
+    id="tab-v17" aria-selected="false"
+    aria-controls="panel-v17" data-tab="v17">
+    v1.7.0
+  </button>
+
+  <button class="tab" role="tab"
+    id="tab-v20" aria-selected="false"
+    aria-controls="panel-v20" data-tab="v20">
+    v2.0.0
+  </button>
+
+  <button class="tab" role="tab"
+    id="tab-plan" aria-selected="false"
+    aria-controls="panel-plan" data-tab="plan">
+    Development
+  </button>
+
 </nav>
 
-<!-- RELEASE TRACK -->
-<section class="top" id="releases">
-<div class="track" aria-label="Release path">
-<div class="now"><small>Now · Current</small><b>v1.5.0</b></div>
-<div><small>Next · Planned</small><b>v1.7.0</b></div>
-<div><small>Vision · Future</small><b>v2.0.0</b></div>
-</div>
+<!-- CONTENT -->
+
+<main class="content">
+
+<!-- OVERVIEW TAB -->
+
+<section class="tab-panel active" id="panel-overview"
+  role="tabpanel" aria-labelledby="tab-overview">
+
+  <div class="section-head">
+    <div>
+      <h2>Release Overview</h2>
+      <p>Project development and release tracking</p>
+    </div>
+  </div>
+
+  <div class="track">
+    <div class="track-item current">
+      <small>Current release</small>
+      <b>v1.5.0</b>
+    </div>
+    <div class="track-item">
+      <small>Next planned</small>
+      <b>v1.7.0</b>
+    </div>
+    <div class="track-item">
+      <small>Long-term vision</small>
+      <b>v2.0.0</b>
+    </div>
+  </div>
+
+  <div class="versions">
+
+    <article class="release highlight">
+      <div class="release-top">
+        <div>
+          <div class="kicker">Current release · Latest</div>
+          <div class="release-version">ProjectLog v1.5.0</div>
+        </div>
+        <span class="status success">RELEASED</span>
+      </div>
+
+      <p class="desc">
+        A major update focused on a smarter AI assistant, additional
+        project tools, and a smoother application update experience.
+      </p>
+
+      <div class="chips">
+        <span class="chip hot">Enhanced AI</span>
+        <span class="chip hot">Additional AI tools</span>
+        <span class="chip">Themed updater</span>
+        <span class="chip">Download tracking</span>
+      </div>
+    </article>
+
+    <article class="release future">
+      <div class="release-top">
+        <div>
+          <div class="kicker">Next planned release</div>
+          <div class="release-version">ProjectLog v1.7.0</div>
+        </div>
+        <span class="status">PLANNED</span>
+      </div>
+
+      <p class="desc">
+        A broader productivity update focused on smoother workflows,
+        more flexible organization, and quality-of-life improvements.
+      </p>
+
+      <div class="chips">
+        <span class="chip">Workflow upgrades</span>
+        <span class="chip">Customization</span>
+        <span class="chip">Quality of life</span>
+      </div>
+    </article>
+
+    <article class="release future">
+      <div class="release-top">
+        <div>
+          <div class="kicker">Major milestone</div>
+          <div class="release-version">ProjectLog v2.0.0</div>
+        </div>
+        <span class="status">LONG-TERM VISION</span>
+      </div>
+
+      <p class="desc">
+        A potential major redesign of ProjectLog with a more capable
+        workspace, powerful integrations, and a new way to work with AI.
+      </p>
+
+      <div class="chips">
+        <span class="chip hot">MCP server</span>
+        <span class="chip hot">AI integration</span>
+        <span class="chip">Workspace redesign</span>
+      </div>
+    </article>
+
+  </div>
+
+  <div class="note">
+    <span class="note-mark">i</span>
+    <div>
+      <strong>About this roadmap</strong>
+      <p>
+        Explore individual release tabs to see features and development
+        plans. Future features and release dates may change.
+      </p>
+    </div>
+  </div>
+
 </section>
 
-<!-- RELEASE CARDS -->
-<section>
-<div class="versions">
+<!-- V1.5.0 TAB -->
 
-<article class="release big">
-<div class="release-top">
-<div>
-<div class="kicker">Current release · Latest</div>
-<div class="version">ProjectLog v1.5.0</div>
-</div>
-<span class="status">RELEASED</span>
-</div>
-<p class="desc">A major update focused on a smarter AI assistant, more useful project tools, and a smoother application update experience.</p>
-<div class="chips">
-<span class="chip hot">Enhanced AI system</span>
-<span class="chip hot">More AI tools</span>
-<span class="chip">Themed update window</span>
-<span class="chip">Download progress</span>
-</div>
-</article>
+<section class="tab-panel" id="panel-v150"
+  role="tabpanel" aria-labelledby="tab-v150">
 
-<article class="release future">
-<div class="release-top">
-<div>
-<div class="kicker">Next planned release</div>
-<div class="version">ProjectLog v1.7.0</div>
-</div>
-<span class="status">PLANNED</span>
-</div>
-<p class="desc">A broader productivity update focused on smoother workflows, more flexible organization, and quality-of-life improvements shaped by user feedback.</p>
-<div class="chips">
-<span class="chip">Workflow upgrades</span>
-<span class="chip">Customization</span>
-<span class="chip">Quality of life</span>
-</div>
-</article>
+  <div class="section-head">
+    <div>
+      <h2>ProjectLog v1.5.0</h2>
+      <p>Current release · Release highlights</p>
+    </div>
+    <span class="status success">RELEASED</span>
+  </div>
 
-<article class="release future big">
-<div class="release-top">
-<div>
-<div class="kicker">Major milestone</div>
-<div class="version">ProjectLog v2.0.0</div>
-</div>
-<span class="status">LONG-TERM VISION</span>
-</div>
-<p class="desc">A potential major redesign of the ProjectLog experience, with a more capable project workspace, stronger tools for managing a project's full lifecycle, and a new way to work with AI.</p>
-<div class="chips">
-<span class="chip hot">MCP server</span>
-<span class="chip hot">AI integration</span>
-<span class="chip">Workspace redesign</span>
-<span class="chip">Project organization</span>
-</div>
-</article>
+  <div class="features">
 
-</div>
+    <article class="feature">
+      <div class="feature-top">
+        <span class="ico">✦</span>
+        <div>
+          <h3>Improved AI assistant</h3>
+          <p>
+            Enhanced AI capabilities for understanding your workspace
+            and helping with everyday development tasks.
+          </p>
+        </div>
+      </div>
+      <span class="tag">AI SYSTEM</span>
+    </article>
+
+    <article class="feature">
+      <div class="feature-top">
+        <span class="ico">⌘</span>
+        <div>
+          <h3>Additional AI tools</h3>
+          <p>
+            Use AI to explore projects, manage versions, search
+            development logs, and work with journal entries.
+          </p>
+        </div>
+      </div>
+      <span class="tag">AI TOOLS</span>
+    </article>
+
+    <article class="feature">
+      <div class="feature-top">
+        <span class="ico">↻</span>
+        <div>
+          <h3>Redesigned update window</h3>
+          <p>
+            A cleaner update experience designed to match the
+            ProjectLog interface and visual theme.
+          </p>
+        </div>
+      </div>
+      <span class="tag">UPDATER</span>
+    </article>
+
+    <article class="feature">
+      <div class="feature-top">
+        <span class="ico">↓</span>
+        <div>
+          <h3>Download progress tracking</h3>
+          <p>
+            Monitor download percentage, progress, speed, and
+            download status while an update is being downloaded.
+          </p>
+        </div>
+      </div>
+      <span class="tag">UPDATER</span>
+    </article>
+
+    <article class="feature">
+      <div class="feature-top">
+        <span class="ico">▤</span>
+        <div>
+          <h3>Better project interaction</h3>
+          <p>
+            Use the AI assistant to access project context and
+            perform supported project management actions.
+          </p>
+        </div>
+      </div>
+      <span class="tag">PRODUCTIVITY</span>
+    </article>
+
+    <article class="feature">
+      <div class="feature-top">
+        <span class="ico">⚙</span>
+        <div>
+          <h3>Improved user experience</h3>
+          <p>
+            Refinements to the assistant and update workflow
+            for a more consistent desktop experience.
+          </p>
+        </div>
+      </div>
+      <span class="tag">IMPROVEMENTS</span>
+    </article>
+
+  </div>
+
+  <div class="section-head" style="margin-top:30px">
+    <div>
+      <h2>AI Usage Guide</h2>
+      <p>Getting started with the ProjectLog AI assistant</p>
+    </div>
+  </div>
+
+  <div class="features">
+
+    <article class="feature">
+      <div class="feature-top">
+        <span class="ico">?</span>
+        <div>
+          <h3>Ask questions</h3>
+          <p>
+            Ask about programming, debugging, project ideas,
+            and your development workflow.
+          </p>
+        </div>
+      </div>
+      <span class="tag">ASK AI</span>
+    </article>
+
+    <article class="feature">
+      <div class="feature-top">
+        <span class="ico">▣</span>
+        <div>
+          <h3>Project context</h3>
+          <p>
+            Ask AI to understand your saved projects,
+            descriptions, and development history.
+          </p>
+        </div>
+      </div>
+      <span class="tag">PROJECTS</span>
+    </article>
+
+    <article class="feature">
+      <div class="feature-top">
+        <span class="ico">✎</span>
+        <div>
+          <h3>Manage journal entries</h3>
+          <p>
+            Search, create, and edit development logs
+            using supported AI tools.
+          </p>
+        </div>
+      </div>
+      <span class="tag">JOURNAL</span>
+    </article>
+
+    <article class="feature">
+      <div class="feature-top">
+        <span class="ico">↗</span>
+        <div>
+          <h3>Track activity</h3>
+          <p>
+            Ask about recent development activity and
+            explore project versions.
+          </p>
+        </div>
+      </div>
+      <span class="tag">ACTIVITY</span>
+    </article>
+
+  </div>
+
+  <div class="note">
+    <span class="note-mark">i</span>
+    <div>
+      <strong>Local AI support</strong>
+      <p>
+        Connect Ollama or LM Studio with a compatible local model
+        to use the AI assistant without paid API services.
+        Available actions depend on the configured model and tools.
+      </p>
+    </div>
+  </div>
+
 </section>
 
-<!-- V1.5.0 DETAILS -->
-<section id="v150">
-<div class="section-head">
-<div>
-<h2>v1.5.0 release highlights</h2>
-<p>Features included in the current release</p>
-</div>
-</div>
+<!-- V1.7.0 TAB -->
 
-<div class="features">
-<article class="feature">
-<div class="feature-top"><span class="ico">✦</span><div>
-<h3>Improved AI assistant</h3>
-<p>Enhanced AI capabilities for understanding your workspace and helping with everyday development tasks.</p>
-</div></div>
-<span class="tag">AI SYSTEM</span>
-</article>
+<section class="tab-panel" id="panel-v17"
+  role="tabpanel" aria-labelledby="tab-v17">
 
-<article class="feature">
-<div class="feature-top"><span class="ico">⌘</span><div>
-<h3>Additional AI tools</h3>
-<p>Use AI to explore projects, manage versions, search development logs, and work with journal entries.</p>
-</div></div>
-<span class="tag">AI TOOLS</span>
-</article>
+  <div class="section-head">
+    <div>
+      <h2>ProjectLog v1.7.0</h2>
+      <p>Proposed improvements for the next development cycle</p>
+    </div>
+    <span class="status">PLANNED</span>
+  </div>
 
-<article class="feature">
-<div class="feature-top"><span class="ico">↻</span><div>
-<h3>Redesigned update window</h3>
-<p>A cleaner update experience designed to match the ProjectLog interface and visual theme.</p>
-</div></div>
-<span class="tag">UPDATER</span>
-</article>
+  <div class="features">
 
-<article class="feature">
-<div class="feature-top"><span class="ico">↓</span><div>
-<h3>Download progress tracking</h3>
-<p>Monitor download percentage, progress, speed, and download status while an update is being downloaded.</p>
-</div></div>
-<span class="tag">UPDATER</span>
-</article>
+    <article class="feature">
+      <div class="feature-top">
+        <span class="ico">⌕</span>
+        <div>
+          <h3>Faster project search</h3>
+          <p>
+            Search projects and important details from one place,
+            with clearer results and fewer clicks.
+          </p>
+        </div>
+      </div>
+      <span class="tag">CORE WORKFLOW</span>
+    </article>
 
-<article class="feature">
-<div class="feature-top"><span class="ico">▤</span><div>
-<h3>Better project interaction</h3>
-<p>Use the AI assistant to access project context and perform supported project management actions.</p>
-</div></div>
-<span class="tag">PRODUCTIVITY</span>
-</article>
+    <article class="feature">
+      <div class="feature-top">
+        <span class="ico">▤</span>
+        <div>
+          <h3>Better Markdown notes</h3>
+          <p>
+            Make notes easier to read and structure with headings,
+            lists, code blocks, and links.
+          </p>
+        </div>
+      </div>
+      <span class="tag">CORE WORKFLOW</span>
+    </article>
 
-<article class="feature">
-<div class="feature-top"><span class="ico">⚙</span><div>
-<h3>Improved user experience</h3>
-<p>Refinements to the assistant and update workflow for a more consistent desktop experience.</p>
-</div></div>
-<span class="tag">IMPROVEMENTS</span>
-</article>
-</div>
+    <article class="feature">
+      <div class="feature-top">
+        <span class="ico">↺</span>
+        <div>
+          <h3>Project activity history</h3>
+          <p>
+            Review important project changes over time,
+            so decisions and progress are easier to trace.
+          </p>
+        </div>
+      </div>
+      <span class="tag">CORE WORKFLOW</span>
+    </article>
 
-<div class="note">
-<span class="note-mark">i</span>
-<div>
-<strong>AI usage tip</strong>
-<p>Connect Ollama or LM Studio with a compatible local model to use the AI assistant locally. Available actions depend on the configured model and enabled tools.</p>
-</div>
-</div>
+    <article class="feature">
+      <div class="feature-top">
+        <span class="ico">◇</span>
+        <div>
+          <h3>Roadmap improvements</h3>
+          <p>
+            Refine milestone and task planning so upcoming
+            work is easier to scan and prioritize.
+          </p>
+        </div>
+      </div>
+      <span class="tag">CORE WORKFLOW</span>
+    </article>
+
+    <article class="feature">
+      <div class="feature-top">
+        <span class="ico">⌨</span>
+        <div>
+          <h3>Keyboard shortcuts</h3>
+          <p>
+            Add shortcuts for common actions to make
+            everyday project management feel faster.
+          </p>
+        </div>
+      </div>
+      <span class="tag">QUALITY OF LIFE</span>
+    </article>
+
+    <article class="feature">
+      <div class="feature-top">
+        <span class="ico">⇧</span>
+        <div>
+          <h3>Safer backup workflow</h3>
+          <p>
+            Improve backup and restore, with clearer feedback
+            before existing data is replaced.
+          </p>
+        </div>
+      </div>
+      <span class="tag">QUALITY OF LIFE</span>
+    </article>
+
+  </div>
+
+  <div class="note">
+    <span class="note-mark">i</span>
+    <div>
+      <strong>Release status</strong>
+      <p>
+        These are proposed features. Final scope and release
+        dates may change based on development and feedback.
+      </p>
+    </div>
+  </div>
+
 </section>
 
-<!-- V1.7.0 DETAILS -->
-<section id="v17">
-<div class="section-head">
-<div>
-<h2>v1.7.0 feature direction</h2>
-<p>Proposed improvements for a future release</p>
-</div>
-</div>
+<!-- V2.0.0 TAB -->
 
-<div class="features">
-<article class="feature"><div class="feature-top"><span class="ico">⌕</span><div>
-<h3>Faster project search</h3>
-<p>Search projects and important details from one place, with clearer results and fewer clicks.</p>
-</div></div><span class="tag">CORE WORKFLOW</span></article>
+<section class="tab-panel" id="panel-v20"
+  role="tabpanel" aria-labelledby="tab-v20">
 
-<article class="feature"><div class="feature-top"><span class="ico">▤</span><div>
-<h3>Better Markdown notes</h3>
-<p>Make notes easier to read and structure with headings, lists, code blocks, and links.</p>
-</div></div><span class="tag">CORE WORKFLOW</span></article>
+  <div class="section-head">
+    <div>
+      <h2>ProjectLog v2.0.0</h2>
+      <p>Long-term vision · MCP server and AI integration</p>
+    </div>
+    <span class="status">LONG-TERM VISION</span>
+  </div>
 
-<article class="feature"><div class="feature-top"><span class="ico">↺</span><div>
-<h3>Project activity history</h3>
-<p>Review important project changes over time, so decisions and progress are easier to trace.</p>
-</div></div><span class="tag">CORE WORKFLOW</span></article>
+  <div class="spot">
 
-<article class="feature"><div class="feature-top"><span class="ico">◇</span><div>
-<h3>Roadmap improvements</h3>
-<p>Refine milestone and task planning so upcoming work is easier to scan and prioritize.</p>
-</div></div><span class="tag">CORE WORKFLOW</span></article>
+    <article class="spot-card">
+      <div class="ico">⌬</div>
+      <h3>MCP server</h3>
+      <p>
+        A built-in Model Context Protocol server would let
+        compatible AI assistants communicate with your
+        ProjectLog workspace in a standard way.
+      </p>
+      <ul>
+        <li>Read projects, notes, and roadmap</li>
+        <li>Create projects and add journal entries</li>
+        <li>Update progress through AI requests</li>
+        <li>Connect to MCP-compatible clients</li>
+        <li>Runs locally with user-controlled access</li>
+      </ul>
+    </article>
 
-<article class="feature"><div class="feature-top"><span class="ico">⌨</span><div>
-<h3>Keyboard shortcuts</h3>
-<p>Add shortcuts for common actions to make everyday project management feel faster.</p>
-</div></div><span class="tag">QUALITY OF LIFE</span></article>
+    <article class="spot-card">
+      <div class="ico">✦</div>
+      <h3>AI integration</h3>
+      <p>
+        Helpful AI features inside the app, so your project
+        history becomes easier to use and not just to store.
+      </p>
+      <ul>
+        <li>Summarize recent project activity</li>
+        <li>Turn rough notes into clean Markdown</li>
+        <li>Suggest roadmap milestones</li>
+        <li>Ask questions about your projects</li>
+        <li>Work with external AI assistants</li>
+      </ul>
+    </article>
 
-<article class="feature"><div class="feature-top"><span class="ico">⇧</span><div>
-<h3>Safer backup workflow</h3>
-<p>Improve backup and restore, with clearer feedback before existing data is replaced.</p>
-</div></div><span class="tag">QUALITY OF LIFE</span></article>
-</div>
+  </div>
+
+  <div class="section-head" style="margin-top:30px">
+    <div>
+      <h2>How MCP could work</h2>
+      <p>Conceptual architecture</p>
+    </div>
+  </div>
+
+  <div class="flow">
+    <div>
+      <b>AI assistant</b>
+      <small>Any MCP client</small>
+    </div>
+    <span>⇄</span>
+    <div>
+      <b>ProjectLog MCP</b>
+      <small>Local, permissioned</small>
+    </div>
+    <span>⇄</span>
+    <div>
+      <b>Your workspace</b>
+      <small>Projects · notes · roadmap</small>
+    </div>
+  </div>
+
+  <p class="flow-cap">
+    Illustrative concept. The final implementation may change.
+  </p>
+
+  <div class="safe">
+    <div>
+      <b>You stay in control</b>
+      <p>
+        AI access would be opt-in, with clear controls
+        over what an assistant can see.
+      </p>
+    </div>
+
+    <div>
+      <b>Read vs. write</b>
+      <p>
+        Separate permissions for reading data and
+        for making changes.
+      </p>
+    </div>
+
+    <div>
+      <b>Works with your data</b>
+      <p>
+        Designed to respect existing projects
+        and JSON import/export.
+      </p>
+    </div>
+  </div>
+
+  <div class="note">
+    <span class="note-mark">i</span>
+    <div>
+      <strong>Future development</strong>
+      <p>
+        MCP integration is a long-term concept for v2.0.0,
+        not a currently available feature.
+      </p>
+    </div>
+  </div>
+
 </section>
 
-<!-- V2.0.0 VISION -->
-<section id="v20">
-<div class="section-head">
-<div>
-<h2>v2.0.0 vision: MCP server &amp; AI integration</h2>
-<p>Early ideas for connecting ProjectLog to the AI tools you already use</p>
-</div>
-</div>
+<!-- DEVELOPMENT TAB -->
 
-<div class="spot">
-<article class="spot-card">
-<div class="ico">⌬</div>
-<h3>MCP server</h3>
-<p>A built-in Model Context Protocol server would let compatible AI assistants talk to your ProjectLog workspace in a standard way.</p>
-<ul>
-<li>Let an assistant read your projects, notes, and roadmap</li>
-<li>Create projects, add notes, and update progress by request</li>
-<li>Works with any MCP-compatible client</li>
-<li>Runs on your machine, started and stopped by you</li>
-</ul>
-</article>
+<section class="tab-panel" id="panel-plan"
+  role="tabpanel" aria-labelledby="tab-plan">
 
-<article class="spot-card">
-<div class="ico">✦</div>
-<h3>AI integration</h3>
-<p>Helpful AI features inside the app, so your project history becomes easier to use and not just to store.</p>
-<ul>
-<li>Summarize a project's recent activity</li>
-<li>Turn rough notes into clean Markdown and next steps</li>
-<li>Suggest roadmap milestones from your goals</li>
-<li>Ask questions about your own projects</li>
-</ul>
-</article>
-</div>
+  <div class="section-head">
+    <div>
+      <h2>Development Plan</h2>
+      <p>How ProjectLog features move from idea to release</p>
+    </div>
+  </div>
 
-<div class="flow" aria-label="How the MCP server could work">
-<div><b>AI assistant</b><small>Any MCP client</small></div>
-<span>⇄</span>
-<div><b>ProjectLog MCP server</b><small>Local, permissioned</small></div>
-<span>⇄</span>
-<div><b>Your workspace</b><small>Projects · notes · roadmap</small></div>
-</div>
+  <div class="timeline">
 
-<p class="flow-cap">Illustrative concept. The final design may change.</p>
+    <div class="phase">
+      <time>PHASE 01</time>
+      <div>
+        <b>Plan &amp; prioritize</b>
+        <p>
+          Choose the highest-value improvements and define
+          how each should behave before implementation.
+        </p>
+      </div>
+    </div>
 
-<div class="safe">
-<div><b>You stay in control</b><p>AI access would be opt-in, with clear controls over what an assistant can see.</p></div>
-<div><b>Read vs. write</b><p>Separate permissions for reading data and for making changes.</p></div>
-<div><b>Works with your data</b><p>Built to respect existing projects and JSON import/export.</p></div>
-</div>
+    <div class="phase">
+      <time>PHASE 02</time>
+      <div>
+        <b>Build &amp; test</b>
+        <p>
+          Implement features in small steps, test existing
+          projects and JSON import/export compatibility,
+          and fix regressions.
+        </p>
+      </div>
+    </div>
+
+    <div class="phase">
+      <time>PHASE 03</time>
+      <div>
+        <b>Release &amp; listen</b>
+        <p>
+          Publish the installer and update metadata,
+          document changes, and use feedback to guide
+          the next iteration.
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section-head" style="margin-top:30px">
+    <div>
+      <h2>Release Information</h2>
+      <p>ProjectLog development status</p>
+    </div>
+  </div>
+
+  <div class="versions">
+
+    <article class="release">
+      <div class="release-top">
+        <div>
+          <div class="kicker">Latest release</div>
+          <div class="release-version">v1.5.0</div>
+        </div>
+        <span class="status success">RELEASED</span>
+      </div>
+      <p class="desc">
+        Current version of ProjectLog.
+      </p>
+    </article>
+
+    <article class="release future">
+      <div class="release-top">
+        <div>
+          <div class="kicker">Next release</div>
+          <div class="release-version">v1.7.0</div>
+        </div>
+        <span class="status">PLANNED</span>
+      </div>
+      <p class="desc">
+        Planned productivity and workflow improvements.
+      </p>
+    </article>
+
+    <article class="release future">
+      <div class="release-top">
+        <div>
+          <div class="kicker">Major milestone</div>
+          <div class="release-version">v2.0.0</div>
+        </div>
+        <span class="status">FUTURE</span>
+      </div>
+      <p class="desc">
+        MCP server, deeper AI integration, and workspace improvements.
+      </p>
+    </article>
+
+  </div>
+
+  <div class="note">
+    <span class="note-mark">i</span>
+    <div>
+      <strong>Roadmap status</strong>
+      <p>
+        v1.5.0 is the current release. Features under v1.7.0
+        and v2.0.0 are development plans, not promises.
+        Final scope and release dates may change.
+        Confirmed changes will be published in official
+        GitHub release notes.
+      </p>
+    </div>
+  </div>
+
 </section>
 
-<!-- DEVELOPMENT PLAN -->
-<section id="plan">
-<div class="section-head">
-<div>
-<h2>Development plan</h2>
-<p>Work will move through these stages</p>
-</div>
-</div>
-
-<div class="timeline">
-<div class="phase"><time>PHASE 01</time><div><b>Plan &amp; prioritize</b><p>Choose the highest-value improvements and define how each should behave before implementation.</p></div></div>
-<div class="phase"><time>PHASE 02</time><div><b>Build &amp; test</b><p>Implement features in small steps, test existing projects and JSON import/export compatibility, and fix regressions.</p></div></div>
-<div class="phase"><time>PHASE 03</time><div><b>Release &amp; listen</b><p>Publish the installer and update metadata, document changes, and use feedback to guide the next iteration.</p></div></div>
-</div>
-
-<div class="note">
-<span class="note-mark">i</span>
-<div>
-<strong>Roadmap status</strong>
-<p>v1.5.0 is the current release. Features listed under v1.7.0 and v2.0.0 are planned ideas, not promises or currently available functionality. The final scope and release dates may change; confirmed changes will be published in the official GitHub release notes.</p>
-</div>
-</div>
-</section>
-
-<!-- CTA -->
-<section class="cta">
-<div>
-<h2>Have an idea for ProjectLog?</h2>
-<p>Feedback shapes what gets built next. Suggest a feature or vote on what matters to you.</p>
-</div>
-<div class="btns">
-<a class="btn p" href="https://github.com/sakib-12345/ProjectLog/issues" target="_blank" rel="noopener">Suggest a feature ↗</a>
-<a class="btn" href="https://github.com/sakib-12345/ProjectLog/releases" target="_blank" rel="noopener">Releases ↗</a>
-</div>
-</section>
+<!-- FOOTER -->
 
 <footer class="footer">
-<span>ProjectLog v1.5.0 · Keep your work moving.</span>
-<a href="https://github.com/sakib-12345/ProjectLog/releases" target="_blank" rel="noopener">View official releases ↗</a>
+  <span>ProjectLog v1.5.0 · Keep your work moving.</span>
+  <a href="https://github.com/sakib-12345/ProjectLog/releases"
+     target="_blank" rel="noopener">
+    View official releases ↗
+  </a>
 </footer>
 
 </main>
+</div>
+
+<!-- TAB SYSTEM -->
+
+<script>
+(function () {
+  const tabs = document.querySelectorAll(".tab");
+  const panels = document.querySelectorAll(".tab-panel");
+
+  function activateTab(name, updateHash = true) {
+    const selected = document.querySelector(
+      '.tab[data-tab="' + name + '"]'
+    );
+
+    const panel = document.getElementById("panel-" + name);
+
+    if (!selected || !panel) return;
+
+    tabs.forEach(tab => {
+      const active = tab === selected;
+      tab.classList.toggle("active", active);
+      tab.setAttribute("aria-selected", String(active));
+      tab.tabIndex = active ? 0 : -1;
+    });
+
+    panels.forEach(item => {
+      item.classList.toggle("active", item === panel);
+    });
+
+    if (updateHash) {
+      history.replaceState(null, "", "#" + name);
+    }
+  }
+
+  tabs.forEach((tab, index) => {
+    tab.addEventListener("click", () => {
+      activateTab(tab.dataset.tab);
+    });
+
+    tab.addEventListener("keydown", event => {
+      let nextIndex = index;
+
+      if (event.key === "ArrowRight") {
+        nextIndex = (index + 1) % tabs.length;
+      } else if (event.key === "ArrowLeft") {
+        nextIndex = (index - 1 + tabs.length) % tabs.length;
+      } else if (event.key === "Home") {
+        nextIndex = 0;
+      } else if (event.key === "End") {
+        nextIndex = tabs.length - 1;
+      } else {
+        return;
+      }
+
+      event.preventDefault();
+      tabs[nextIndex].focus();
+      activateTab(tabs[nextIndex].dataset.tab);
+    });
+  });
+
+  const initialTab = location.hash.replace("#", "");
+
+  if (initialTab && document.querySelector(
+    '.tab[data-tab="' + initialTab + '"]'
+  )) {
+    activateTab(initialTab, false);
+  } else {
+    activateTab("overview", false);
+  }
+})();
+</script>
+
 </body>
 </html>
+```
