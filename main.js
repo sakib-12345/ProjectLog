@@ -11,6 +11,20 @@ const path = require("path");
 const fs = require("fs");
 const os = require("os");
 
+let mainWindow = null;
+let updateWindow = null;
+let pendingUpdateVersion = null;
+function sendUpdateState(state) {
+  for (const win of [updateWindow, mainWindow]) if (win && !win.isDestroyed()) win.webContents.send("projectlog:update-state", state);
+}
+function showUpdateWindow(state = {}) {
+  if (updateWindow && !updateWindow.isDestroyed()) { updateWindow.show(); sendUpdateState(state); return; }
+  updateWindow = new BrowserWindow({width:470,height:440,minWidth:430,minHeight:400,resizable:false,parent:mainWindow&&!mainWindow.isDestroyed()?mainWindow:undefined,modal:!!(mainWindow&&!mainWindow.isDestroyed()),show:false,backgroundColor:"#101318",title:"ProjectLog Update",webPreferences:{preload:path.join(__dirname,"preload.js"),contextIsolation:true,nodeIntegration:false,sandbox:true}});
+  updateWindow.setMenuBarVisibility(false);
+  updateWindow.loadFile(path.join(__dirname,"update.html"));
+  updateWindow.once("ready-to-show",()=>{updateWindow.show();sendUpdateState(state);});
+  updateWindow.on("closed",()=>{updateWindow=null;});
+}
 function createWindow() {
   const win = new BrowserWindow({
     width: 1440,
@@ -38,6 +52,8 @@ function createWindow() {
     return { action: "deny" };
   });
 
+  mainWindow = win;
+  win.on("closed", () => { if (mainWindow === win) mainWindow = null; });
   win.loadFile(path.join(__dirname, "index.html"));
 }
 
@@ -211,6 +227,47 @@ function scanDirectory(root) {
 }
 
 app.whenReady().then(() => {
+  ipcMain.handle("projectlog:update-action", async (_event, action) => {
+    if (action === "download") {
+      if (!pendingUpdateVersion) throw new Error("No update is available to download.");
+      try { sendUpdateState({status:"downloading",version:pendingUpdateVersion,percent:0}); await autoUpdater.downloadUpdate(); return {success:true}; }
+      catch (error) { sendUpdateState({status:"error",message:error.message||"Download failed."}); throw error; }
+    }
+    if (action === "install") { autoUpdater.quitAndInstall(false,true); return {success:true}; }
+    if (action === "later") { if(updateWindow&&!updateWindow.isDestroyed()) updateWindow.close(); return {success:true}; }
+    throw new Error("Unsupported update action.");
+  });
+
+  ipcMain.handle("projectlog:local-ai-request", async (_event, payload) => {
+    if (!payload || !["ollama", "lmstudio"].includes(payload.provider)) throw new Error("Unsupported local AI provider.");
+    if (typeof payload.endpoint !== "string" || typeof payload.model !== "string" || !Array.isArray(payload.messages)) throw new Error("Invalid local AI request.");
+    const endpoint = new URL(payload.endpoint);
+    if (!["http:", "https:"].includes(endpoint.protocol) || !["localhost", "127.0.0.1", "::1"].includes(endpoint.hostname)) throw new Error("Only a localhost model endpoint is allowed.");
+    const messages = payload.messages.slice(-24).map(m => ({ role: String(m.role || "user"), content: String(m.content || ""), ...(m.tool_calls ? { tool_calls: m.tool_calls } : {}), ...(m.tool_name ? { tool_name: m.tool_name } : {}), ...(m.tool_call_id ? { tool_call_id: m.tool_call_id } : {}) }));
+    const tools = Array.isArray(payload.tools) ? payload.tools.slice(0, 20) : [];
+    let url, body;
+    if (payload.provider === "ollama") {
+      url = new URL("/api/chat", endpoint).toString();
+      body = { model: payload.model, messages, tools, stream: false };
+    } else {
+      url = new URL("/v1/chat/completions", endpoint).toString();
+      body = { model: payload.model, messages, tools, tool_choice: "auto", stream: false };
+    }
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 180000);
+    try {
+      const response = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body), signal: controller.signal });
+      const text = await response.text();
+      if (!response.ok) throw new Error(`Local model API returned HTTP ${response.status}: ${text.slice(0, 500)}`);
+      let data; try { data = JSON.parse(text); } catch { throw new Error("The local model server returned invalid JSON."); }
+      if (payload.provider === "ollama") return { provider: "ollama", message: data.message || {} };
+      return data;
+    } catch (error) {
+      if (error.name === "AbortError") throw new Error("The local model request timed out after 3 minutes.");
+      throw new Error(error.message || "Could not connect to the local model server.");
+    } finally { clearTimeout(timer); }
+  });
+
   ipcMain.handle("projectlog:check-for-updates", async () => {
     if (!app.isPackaged || process.platform !== "win32") {
       return { status: "unsupported", message: "Update checks are available in the installed Windows version, not in development mode." };
@@ -332,83 +389,33 @@ app.whenReady().then(() => {
 
   createWindow();
 
-  // User-approved GitHub Releases updater. Never downloads or installs silently.
+  // User-approved, themed updater with live download progress.
   if (app.isPackaged && process.platform === "win32") {
     autoUpdater.autoDownload = false;
     autoUpdater.autoInstallOnAppQuit = false;
-
-    let updatePromptOpen = false;
-    let downloadInProgress = false;
-
-    autoUpdater.on("update-available", async (info) => {
-      if (updatePromptOpen) return;
-      updatePromptOpen = true;
-      try {
-        const choice = await dialog.showMessageBox({
-          type: "info",
-          title: "ProjectLog update available",
-          message: `ProjectLog ${info.version} is available.`,
-          detail: "Would you like to download this update now? Your saved projects and data are kept separate from the app installation and will not be intentionally removed by updating.",
-          buttons: ["Download update", "Not now"],
-          defaultId: 0,
-          cancelId: 1,
-          noLink: true,
-        });
-
-        if (choice.response === 0 && !downloadInProgress) {
-          downloadInProgress = true;
-          await autoUpdater.downloadUpdate();
-        }
-      } catch (error) {
-        dialog.showMessageBox({
-          type: "warning",
-          title: "Update download failed",
-          message: "ProjectLog could not download the update.",
-          detail: error?.message || "Please try again later.",
-          buttons: ["OK"],
-        });
-      } finally {
-        updatePromptOpen = false;
-      }
+    autoUpdater.on("update-available", (info) => {
+      pendingUpdateVersion = info.version;
+      showUpdateWindow({status:"available",version:info.version});
+      sendUpdateState({status:"available",version:info.version});
     });
-
-    autoUpdater.on("update-not-available", () => {
-      // No dialog when the installed version is current.
+    autoUpdater.on("update-not-available", () => sendUpdateState({status:"current",version:app.getVersion()}));
+    autoUpdater.on("download-progress", (progress) => sendUpdateState({
+      status:"downloading",version:pendingUpdateVersion,percent:progress.percent,
+      speed:`${(progress.bytesPerSecond/1048576).toFixed(2)} MB/s`,
+      transferred:`${(progress.transferred/1048576).toFixed(1)} MB`,
+      total:`${(progress.total/1048576).toFixed(1)} MB`,
+      bytesPerSecond:`${(progress.bytesPerSecond/1048576).toFixed(2)} MB/s`
+    }));
+    autoUpdater.on("update-downloaded", (info) => {
+      sendUpdateState({status:"downloaded",version:info.version,percent:100});
+      showUpdateWindow({status:"downloaded",version:info.version,percent:100});
     });
-
-    autoUpdater.on("download-progress", (progress) => {
-      // Progress is available for a future in-app progress UI; no modal spam.
-      app.setAppUserModelId("com.shakib.projectlog");
-    });
-
-    autoUpdater.on("update-downloaded", async (info) => {
-      const choice = await dialog.showMessageBox({
-        type: "info",
-        title: "Update ready to install",
-        message: `ProjectLog ${info.version} has been downloaded.`,
-        detail: "Restart ProjectLog to install the update now, or choose Later to keep using this version. Your app data should remain intact; as with any update, keeping a backup of important exports is recommended.",
-        buttons: ["Restart and install", "Later"],
-        defaultId: 0,
-        cancelId: 1,
-        noLink: true,
-      });
-      if (choice.response === 0) {
-        autoUpdater.quitAndInstall(false, true);
-      }
-    });
-
     autoUpdater.on("error", (error) => {
-      console.error("ProjectLog updater error:", error);
+      console.error("ProjectLog updater error:",error);
+      sendUpdateState({status:"error",message:error?.message||"Update service error."});
     });
-
-    // Allow the main window to appear before checking GitHub Releases.
-    setTimeout(() => {
-      autoUpdater.checkForUpdates().catch((error) => {
-        console.error("ProjectLog update check failed:", error);
-      });
-    }, 5000);
+    setTimeout(()=>autoUpdater.checkForUpdates().catch(error=>console.error("ProjectLog update check failed:",error)),5000);
   }
-
   app.on("activate", () => {
     if (!BrowserWindow.getAllWindows().length) {
       createWindow();
