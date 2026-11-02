@@ -67,7 +67,7 @@ aside{position:relative;transition:padding .22s ease;overflow:hidden}
 
 
 
-/* ProjectLog 1.1.0 app views and theme */
+/* ProjectLog 1.5.0 app views and theme */
 .app-view{min-height:calc(100vh - 0px);background:var(--bg);color:var(--text)}
 .app.show-settings .topbar,.app.show-settings .content,.app.show-upcoming .topbar,.app.show-upcoming .content{display:none}
 .app.show-settings #settingsView,.app.show-upcoming #upcomingView{display:block!important}
@@ -136,6 +136,9 @@ aside{position:relative;transition:padding .22s ease;overflow:hidden}
 :root[data-theme="light"] .project-count,:root[data-theme="light"] .sidefoot,:root[data-theme="light"] .bottom-note{color:#687386}
 
 @media(max-width:650px){.settings-facts{grid-template-columns:1fr}.settings-wrap{padding:22px 16px}}
+
+.ai-wrap{max-width:1000px;margin:0 auto;padding:clamp(20px,4vw,42px);height:calc(100vh - 8px);display:flex;flex-direction:column;gap:14px}.ai-heading h1{font-size:32px;letter-spacing:-1px;margin:6px 0}.ai-heading p{color:var(--muted);margin:0}.ai-config{display:grid;grid-template-columns:150px minmax(120px,1fr) minmax(180px,1fr) auto;gap:8px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px}.ai-config label{display:block;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.7px;margin:0 0 5px}.ai-config select,.ai-config input{width:100%;min-width:0;background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:9px}.ai-status{font-size:11px;color:var(--muted);align-self:center}.ai-chat{flex:1;min-height:180px;overflow:auto;border:1px solid var(--line);border-radius:12px;background:var(--panel);padding:16px;display:flex;flex-direction:column;gap:12px}.ai-msg{max-width:90%;padding:11px 13px;border-radius:11px;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.6}.ai-msg.user{align-self:flex-end;background:#343434;color:#fff}.ai-msg.assistant{align-self:flex-start;background:var(--bg);border:1px solid var(--line);color:var(--text)}.ai-msg.system{align-self:center;color:var(--muted);font-size:12px;padding:5px}.ai-compose{display:flex;gap:8px}.ai-compose textarea{flex:1;resize:vertical;min-height:58px;max-height:160px;background:var(--panel);border:1px solid var(--line);border-radius:10px;color:var(--text);padding:12px;outline:none}.ai-compose button{min-width:100px}.ai-note{font-size:11px;color:var(--muted)}.app.show-ai .topbar,.app.show-ai .content,.app.show-ai #settingsView,.app.show-ai #upcomingView{display:none!important}.app.show-ai #aiView{display:block!important}@media(max-width:800px){.ai-config{grid-template-columns:1fr 1fr}.ai-config>div:last-child{grid-column:1/-1}.ai-wrap{height:auto;min-height:calc(100vh - 20px)}}
+
 </style>
 </head>
 <body>
@@ -144,11 +147,11 @@ aside{position:relative;transition:padding .22s ease;overflow:hidden}
   <div class="brand"><div class="brandmark">P</div><div><strong>ProjectLog</strong><small>Developer journal</small></div></div>
   <div><div class="side-label">Workspace</div><button class="navitem active" id="overviewBtn"><span>▦</span> Project overview</button><button class="navitem" id="focusEntries"><span>▤</span> Development shells</button></div>
   <div><div class="side-label">Your projects</div><div class="project-list" id="projectList"></div><button class="project-add" id="createProject">＋ Create project</button></div>
-  <div><div class="side-label">Application</div><button class="navitem" id="settingsNav"><span>⚙</span> Settings</button><button class="navitem" id="upcomingNav"><span>↗</span> Upcoming</button></div>
+  <div><div class="side-label">Application</div><button class="navitem" id="aiNav"><span>✦</span> Local AI</button><button class="navitem" id="settingsNav"><span>⚙</span> Settings</button><button class="navitem" id="upcomingNav"><span>↗</span> Upcoming</button></div>
   <div class="sidefoot">
-    <div class="sidefoot-copy">PROJECTLOG v1.1.0<br>by Shakib</div>
+    <div class="sidefoot-copy">PROJECTLOG v1.5.0<br>by Shakib</div>
     <div class="social-links" aria-label="Developer links">
-      <a class="social-link" href="https://github.com/sakib-12345" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub">
+      <a class="social-link" href="https://github.com/sakib-12345/ProjectLog" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .9a11.1 11.1 0 0 0-3.51 21.63c.55.1.76-.24.76-.54v-2.13c-3.1.67-3.76-1.32-3.76-1.32-.5-1.28-1.23-1.62-1.23-1.62-1.01-.69.08-.68.08-.68 1.12.08 1.71 1.15 1.71 1.15.99 1.7 2.6 1.21 3.23.93.1-.72.39-1.21.7-1.49-2.47-.28-5.07-1.24-5.07-5.5 0-1.22.44-2.22 1.15-3-.12-.28-.5-1.42.11-2.96 0 0 .94-.3 3.05 1.14a10.6 10.6 0 0 1 5.55 0c2.11-1.44 3.05-1.14 3.05-1.14.61 1.54.23 2.68.11 2.96.72.78 1.15 1.78 1.15 3.01 0 4.27-2.61 5.21-5.1 5.49.4.35.75 1.02.75 2.06v3.05c0 .3.2.65.77.54A11.1 11.1 0 0 0 12 .9Z"/></svg>GitHub
       </a>
       <a class="social-link" href="https://shakibhossaintahmid.vercel.app" target="_blank" rel="noopener noreferrer" aria-label="Portfolio" title="Portfolio">
@@ -169,10 +172,11 @@ aside{position:relative;transition:padding .22s ease;overflow:hidden}
 <section id="shellSection"><div class="section-head"><div><h2>Development history</h2><p>Each shell is a compact, dated checkpoint. Click Edit to change it.</p></div></div><div class="shells" id="shells"></div></section>
 <div class="bottom-note"><span id="saveState">● Local storage ready</span><span>Markdown · Attachments · Project-based history</span></div>
 </div>
+<section id="aiView" class="app-view hidden" aria-label="Local AI assistant"><div class="ai-wrap"><div class="ai-heading"><div class="eyebrow">Local inference · ProjectLog tools</div><h1>Local AI assistant</h1><p>Use Ollama or LM Studio to search and update your ProjectLog journal. Requests go to the local model server you configure.</p></div><div class="ai-config"><div><label for="aiProvider">Provider</label><select id="aiProvider"><option value="ollama">Ollama</option><option value="lmstudio">LM Studio</option></select></div><div><label for="aiModel">Model ID</label><input id="aiModel" value="qwen3" placeholder="e.g. qwen3:8b"></div><div><label for="aiEndpoint">Local API endpoint</label><input id="aiEndpoint" value="http://127.0.0.1:11434" spellcheck="false"></div><div style="display:flex;align-items:end;gap:6px"><button id="aiConnectBtn" type="button">Test connection</button><button id="aiClearBtn" type="button">Clear</button></div><div class="ai-status" id="aiStatus" style="grid-column:1/-1">Choose a tool-capable model and make sure its local server is running.</div></div><div id="aiChat" class="ai-chat" aria-live="polite"><div class="ai-msg system">Try: “Summarize this project”, “Find my latest bug”, or “Create a shell documenting the latest change.”</div></div><form id="aiForm" class="ai-compose"><textarea id="aiPrompt" placeholder="Ask about your projects or request a journal update…" required></textarea><button id="aiSendBtn" class="primary" type="submit">Send</button></form><div class="ai-note">Available tools: project overview, project search, shell search, recent activity, version listing, project creation, version creation, shell creation and shell editing. AI can create or edit shells when requested. Review saved entries after tool use. Model quality depends on its tool-calling support. No cloud API key is used.</div></div></section>
 <section id="settingsView" class="app-view hidden" aria-label="Settings">
   <div class="settings-wrap"><div class="eyebrow">Preferences</div><h1>Settings</h1><p class="settings-intro">Make ProjectLog work the way you do.</p>
     <section class="settings-card"><div><h2>Appearance</h2><p>Choose the interface theme.</p></div><div class="theme-options"><button id="darkThemeBtn" type="button">☾ Dark</button><button id="lightThemeBtn" type="button">☀ Light</button></div></section>
-    <section class="settings-card"><div><h2>Application</h2><p>Version, local storage and update status.</p></div><div class="settings-facts"><div><span>Version</span><strong>1.1.0</strong></div><div><span>Data storage</span><strong>On this device</strong></div><div><span>Autosave</span><strong>Enabled</strong></div><div><span>Update status</span><strong id="updateStatus">Ready to check</strong></div></div><button class="primary" id="checkUpdatesBtn">Check for updates</button><p class="settings-hint" id="updateHint">Updates are checked against the published GitHub release when running the installed app.</p></section>
+    <section class="settings-card"><div><h2>Application</h2><p>Version, local storage and update status.</p></div><div class="settings-facts"><div><span>Version</span><strong>1.5.0</strong></div><div><span>Data storage</span><strong>On this device</strong></div><div><span>Autosave</span><strong>Enabled</strong></div><div><span>Update status</span><strong id="updateStatus">Ready to check</strong></div></div><button class="primary" id="checkUpdatesBtn">Check for updates</button><p class="settings-hint" id="updateHint">Updates are checked against the published GitHub release when running the installed app.</p></section>
     <section class="settings-card"><div><h2>Data & privacy</h2><p>Your projects stay in local browser storage. Export a JSON backup regularly.</p></div><button id="settingsExportBtn">Export backup (JSON)</button></section>
     <div class="settings-footer">ProjectLog Desktop · Built for focused project tracking</div>
   </div>
@@ -403,6 +407,48 @@ $('exportAiBtn').addEventListener('click',()=>{
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){$('galleryModal').classList.remove('open');$('subprojectModal').classList.remove('open');$('projectDetailsModal').classList.remove('open');}});
 
 
+
+// Local model assistant: Ollama and LM Studio tool-calling APIs.
+const aiConversation=[];
+function aiStatus(msg){const el=$('aiStatus');if(el)el.textContent=msg;}
+function aiAddMessage(role,text){const el=document.createElement('div');el.className='ai-msg '+role;el.textContent=text;$('aiChat').appendChild(el);$('aiChat').scrollTop=$('aiChat').scrollHeight;}
+function aiEndpointDefault(){const provider=$('aiProvider')?.value||'ollama';$('aiEndpoint').value=provider==='ollama'?'http://127.0.0.1:11434':'http://127.0.0.1:1234';$('aiModel').value=provider==='ollama'?'qwen3:8b':'qwen3-8b';}
+const aiTools=[
+ {type:'function',function:{name:'get_project_context',description:'Read the active ProjectLog project metadata and all version names and shell summaries.',parameters:{type:'object',properties:{include_notes:{type:'boolean',description:'Include shell notes in the result; default true'}},required:[]}}},
+ {type:'function',function:{name:'search_shells',description:'Search saved shells across every project by title, notes, status, or version. Returns matching journal entries.',parameters:{type:'object',properties:{query:{type:'string',description:'Search phrase'},limit:{type:'integer',description:'Maximum results, 1 to 20'}},required:['query']}}},
+ {type:'function',function:{name:'create_shell',description:'Create and save a new shell in the active project and active version.',parameters:{type:'object',properties:{title:{type:'string'},notes:{type:'string'},status:{type:'string',enum:['working','broken','fix']}},required:['title','notes']}}},
+ {type:'function',function:{name:'update_shell',description:'Update the title, notes, or status of a shell in the active project. The shell ID must come from ProjectLog search/context results.',parameters:{type:'object',properties:{shell_id:{type:'string'},title:{type:'string'},notes:{type:'string'},status:{type:'string',enum:['working','broken','fix']}},required:['shell_id']}}},
+ {type:'function',function:{name:'list_projects',description:'List all saved projects with IDs, descriptions, technologies and version counts.',parameters:{type:'object',properties:{},required:[]}}},
+ {type:'function',function:{name:'get_active_project',description:'Get detailed information about the currently selected project and version.',parameters:{type:'object',properties:{},required:[]}}},
+ {type:'function',function:{name:'list_versions',description:'List versions and shell counts for the active project.',parameters:{type:'object',properties:{},required:[]}}},
+ {type:'function',function:{name:'get_recent_activity',description:'Get the most recently updated shells across all projects.',parameters:{type:'object',properties:{limit:{type:'integer',description:'Number of entries, 1 to 20'}},required:[]}}},
+ {type:'function',function:{name:'create_project',description:'Create and save a new project. Does not delete or overwrite existing projects.',parameters:{type:'object',properties:{name:{type:'string'},description:{type:'string'},technologies:{type:'string'}},required:['name']}}},
+ {type:'function',function:{name:'create_version',description:'Create a new empty version in the active project.',parameters:{type:'object',properties:{name:{type:'string'},version:{type:'string'},description:{type:'string'}},required:['name']}}}
+];
+function aiProjectSnapshot(includeNotes=true){return state.projects.map(p=>({id:p.id,name:p.name,description:p.description,technologies:p.technologies,activeVersion:(p.versions||[]).find(v=>v.id===p.activeVersionId)?.name,versions:(p.versions||[]).map(v=>({id:v.id,name:v.name,version:v.version,shells:(v.shells||[]).map(sh=>({id:sh.id,title:sh.title,status:sh.status,date:sh.date,...(includeNotes?{notes:sh.notes}:{}),attachmentNames:(sh.attachments||[]).map(a=>a.name)}))}))}));}
+async function aiRunTool(name,args){
+ if(name==='get_project_context'){return aiProjectSnapshot(args.include_notes!==false);}
+ if(name==='search_shells'){const q=String(args.query||'').toLowerCase();const limit=Math.max(1,Math.min(20,Number(args.limit)||10));const hits=[];for(const p of state.projects){for(const v of (p.versions||[])){for(const sh of (v.shells||[])){if((sh.title+' '+sh.notes+' '+sh.status+' '+v.name+' '+p.name).toLowerCase().includes(q))hits.push({projectId:p.id,project:p.name,versionId:v.id,version:v.name,id:sh.id,title:sh.title,status:sh.status,date:sh.date,notes:sh.notes});}}}return hits.slice(0,limit);}
+ if(name==='create_shell'){const p=current(),v=activeVersion(p);if(!p||!v)throw new Error('No active project/version');const sh={id:uid(),title:String(args.title||'New checkpoint').slice(0,200),status:['working','broken','fix'].includes(args.status)?args.status:'working',color:'normal',date:now(),notes:String(args.notes||'').slice(0,50000),attachments:[],history:[],editing:false};v.shells.unshift(sh);p.shells=v.shells;await persist('AI created a shell');return {success:true,id:sh.id,title:sh.title,project:p.name,version:v.name};}
+ if(name==='update_shell'){const p=current(),id=String(args.shell_id||'');let sh=null,ownerVersion=null;for(const v of (p.versions||[])){const found=(v.shells||[]).find(x=>x.id===id);if(found){sh=found;ownerVersion=v;break;}}if(!sh)throw new Error('Shell not found in the active project. Search the active project first.');if(args.title!==undefined)sh.title=String(args.title).slice(0,200);if(args.notes!==undefined)sh.notes=String(args.notes).slice(0,50000);if(args.status!==undefined&&['working','broken','fix'].includes(args.status))sh.status=args.status;sh.history=Array.isArray(sh.history)?sh.history:[];sh.history.push({title:sh.title,status:sh.status,date:sh.date,notes:sh.notes,savedAt:now()});sh.history=sh.history.slice(-20);if(ownerVersion.id===p.activeVersionId)p.shells=ownerVersion.shells;await dbPut(state);render();notify('AI updated a shell');return {success:true,id:sh.id,title:sh.title};}
+ if(name==='list_projects'){return state.projects.map(p=>({id:p.id,name:p.name,description:p.description,technologies:p.technologies,versionCount:(p.versions||[]).length,shellCount:(p.versions||[]).reduce((n,v)=>n+(v.shells||[]).length,0)}));}
+ if(name==='get_active_project'){const p=current(),v=activeVersion(p);if(!p)return {error:'No active project'};return {id:p.id,name:p.name,description:p.description,technologies:p.technologies,activeVersion:v?{id:v.id,name:v.name,version:v.version,shellCount:(v.shells||[]).length}:null};}
+ if(name==='list_versions'){const p=current();return (p?.versions||[]).map(v=>({id:v.id,name:v.name,version:v.version,description:v.description,shellCount:(v.shells||[]).length,active:v.id===p.activeVersionId}));}
+ if(name==='get_recent_activity'){const limit=Math.max(1,Math.min(20,Number(args.limit)||10));const items=[];for(const p of state.projects)for(const v of (p.versions||[]))for(const sh of (v.shells||[]))items.push({project:p.name,version:v.name,id:sh.id,title:sh.title,status:sh.status,date:sh.date,notes:sh.notes});return items.sort((a,b)=>String(b.date||'').localeCompare(String(a.date||''))).slice(0,limit);}
+ if(name==='create_project'){const projectName=String(args.name||'').trim().slice(0,100);if(!projectName)throw new Error('Project name is required.');const p=normalizeProject({id:uid(),name:projectName,description:String(args.description||'').slice(0,2000),technologies:String(args.technologies||''),shells:[]});state.projects.unshift(p);state.activeProjectId=p.id;await persist('AI created a project');return {success:true,id:p.id,name:p.name};}
+ if(name==='create_version'){const p=current();if(!p)throw new Error('No active project.');const name=String(args.name||'').trim().slice(0,100);if(!name)throw new Error('Version name is required.');const v={id:uid(),name,version:String(args.version||'').slice(0,80),description:String(args.description||'').slice(0,2000),shells:[],updatedAt:now()};p.versions=p.versions||[];p.versions.push(v);p.activeVersionId=v.id;p.shells=v.shells;await persist('AI created a version');return {success:true,id:v.id,name:v.name,project:p.name};}
+ throw new Error('Tool not allowed: '+name);
+}
+function aiNormalizeEndpoint(){let raw=$('aiEndpoint').value.trim().replace(/\/$/,'');const u=new URL(raw);if(!['http:','https:'].includes(u.protocol)||!['localhost','127.0.0.1','::1'].includes(u.hostname))throw new Error('For safety, the API endpoint must be localhost or 127.0.0.1.');return raw;}
+async function aiRequest(messages,tools){const provider=$('aiProvider').value,endpoint=aiNormalizeEndpoint(),model=$('aiModel').value.trim();if(!model)throw new Error('Enter the exact model ID shown by your local model app.');if(!window.projectLog?.localAIRequest)throw new Error('Local AI bridge is unavailable. Restart ProjectLog after applying the updated main.js and preload.js.');return window.projectLog.localAIRequest({provider,endpoint,model,messages,tools});}
+function aiExtract(response){if(response?.provider==='ollama')return response.message||{};const choice=response?.choices?.[0]?.message||{};return {role:choice.role||'assistant',content:choice.content||'',tool_calls:choice.tool_calls||[]};}
+async function aiSend(prompt){const provider=$('aiProvider').value,model=$('aiModel').value.trim();aiConversation.push({role:'user',content:prompt});aiAddMessage('user',prompt);$('aiPrompt').value='';$('aiSendBtn').disabled=true;aiStatus('Connecting to '+(provider==='ollama'?'Ollama':'LM Studio')+'…');try{const system={role:'system',content:'You are ProjectLog v1.5.0 local assistant. You have tools to inspect projects, versions, recent activity and journal shells, and to create projects, versions and shells or edit existing shells. Use the supplied tools to inspect actual saved data before answering about it. Never claim a change was saved unless a tool returns success. Do not invent IDs or entries. Ask for clarification before destructive operations; deletion tools do not exist. Keep answers clear. Active ProjectLog data is local to this app.'};let messages=[system,...aiConversation];let finalText='';for(let step=0;step<10;step++){const res=await aiRequest(messages,aiTools);const msg=aiExtract(res);if(!msg||(!msg.content&&!msg.tool_calls?.length))throw new Error('The model returned no text or tool calls. Try a model with tool-calling support.');messages.push(msg);if(msg.tool_calls?.length){for(const call of msg.tool_calls){const fn=call.function||{};let args=fn.arguments||{};if(typeof args==='string'){try{args=JSON.parse(args)}catch{args={}}}aiStatus('Running tool: '+fn.name);let result;try{result=await aiRunTool(fn.name,args);}catch(err){result={error:err.message||String(err)};}messages.push(provider==='ollama'?{role:'tool',tool_name:fn.name,content:JSON.stringify(result)}:{role:'tool',tool_call_id:call.id,content:JSON.stringify(result)});}continue;}finalText=typeof msg.content==='string'?msg.content:JSON.stringify(msg.content);break;}if(!finalText)finalText='I reached the tool-call limit for this turn. Please ask a narrower question.';aiConversation.push({role:'assistant',content:finalText});aiAddMessage('assistant',finalText);aiStatus('Connected · '+model+' · Local inference');}catch(err){aiStatus('Connection or model error');aiAddMessage('system','Error: '+(err.message||String(err))+'\n\nCheck that the model server is running, the endpoint is correct, and the model supports tool calling.');}finally{$('aiSendBtn').disabled=false;$('aiPrompt').focus();}}
+$('aiProvider')?.addEventListener('change',aiEndpointDefault);
+$('aiConnectBtn')?.addEventListener('click',async()=>{try{aiStatus('Testing connection…');const provider=$('aiProvider').value;const r=await aiRequest([{role:'user',content:'Reply with exactly: connected'}],[]);const msg=aiExtract(r);aiStatus('Connected · '+($('aiModel').value.trim()||'model')+' · '+(msg.content||'response received').toString().slice(0,100));}catch(e){aiStatus('Connection failed: '+(e.message||String(e)));}});
+$('aiClearBtn')?.addEventListener('click',()=>{aiConversation.length=0;$('aiChat').innerHTML='<div class="ai-msg system">Conversation cleared. Your saved ProjectLog entries were not changed.</div>';aiStatus('Conversation cleared');});
+$('aiForm')?.addEventListener('submit',e=>{e.preventDefault();const prompt=$('aiPrompt').value.trim();if(prompt)aiSend(prompt);});
+$('aiNav')?.addEventListener('click',()=>showAppView('ai'));
+
 function setTheme(theme){
   const safe=theme==='light'?'light':'dark';
   document.documentElement.dataset.theme=safe;
@@ -414,8 +460,10 @@ function showAppView(view){
   const appEl=document.querySelector('.app');
   appEl.classList.toggle('show-settings',view==='settings');
   appEl.classList.toggle('show-upcoming',view==='upcoming');
+  appEl.classList.toggle('show-ai',view==='ai');
   document.querySelectorAll('.navitem').forEach(b=>b.classList.remove('active'));
   if(view==='settings')$('settingsNav')?.classList.add('active');
+  else if(view==='ai')$('aiNav')?.classList.add('active');
   else if(view==='upcoming')$('upcomingNav')?.classList.add('active');
   else $('overviewBtn')?.classList.add('active');
 }
@@ -444,6 +492,15 @@ $('focusEntries')?.addEventListener('click',()=>{showAppView('workspace');setTim
 $('darkThemeBtn')?.addEventListener('click',()=>setTheme('dark'));
 $('lightThemeBtn')?.addEventListener('click',()=>setTheme('light'));
 $('settingsExportBtn')?.addEventListener('click',()=>$('exportJsonBtn')?.click());
+window.projectLog?.onUpdateState?.((update)=>{
+  const status=$('updateStatus'),hint=$('updateHint');
+  if(!status||!hint)return;
+  if(update.status==='available'){status.textContent='Update available';hint.textContent=`ProjectLog ${update.version} is available. Use the themed update window to download it.`;}
+  else if(update.status==='downloading'){status.textContent=`Downloading · ${Math.round(update.percent||0)}%`;hint.textContent=`${update.transferred||''} ${update.total?'of '+update.total:''} ${update.speed||''}`;}
+  else if(update.status==='downloaded'){status.textContent='Ready to install';hint.textContent=`ProjectLog ${update.version} is downloaded. Restart from the update window to install.`;}
+  else if(update.status==='current'){status.textContent='Up to date';hint.textContent=`ProjectLog ${update.version||'current version'} is installed.`;}
+  else if(update.status==='error'){status.textContent='Update error';hint.textContent=update.message||'The update failed.';}
+});
 $('checkUpdatesBtn')?.addEventListener('click',async()=>{
   const status=$('updateStatus'),hint=$('updateHint'),btn=$('checkUpdatesBtn');
   status.textContent='Checking…';hint.textContent='Contacting the update service…';btn.disabled=true;
