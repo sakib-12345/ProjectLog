@@ -1,7 +1,7 @@
 {
   "name": "projectlog-desktop",
-  "version": "1.5.0",
-  "description": "ProjectLog - A modern desktop project journal",
+  "version": "1.6.0",
+  "description": "ProjectLog 1.6.0 - A faster, responsive desktop project journal with Pogo local AI",
   "author": {
     "name": "Shakib Hossain Tahmid"
   },
