@@ -29,9 +29,10 @@ function createWindow() {
   const win = new BrowserWindow({
     width: 1440,
     height: 950,
-    minWidth: 900,
-    minHeight: 650,
+    minWidth: 360,
+    minHeight: 500,
     backgroundColor: "#212121",
+    show: false,
     title: "ProjectLog",
     icon: path.join(__dirname, "assets", "icon.png"),
     webPreferences: {
@@ -53,8 +54,9 @@ function createWindow() {
   });
 
   mainWindow = win;
+  win.once("ready-to-show", () => { if (!win.isDestroyed()) win.show(); });
   win.on("closed", () => { if (mainWindow === win) mainWindow = null; });
-  win.loadFile(path.join(__dirname, "index.html"));
+  win.loadFile(path.join(__dirname, "index.html")).catch(error => console.error("ProjectLog failed to load:", error));
 }
 
 const SKIP_DIRS = new Set([
