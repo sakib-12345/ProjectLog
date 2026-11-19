@@ -6,7 +6,14 @@ const {
   Menu,
   shell,
 } = require("electron");
-const { autoUpdater } = require("electron-updater");
+// Load electron-updater on first use to keep startup fast.
+const autoUpdater = new Proxy({}, {
+  get: (_t, k) => { const u = require("electron-updater").autoUpdater; const v = u[k]; return typeof v === "function" ? v.bind(u) : v; },
+  set: (_t, k, v) => { require("electron-updater").autoUpdater[k] = v; return true; },
+});
+
+if (!app.requestSingleInstanceLock()) app.quit();
+app.on("second-instance", () => { if (mainWindow) { if (mainWindow.isMinimized()) mainWindow.restore(); mainWindow.focus(); } });
 const path = require("path");
 const fs = require("fs");
 const os = require("os");
@@ -14,16 +21,23 @@ const os = require("os");
 let mainWindow = null;
 let updateWindow = null;
 let pendingUpdateVersion = null;
-function sendUpdateState(state) {
-  for (const win of [updateWindow, mainWindow]) if (win && !win.isDestroyed()) win.webContents.send("projectlog:update-state", state);
+let pendingNotes = "";
+let pendingDate = "";
+function toNotes(n) {
+  if (!n) return "";
+  const raw = Array.isArray(n) ? n.map(x => `## ${x.version || ""}\n${x.note || ""}`).join("\n\n") : String(n);
+  return raw.replace(/<br\s*\/?>/gi, "\n").replace(/<\/(p|li|h\d)>/gi, "\n").replace(/<li>/gi, "- ").replace(/<[^>]+>/g, "").replace(/&nbsp;/g, " ").replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").trim().slice(0, 6000);
 }
+function sendUpdateState(state) {
+  if (state.notes === undefined && pendingNotes) state = { ...state, notes: pendingNotes };
+  if (state.releaseDate === undefined && pendingDate) state = { ...state, releaseDate: pendingDate };
+  if (mainWindow && !mainWindow.isDestroyed()) mainWindow.webContents.send("projectlog:update-state", state);
+}
+// Updates are shown inside the main window; no separate window is created.
 function showUpdateWindow(state = {}) {
-  if (updateWindow && !updateWindow.isDestroyed()) { updateWindow.show(); sendUpdateState(state); return; }
-  updateWindow = new BrowserWindow({width:470,height:440,minWidth:430,minHeight:400,resizable:false,parent:mainWindow&&!mainWindow.isDestroyed()?mainWindow:undefined,modal:!!(mainWindow&&!mainWindow.isDestroyed()),show:false,backgroundColor:"#101318",title:"ProjectLog Update",webPreferences:{preload:path.join(__dirname,"preload.js"),contextIsolation:true,nodeIntegration:false,sandbox:true}});
-  updateWindow.setMenuBarVisibility(false);
-  updateWindow.loadFile(path.join(__dirname,"update.html"));
-  updateWindow.once("ready-to-show",()=>{updateWindow.show();sendUpdateState(state);});
-  updateWindow.on("closed",()=>{updateWindow=null;});
+  if (!mainWindow || mainWindow.isDestroyed()) return;
+  if (mainWindow.isMinimized()) mainWindow.restore();
+  sendUpdateState({ ...state, open: true });
 }
 function createWindow() {
   const win = new BrowserWindow({
@@ -236,7 +250,7 @@ app.whenReady().then(() => {
       catch (error) { sendUpdateState({status:"error",message:error.message||"Download failed."}); throw error; }
     }
     if (action === "install") { autoUpdater.quitAndInstall(false,true); return {success:true}; }
-    if (action === "later") { if(updateWindow&&!updateWindow.isDestroyed()) updateWindow.close(); return {success:true}; }
+    if (action === "later") return {success:true};
     throw new Error("Unsupported update action.");
   });
 
@@ -266,6 +280,62 @@ app.whenReady().then(() => {
       return data;
     } catch (error) {
       if (error.name === "AbortError") throw new Error("The local model request timed out after 3 minutes.");
+      throw new Error(error.message || "Could not connect to the local model server.");
+    } finally { clearTimeout(timer); }
+  });
+
+  ipcMain.handle("projectlog:local-ai-stream", async (event, payload) => {
+    if (!payload || !["ollama", "lmstudio"].includes(payload.provider)) throw new Error("Unsupported local AI provider.");
+    if (typeof payload.endpoint !== "string" || typeof payload.model !== "string" || !Array.isArray(payload.messages)) throw new Error("Invalid local AI request.");
+    const endpoint = new URL(payload.endpoint);
+    if (!["http:", "https:"].includes(endpoint.protocol) || !["localhost", "127.0.0.1", "::1", "[::1]"].includes(endpoint.hostname)) throw new Error("Only a localhost model endpoint is allowed.");
+    const messages = payload.messages.slice(-24).map(m => ({ role: String(m.role || "user"), content: String(m.content || ""), ...(m.tool_calls ? { tool_calls: m.tool_calls } : {}), ...(m.tool_name ? { tool_name: m.tool_name } : {}), ...(m.tool_call_id ? { tool_call_id: m.tool_call_id } : {}) }));
+    const tools = Array.isArray(payload.tools) ? payload.tools.slice(0, 20) : [];
+    const isOllama = payload.provider === "ollama";
+    const url = new URL(isOllama ? "/api/chat" : "/v1/chat/completions", endpoint).toString();
+    const body = isOllama ? { model: payload.model, messages, tools, stream: true } : { model: payload.model, messages, tools, tool_choice: "auto", stream: true };
+    const controller = new AbortController();
+    let timer = setTimeout(() => controller.abort(), 180000);
+    const calls = [];
+    let content = "";
+    const send = (delta) => { if (!event.sender.isDestroyed()) event.sender.send("projectlog:ai-chunk", { id: payload.id, delta }); };
+    const handleLine = (line) => {
+      line = line.trim();
+      if (!line) return;
+      if (!isOllama) { if (!line.startsWith("data:")) return; line = line.slice(5).trim(); if (line === "[DONE]") return; }
+      let j; try { j = JSON.parse(line); } catch { return; }
+      if (isOllama) {
+        const m = j.message || {};
+        if (m.content) { content += m.content; send(m.content); }
+        if (Array.isArray(m.tool_calls)) calls.push(...m.tool_calls);
+      } else {
+        const d = j.choices?.[0]?.delta || {};
+        if (d.content) { content += d.content; send(d.content); }
+        for (const tc of d.tool_calls || []) {
+          const i = tc.index ?? 0;
+          const c = calls[i] || (calls[i] = { id: tc.id, type: "function", function: { name: "", arguments: "" } });
+          if (tc.id) c.id = tc.id;
+          if (tc.function?.name) c.function.name += tc.function.name;
+          if (tc.function?.arguments) c.function.arguments += tc.function.arguments;
+        }
+      }
+    };
+    try {
+      const response = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body), signal: controller.signal });
+      if (!response.ok) throw new Error(`Local model API returned HTTP ${response.status}: ${(await response.text()).slice(0, 500)}`);
+      const decoder = new TextDecoder();
+      let buf = "";
+      for await (const chunk of response.body) {
+        clearTimeout(timer); timer = setTimeout(() => controller.abort(), 180000);
+        buf += decoder.decode(chunk, { stream: true });
+        let nl;
+        while ((nl = buf.indexOf("\n")) >= 0) { handleLine(buf.slice(0, nl)); buf = buf.slice(nl + 1); }
+      }
+      handleLine(buf);
+      const message = { role: "assistant", content, ...(calls.length ? { tool_calls: calls.filter(Boolean) } : {}) };
+      return isOllama ? { provider: "ollama", message } : { choices: [{ message }] };
+    } catch (error) {
+      if (error.name === "AbortError") throw new Error("The local model stopped responding (3 minute idle timeout).");
       throw new Error(error.message || "Could not connect to the local model server.");
     } finally { clearTimeout(timer); }
   });
@@ -397,8 +467,9 @@ app.whenReady().then(() => {
     autoUpdater.autoInstallOnAppQuit = false;
     autoUpdater.on("update-available", (info) => {
       pendingUpdateVersion = info.version;
+      pendingNotes = toNotes(info.releaseNotes);
+      pendingDate = info.releaseDate || "";
       showUpdateWindow({status:"available",version:info.version});
-      sendUpdateState({status:"available",version:info.version});
     });
     autoUpdater.on("update-not-available", () => sendUpdateState({status:"current",version:app.getVersion()}));
     autoUpdater.on("download-progress", (progress) => sendUpdateState({
