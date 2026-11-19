@@ -1,7 +1,7 @@
 {
   "name": "projectlog-desktop",
-  "version": "1.6.0",
-  "description": "ProjectLog 1.6.0 - A faster, responsive desktop project journal with Pogo local AI",
+  "version": "1.7.0",
+  "description": "ProjectLog 1.7.0 - A responsive desktop project journal with Pogo local AI",
   "author": {
     "name": "Shakib Hossain Tahmid"
   },
@@ -9,7 +9,8 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "dist": "electron-builder"
+    "dist": "electron-builder",
+    "dist:all": "electron-builder -mwl"
   },
   "devDependencies": {
     "electron": "^38.0.0",
@@ -26,8 +27,7 @@
       "main.js",
       "preload.js",
       "package.json",
-      "assets/**/*",
-      "update.html"
+      "assets/**/*"
     ],
     "win": {
       "icon": "assets/icon.ico",
@@ -54,7 +54,20 @@
         "repo": "ProjectLog",
         "releaseType": "release"
       }
-    ]
+    ],
+    "electronLanguages": [
+      "en-US"
+    ],
+    "mac": {
+      "target": "dmg",
+      "category": "public.app-category.productivity"
+    },
+    "linux": {
+      "target": [
+        "AppImage"
+      ],
+      "category": "Office"
+    }
   },
   "dependencies": {
     "electron-updater": "^6.8.11"
