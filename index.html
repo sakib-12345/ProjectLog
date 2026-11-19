@@ -176,6 +176,84 @@ aside{position:relative;transition:padding .22s ease;overflow:hidden}
 .insight-item strong{display:block;color:var(--text);margin-bottom:3px}
 .dashboard-hint{font-size:11px;color:var(--muted)}.dashboard-widget{cursor:grab}.dashboard-widget.dragging{opacity:.45}.dashboard-widget.drop-target{outline:2px dashed var(--accent);outline-offset:4px}
 @media(max-width:650px){.ai-library{grid-template-columns:1fr 1fr}.ai-library input{grid-column:1/-1}.ai-wrap{padding:16px}}
+
+/* Tags, backups, saved models, prompt templates */
+.filter-bar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:0 0 14px}.filter-bar select{width:auto;min-width:150px}
+.tag-chips,.tag-row{display:flex;gap:6px;flex-wrap:wrap}.tag-row{padding:6px 14px 10px}
+.tag-chip{padding:2px 10px;border-radius:999px;font-size:12px;background:transparent;color:var(--muted)}.tag-chip.on{background:var(--text);color:var(--bg);border-color:var(--text)}
+.bk-row{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 12px;border:1px solid var(--line);border-radius:10px;margin-top:8px}.bk-row small{display:block;color:var(--muted)}.bk-actions{display:flex;gap:6px}
+.settings-form{display:grid;grid-template-columns:140px 1fr 1.4fr auto;gap:8px;align-items:center}.settings-form input,.settings-form select{width:100%}
+.ai-extra{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:0 0 10px}.ai-extra select,.ai-extra input[type=text]{flex:1 1 160px;max-width:260px;min-width:0}.ai-stream{display:flex;gap:6px;align-items:center;color:var(--muted);font-size:13px}
+@media(max-width:800px){.settings-form{grid-template-columns:1fr 1fr}.settings-form button{grid-column:1/-1}}
+@media(max-width:480px){.settings-form{grid-template-columns:1fr}.ai-extra>*{flex:1 1 100%;max-width:none!important}}
+@media(pointer:coarse){button,select,input:not([type=checkbox]):not([type=radio]){min-height:42px}}
+
+/* 1.7.0: markdown components, update dialog */
+[hidden]{display:none!important}
+.md-callout{--c:#6ea8fe;margin:12px 0;border:1px solid color-mix(in srgb,var(--c) 35%,var(--line));border-left:3px solid var(--c);border-radius:8px;background:color-mix(in srgb,var(--c) 9%,transparent);padding:10px 14px}
+.md-callout-title{font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--c);margin-bottom:4px}
+.md-callout-body>:first-child{margin-top:0}.md-callout-body>:last-child{margin-bottom:0}
+.md-note{--c:#6ea8fe}.md-tip,.md-success{--c:#4fb383}.md-important{--c:#a58cf0}.md-warning{--c:#d9a441}.md-caution{--c:#e08a5a}.md-danger{--c:#e06c6c}
+.md-details{margin:12px 0;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.md-details summary{cursor:pointer;padding:9px 14px;font-weight:600;background:color-mix(in srgb,var(--text) 5%,transparent);list-style:none;display:flex;align-items:center;gap:8px}
+.md-details summary::-webkit-details-marker{display:none}.md-details summary::before{content:"";width:6px;height:6px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(-45deg);transition:transform .15s}
+.md-details[open] summary::before{transform:rotate(45deg)}.md-details-body{padding:4px 14px 10px}
+.md-code{margin:12px 0;border:1px solid var(--line);border-radius:8px;overflow:hidden}.md-code pre{margin:0;border:0;border-radius:0}
+.md-code-head{display:flex;justify-content:space-between;align-items:center;padding:4px 8px 4px 12px;font-size:12px;color:var(--muted);background:color-mix(in srgb,var(--text) 6%,transparent);border-bottom:1px solid var(--line)}
+.md-copy{padding:2px 10px;font-size:12px}
+.md-progress{display:inline-flex;align-items:center;gap:8px;min-width:160px;vertical-align:middle}.md-progress-track{flex:1;height:8px;border-radius:99px;background:color-mix(in srgb,var(--text) 14%,transparent);overflow:hidden}.md-progress-bar{display:block;height:100%;background:var(--accent,#4fb383);border-radius:99px}.md-progress-label{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.md-badge{display:inline-block;padding:1px 9px;border-radius:99px;font-size:12px;font-weight:600;border:1px solid var(--bc,var(--line));color:var(--bc,var(--muted));background:color-mix(in srgb,var(--bc,var(--muted)) 12%,transparent)}
+.md-badge-ok{--bc:#4fb383}.md-badge-warn{--bc:#d9a441}.md-badge-fail{--bc:#e06c6c}.md-badge-info{--bc:#6ea8fe}.md-badge-todo{--bc:#9a9a9a}
+.markdown-preview kbd{font:12px ui-monospace,Consolas,monospace;padding:1px 6px;border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;background:color-mix(in srgb,var(--text) 7%,transparent)}
+.markdown-preview mark{background:color-mix(in srgb,#d9a441 38%,transparent);color:inherit;padding:0 3px;border-radius:3px}
+.md-toolbar{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 8px}.md-toolbar button{padding:3px 10px;font-size:12px}
+.ref-table{width:100%;border-collapse:collapse;font-size:13px}.ref-table td{padding:6px 8px;border-top:1px solid var(--line);vertical-align:top}.ref-table td:first-child{font-family:ui-monospace,Consolas,monospace;color:var(--muted);white-space:nowrap}
+.upd-overlay{position:fixed;inset:0;z-index:300;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(0,0,0,.55);backdrop-filter:blur(2px)}
+.upd-panel{width:min(560px,100%);max-height:calc(100vh - 40px);display:flex;flex-direction:column;gap:14px;padding:22px;border:1px solid var(--line);border-radius:14px;background:var(--panel);color:var(--text);box-shadow:0 24px 60px rgba(0,0,0,.45)}
+.upd-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.upd-head h2{margin:0;font-size:20px}.upd-head p{margin:4px 0 0;color:var(--muted)}
+.upd-x{padding:2px 10px;font-size:18px;line-height:1.2}
+.upd-meta{display:flex;gap:8px;flex-wrap:wrap}.upd-chip{padding:2px 10px;border-radius:99px;border:1px solid var(--line);font-size:12px;color:var(--muted)}.upd-chip:empty{display:none}
+.upd-notes-wrap{min-height:0;display:flex;flex-direction:column;gap:6px}.upd-notes-wrap h3{margin:0;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.upd-notes{overflow:auto;max-height:240px;padding:10px 14px;border:1px solid var(--line);border-radius:10px;background:color-mix(in srgb,var(--text) 4%,transparent)}
+.upd-bar{height:8px;border-radius:99px;background:color-mix(in srgb,var(--text) 14%,transparent);overflow:hidden}.upd-bar span{display:block;height:100%;width:0;background:var(--accent,#4fb383);transition:width .25s}
+.upd-stats{display:flex;justify-content:space-between;gap:10px;margin-top:6px;font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.upd-error{margin:0;color:#e06c6c}.upd-actions{display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap}
+@media(max-width:480px){.upd-panel{padding:16px}.upd-actions button{flex:1}}
+
+/* Pogo layout: chat-first with collapsible right sidebar */
+.ai-wrap.ai-layout{max-width:none;margin:0;padding:14px 18px;height:100vh;flex-direction:row;align-items:stretch;gap:14px}
+.ai-main{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:10px}
+.ai-topbar{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.ai-title{font-size:18px;font-weight:700;letter-spacing:-.3px}
+.ai-side-toggle{display:inline-flex;align-items:center;gap:6px;font-size:12px;padding:7px 11px;white-space:nowrap}
+.ai-side-toggle .chev{display:inline-block;transition:transform .2s}
+.ai-layout.side-collapsed .ai-side-toggle .chev{transform:rotate(180deg)}
+.ai-main .ai-chat{flex:1 1 auto;min-height:0;padding:18px 20px}
+.ai-main .ai-msg{max-width:min(860px,92%)}
+.ai-main .ai-tools-row{flex-wrap:nowrap;overflow-x:auto;padding-bottom:2px}
+.ai-main .ai-tools-row button{flex:0 0 auto;white-space:nowrap}
+.ai-main .ai-compose textarea{min-height:84px;max-height:220px;font-size:14px}
+.ai-side{flex:0 0 300px;width:300px;min-width:0;box-sizing:border-box;display:flex;flex-direction:column;gap:12px;overflow-y:auto;overflow-x:hidden;padding:0 8px 0 14px;border-left:1px solid var(--line)}
+.ai-side .ai-heading h1{font-size:22px;margin:4px 0}
+.ai-side .ai-heading p{font-size:12px;line-height:1.5}
+.ai-side .ai-config{grid-template-columns:1fr}
+.ai-side .ai-config>div:last-child{grid-column:auto}
+.ai-side .ai-library{grid-template-columns:repeat(3,minmax(0,1fr))}
+.ai-side .ai-library input,.ai-side .ai-library select{grid-column:1/-1}
+.ai-side .ai-extra{margin:0}
+.ai-side .ai-extra>*{flex:1 1 100%;max-width:none}
+.ai-layout.side-collapsed .ai-side{display:none}
+@media(max-width:800px){
+.ai-wrap.ai-layout{flex-direction:column;height:auto;min-height:calc(100vh - 20px);padding:14px}
+.ai-main{min-height:calc(100vh - 40px)}
+.ai-main .ai-chat{min-height:55vh}
+.ai-side{flex:0 0 auto;width:auto;overflow:visible;padding:12px 0 0;border-left:0;border-top:1px solid var(--line)}
+}
+
+/* Main app sidebar stays fixed while the page content scrolls */
+@media(min-width:901px){
+.app>aside{position:sticky;top:0;align-self:start;height:100vh;min-height:0;overflow-y:auto;overflow-x:hidden;scrollbar-width:thin}
+}
 </style>
 </head>
 <body>
@@ -186,7 +264,7 @@ aside{position:relative;transition:padding .22s ease;overflow:hidden}
   <div><div class="side-label">Your projects</div><div class="project-list" id="projectList"></div><button class="project-add" id="createProject">＋ Create project</button></div>
   <div><div class="side-label">Application</div><button class="navitem" id="aiNav"><span>✦</span> Pogo AI</button><button class="navitem" id="settingsNav"><span>⚙</span> Settings</button><button class="navitem" id="upcomingNav"><span>↗</span> Upcoming</button></div>
   <div class="sidefoot">
-    <div class="sidefoot-copy">PROJECTLOG v1.6.0<br>by Shakib</div>
+    <div class="sidefoot-copy">PROJECTLOG v1.7.0<br>by Shakib</div>
     <div class="social-links" aria-label="Developer links">
       <a class="social-link" href="https://github.com/sakib-12345/ProjectLog" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .9a11.1 11.1 0 0 0-3.51 21.63c.55.1.76-.24.76-.54v-2.13c-3.1.67-3.76-1.32-3.76-1.32-.5-1.28-1.23-1.62-1.23-1.62-1.01-.69.08-.68.08-.68 1.12.08 1.71 1.15 1.71 1.15.99 1.7 2.6 1.21 3.23.93.1-.72.39-1.21.7-1.49-2.47-.28-5.07-1.24-5.07-5.5 0-1.22.44-2.22 1.15-3-.12-.28-.5-1.42.11-2.96 0 0 .94-.3 3.05 1.14a10.6 10.6 0 0 1 5.55 0c2.11-1.44 3.05-1.14 3.05-1.14.61 1.54.23 2.68.11 2.96.72.78 1.15 1.78 1.15 3.01 0 4.27-2.61 5.21-5.1 5.49.4.35.75 1.02.75 2.06v3.05c0 .3.2.65.77.54A11.1 11.1 0 0 0 12 .9Z"/></svg>GitHub
@@ -207,17 +285,21 @@ aside{position:relative;transition:padding .22s ease;overflow:hidden}
 <section id="insightsPanel" class="insights-panel dashboard-widget" draggable="true"><h2>Smart project insights</h2><div class="insight-list" id="insightList"><div class="insight-item">Insights will appear when your project is loaded.</div></div></section>
 
 <section id="roadmapSection" class="dashboard-widget" draggable="true"><div class="section-head"><div><h2>Project roadmap</h2><p>A connected overview of each shell and its current state.</p></div></div><div id="roadmap" class="roadmap"></div></section>
+<div id="filterBar" class="filter-bar"><select id="statusFilter" aria-label="Filter by status"><option value="">All statuses</option><option value="working">Works now</option><option value="broken">Not working</option><option value="fix">Needs fixing</option></select><div id="tagChips" class="tag-chips"></div></div>
 <section id="shellSection" class="dashboard-widget" draggable="true"><div class="section-head"><div><h2>Development history</h2><p>Each shell is a compact, dated checkpoint. Click Edit to change it.</p></div></div><div class="shells" id="shells"></div></section>
 <div class="bottom-note"><span id="saveState">● Local storage ready</span><span>Markdown · Attachments · Project-based history</span></div>
 </div>
-<section id="aiView" class="app-view hidden" aria-label="Pogo AI assistant"><div class="ai-wrap"><div class="ai-heading"><div class="eyebrow">Local inference · ProjectLog tools</div><h1>Pogo</h1><p>Use Ollama or LM Studio to search and update your ProjectLog journal. Requests go to the local model server you configure.</p></div><div class="ai-config"><div><label for="aiProvider">Provider</label><select id="aiProvider"><option value="ollama">Ollama</option><option value="lmstudio">LM Studio</option></select></div><div><label for="aiModel">Model ID</label><input id="aiModel" value="qwen3" placeholder="e.g. qwen3:8b"></div><div><label for="aiEndpoint">Local API endpoint</label><input id="aiEndpoint" value="http://127.0.0.1:11434" spellcheck="false"></div><div style="display:flex;align-items:end;gap:6px"><button id="aiConnectBtn" type="button">Test connection</button><button id="aiClearBtn" type="button">Clear</button></div><div class="ai-status" id="aiStatus" style="grid-column:1/-1">Choose a tool-capable model and make sure its local server is running.</div></div><div class="ai-tools-row" aria-label="Pogo quick actions"><button type="button" data-pogo-action="Summarize the active project. Inspect the actual project data and give me progress, completed work, and next steps.">▤ Project summary</button><button type="button" data-pogo-action="Analyze the active project's shells for bugs, broken items, and likely causes. Give a prioritized bug analysis.">⌕ Bug analysis</button><button type="button" data-pogo-action="Create clear technical documentation for the active project based on its saved details and shells. Structure it with headings and checklists.">▧ Generate documentation</button><button type="button" data-pogo-action="Review the active project for unfinished tasks and blockers. Suggest practical next actions.">✦ Project insights</button></div><div class="ai-library"><input id="chatSearch" placeholder="Search saved chats…" aria-label="Search saved chats"><select id="chatPicker" aria-label="Saved conversations"><option value="">Current conversation</option></select><button type="button" id="newChatBtn">＋ New chat</button><button type="button" id="renameChatBtn">Rename</button><button type="button" id="deleteChatBtn" class="danger">Delete</button></div><div id="aiChat" class="ai-chat" aria-live="polite"><div class="ai-msg system">Hi! I’m Pogo. Try: “Summarize this project”, “Find my latest bug”, or “Create a shell documenting the latest change.”</div></div><form id="aiForm" class="ai-compose"><textarea id="aiPrompt" placeholder="Ask Pogo about your projects or request a journal update…" required></textarea><button id="aiSendBtn" class="primary" type="submit">Send</button></form><div class="ai-note">Available tools: project overview, project search, shell search, recent activity, version listing, project creation, version creation, shell creation and shell editing. AI can create or edit shells when requested. Review saved entries after tool use. Model quality depends on its tool-calling support. No cloud API key is used.</div></div></section>
+<section id="aiView" class="app-view hidden" aria-label="Pogo AI assistant"><div class="ai-wrap ai-layout" id="aiLayout"><div class="ai-main"><div class="ai-topbar"><div class="ai-title"><span aria-hidden="true">✦</span> Pogo</div><button type="button" id="aiSideToggle" class="ai-side-toggle" aria-controls="aiSide" aria-expanded="true" title="Show or hide settings panel">⚙ Settings <span class="chev" aria-hidden="true">›</span></button></div><div class="ai-tools-row" aria-label="Pogo quick actions"><button type="button" data-pogo-action="Summarize the active project. Inspect the actual project data and give me progress, completed work, and next steps.">▤ Project summary</button><button type="button" data-pogo-action="Analyze the active project's shells for bugs, broken items, and likely causes. Give a prioritized bug analysis.">⌕ Bug analysis</button><button type="button" data-pogo-action="Create clear technical documentation for the active project based on its saved details and shells. Structure it with headings and checklists.">▧ Generate documentation</button><button type="button" data-pogo-action="Review the active project for unfinished tasks and blockers. Suggest practical next actions.">✦ Project insights</button></div><div id="aiChat" class="ai-chat" aria-live="polite"><div class="ai-msg system">Hi! I’m Pogo. Try: “Summarize this project”, “Find my latest bug”, or “Create a shell documenting the latest change.”</div></div><form id="aiForm" class="ai-compose"><textarea id="aiPrompt" placeholder="Ask Pogo about your projects or request a journal update…" required></textarea><button id="aiSendBtn" class="primary" type="submit">Send</button></form></div><div id="aiSide" class="ai-side" role="complementary" aria-label="Pogo settings"><div class="ai-heading"><div class="eyebrow">Local inference · ProjectLog tools</div><h1>Pogo</h1><p>Use Ollama or LM Studio to search and update your ProjectLog journal. Requests go to the local model server you configure.</p></div><div class="ai-config"><div><label for="aiProvider">Provider</label><select id="aiProvider"><option value="ollama">Ollama</option><option value="lmstudio">LM Studio</option></select></div><div><label for="aiModel">Model ID</label><input id="aiModel" value="qwen3" placeholder="e.g. qwen3:8b"></div><div><label for="aiEndpoint">Local API endpoint</label><input id="aiEndpoint" value="http://127.0.0.1:11434" spellcheck="false"></div><div style="display:flex;align-items:end;gap:6px"><button id="aiConnectBtn" type="button">Test connection</button><button id="aiClearBtn" type="button">Clear</button></div><div class="ai-status" id="aiStatus" style="grid-column:1/-1">Choose a tool-capable model and make sure its local server is running.</div></div><div class="ai-library"><input id="chatSearch" placeholder="Search saved chats…" aria-label="Search saved chats"><select id="chatPicker" aria-label="Saved conversations"><option value="">Current conversation</option></select><button type="button" id="newChatBtn">＋ New chat</button><button type="button" id="renameChatBtn">Rename</button><button type="button" id="deleteChatBtn" class="danger">Delete</button></div><div class="ai-extra"><select id="aiSavedModels" aria-label="Saved models"><option value="">Saved models</option></select><button id="aiSaveModel" type="button">Save model</button><select id="aiTemplates" aria-label="Prompt templates"></select><input id="aiTplName" type="text" placeholder="Template name" maxlength="60" aria-label="Template name"><button id="aiTplSave" type="button">Save prompt</button><button id="aiTplDel" type="button">Delete template</button><label class="ai-stream"><input type="checkbox" id="aiStream" checked> Stream replies</label></div><div class="ai-note">Available tools: project overview, project search, shell search, recent activity, version listing, project creation, version creation, shell creation and shell editing. AI can create or edit shells when requested. Review saved entries after tool use. Model quality depends on its tool-calling support. No cloud API key is used.</div></div></div></section>
 <section id="settingsView" class="app-view hidden" aria-label="Settings">
   <div class="settings-wrap"><div class="eyebrow">Preferences</div><h1>Settings</h1><p class="settings-intro">Make ProjectLog work the way you do.</p>
     <section class="settings-card"><div><h2>Appearance</h2><p>Choose the interface theme.</p></div><div class="theme-options"><button type="button" data-theme-choice="dark">☾ Dark</button><button type="button" data-theme-choice="light">☀ Light</button><button type="button" data-theme-choice="ocean">🌊 Ocean</button><button type="button" data-theme-choice="forest">🌿 Forest</button><button type="button" data-theme-choice="sunset">🌅 Sunset</button><button type="button" data-theme-choice="rose">🌸 Rose</button><button type="button" data-theme-choice="midnight">✦ Midnight</button></div></section>
     <section class="settings-card"><div><h2>Pogo AI</h2><p>Choose whether Pogo keeps conversation history on this device. Saved chats stay local to this app.</p></div><label class="pogo-save-setting"><input id="savePogoChats" type="checkbox"> Save Pogo conversations on this device</label><p class="settings-hint">Turning this off stops future saving and clears the locally saved Pogo conversation history.</p></section>
     <section class="settings-card"><div><h2>Local model preferences</h2><p>Remember your local provider, model name, and localhost endpoint between launches.</p></div><label class="pogo-save-setting"><input id="rememberLocalModel" type="checkbox"> Save local model name and connection settings</label><p class="settings-hint">These preferences are stored locally on this device. The model itself is not downloaded or stored by ProjectLog.</p></section>
     <section class="settings-card"><div><h2>Dashboard layout</h2><p>Choose which dashboard sections are visible. You can also drag dashboard sections to reorder them.</p></div><label class="pogo-save-setting"><input type="checkbox" data-widget-toggle="roadmapSection" checked> Show project roadmap</label><label class="pogo-save-setting"><input type="checkbox" data-widget-toggle="shellSection" checked> Show development history</label><label class="pogo-save-setting"><input type="checkbox" data-widget-toggle="insightsPanel" checked> Show smart project insights</label><p class="dashboard-hint">On the workspace, drag a section by its heading to change its order.</p></section>
-    <section class="settings-card"><div><h2>Application</h2><p>Version, local storage and update status.</p></div><div class="settings-facts"><div><span>Version</span><strong>1.6.0</strong></div><div><span>Data storage</span><strong>On this device</strong></div><div><span>Autosave</span><strong>Enabled</strong></div><div><span>Update status</span><strong id="updateStatus">Ready to check</strong></div></div><button class="primary" id="checkUpdatesBtn">Check for updates</button><p class="settings-hint" id="updateHint">Updates are checked against the published GitHub release when running the installed app.</p></section>
+    <section class="settings-card"><div><h2>Saved models</h2><p>Keep a list of local model names and select them in Pogo.</p></div><div class="settings-form"><select id="mdlProvider" aria-label="Provider"><option value="ollama">Ollama</option><option value="lmstudio">LM Studio</option></select><input id="mdlLabel" placeholder="Label (optional)" maxlength="60" aria-label="Label"><input id="mdlId" placeholder="Model ID, e.g. qwen3:8b" spellcheck="false" aria-label="Model ID"><button id="mdlAdd" type="button" class="primary">Save model</button></div><div id="aiModelList"></div></section>
+    <section class="settings-card"><div><h2>Backups</h2><p>Snapshots of your workspace are stored on this device. The five most recent are kept.</p></div><label class="pogo-save-setting"><input type="checkbox" id="autoBackupToggle" checked> Create backups automatically</label><div><button id="backupNowBtn" type="button" class="primary">Back up now</button></div><div id="backupList"></div></section>
+    <section class="settings-card"><div><h2>Markdown reference</h2><p>Supported in shell notes, previews, exports and Pogo replies.</p></div><table class="ref-table"><tr><td>&gt; [!NOTE]</td><td>Callout. Also TIP, IMPORTANT, WARNING, CAUTION, DANGER, SUCCESS. Continue the quote on the next lines.</td></tr><tr><td>:::details Title</td><td>Collapsible section. Close it with a line containing only :::</td></tr><tr><td>:::warning Title</td><td>Callout block with an optional title, closed with :::</td></tr><tr><td>{progress:60}</td><td>Progress bar, 0 to 100.</td></tr><tr><td>{ok:Done}</td><td>Status badge. Also warn, fail, info, todo.</td></tr><tr><td>[[Ctrl+S]]</td><td>Keyboard key.</td></tr><tr><td>==text==</td><td>Highlight.</td></tr><tr><td>- [ ] Task</td><td>Checklist item.</td></tr></table></section>
+    <section class="settings-card"><div><h2>Application</h2><p>Version, local storage and update status.</p></div><div class="settings-facts"><div><span>Version</span><strong>1.7.0</strong></div><div><span>Data storage</span><strong>On this device</strong></div><div><span>Autosave</span><strong>Enabled</strong></div><div><span>Update status</span><strong id="updateStatus">Ready to check</strong></div></div><button class="primary" id="checkUpdatesBtn">Check for updates</button><button id="viewUpdateBtn" type="button" hidden>View update details</button><p class="settings-hint" id="updateHint">Updates are checked against the published GitHub release when running the installed app.</p></section>
     <section class="settings-card"><div><h2>Data & privacy</h2><p>Your projects stay in local browser storage. Export a JSON backup regularly.</p></div><button id="settingsExportBtn">Export backup (JSON)</button></section>
     <div class="settings-footer">ProjectLog Desktop · Built for focused project tracking</div>
   </div>
@@ -232,6 +314,7 @@ aside{position:relative;transition:padding .22s ease;overflow:hidden}
 <div class="modal" id="subprojectModal"><form class="modal-panel" id="subprojectForm"><h2 id="subprojectTitle">Create version</h2><label class="fieldlabel">Version name</label><input id="subprojectName" class="input" placeholder="e.g. Stable release" required><label class="fieldlabel" style="margin-top:10px">Version number / branch</label><input id="subprojectVersion" class="input" placeholder="v1.0, v2.0, feature/login"><label class="fieldlabel" style="margin-top:10px">Description</label><textarea id="subprojectDescription" class="notes" placeholder="What is different in this version?"></textarea><div class="create-project-actions"><button type="button" id="cancelSubprojectBtn">Cancel</button><button class="primary" type="submit">Save version</button></div></form></div>
 <div class="toast" id="toast">Saved</div>
 <input type="file" id="filePicker" multiple class="hidden"><input type="file" id="jsonPicker" accept=".json,.projectlog.json,application/json" class="hidden">
+<div class="upd-overlay" id="updateModal" hidden><div class="upd-panel" role="dialog" aria-modal="true" aria-labelledby="updTitle"><div class="upd-head"><div><h2 id="updTitle">Update available</h2><p id="updSub"></p></div><button type="button" class="upd-x" id="updClose" aria-label="Close">&times;</button></div><div class="upd-meta"><span class="upd-chip" id="updVersion"></span><span class="upd-chip" id="updDate"></span></div><div class="upd-notes-wrap"><h3>Release notes</h3><div class="markdown-preview upd-notes" id="updNotes"></div></div><div id="updProgress" hidden><div class="upd-bar"><span id="updBar"></span></div><div class="upd-stats"><span id="updPct"></span><span id="updDetail"></span></div></div><p class="upd-error" id="updError" hidden></p><div class="upd-actions"><button type="button" id="updLater">Later</button><button type="button" class="primary" id="updPrimary">Download update</button></div></div></div>
 <script>
 (()=>{
 const DB_NAME='projectlog-db',STORE='workspace';let db,state,toastTimer,saveTimer;
@@ -423,7 +506,7 @@ $('roadmap').addEventListener('dragend',()=>{draggedRoadmapId=null;document.quer
 $('mediaGallery').addEventListener('click',e=>{const open=e.target.closest('[data-open-shell]');if(open){const target=open.dataset.openShell;jumpToShell(target);return;}const img=e.target.closest('img[data-preview]');if(img){const sh=current().shells.find(s=>s.attachments.some(a=>a.id===img.dataset.preview)),a=sh?.attachments.find(x=>x.id===img.dataset.preview);if(a){$('modalImage').src=a.data;$('imageModal').classList.add('open');}}const b=e.target.closest('button[data-download]');if(b){const sh=findShell(b.dataset.shell),a=sh?.attachments.find(x=>x.id===b.dataset.download);if(a?.data)downloadData(a.data,a.name,a.type);}});
 $('filePicker').addEventListener('change',async e=>{const files=Array.from(e.target.files||[]),sh=findShell(e.target.dataset.shell);if(!sh||!sh.editing||!files.length)return;for(const f of files){if(f.size>100*1024*1024){notify('Skipped '+f.name+' (over 100 MB; large files can exceed browser storage limits)');continue;}const data=await new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=reject;r.readAsDataURL(f);});sh.attachments.push({id:uid(),name:f.name,type:f.type||'application/octet-stream',size:f.size,lastModified:f.lastModified,data});}e.target.value='';render();notify('Files added — save the shell to keep changes');});
 $('closeModal').addEventListener('click',()=>$('imageModal').classList.remove('open'));$('imageModal').addEventListener('click',e=>{if(e.target.id==='imageModal')e.currentTarget.classList.remove('open');});document.addEventListener('keydown',e=>{if(e.key==='Escape')$('imageModal').classList.remove('open');});
-async function init(){try{db=await openDB();const raw=await dbGet();state=raw?normalizeState(raw):seed();await dbPut(state);render();}catch(e){document.body.innerHTML='<div style="padding:30px;color:white">Could not open local storage. Try the latest version of Chrome or Edge. Details: '+esc(e.message)+'</div>';console.error(e);}}
+async function init(){try{db=await openDB();const raw=await dbGet();state=raw?normalizeState(raw):seed();if(!raw||!Array.isArray(raw.projects))await dbPut(state);render();}catch(e){document.body.innerHTML='<div style="padding:30px;color:white">Could not open local storage. Try the latest version of Chrome or Edge. Details: '+esc(e.message)+'</div>';console.error(e);}}
 
 let editingSubId=null;
 function editSubproject(sub){editingSubId=sub?sub.id:null;$('subprojectTitle').textContent=sub?'Edit version':'Create version';$('subprojectName').value=sub?.name||'';$('subprojectVersion').value=sub?.version||'';$('subprojectDescription').value=sub?.description||'';$('subprojectModal').classList.add('open');}
@@ -502,7 +585,7 @@ async function aiRunTool(name,args){
 function aiNormalizeEndpoint(){let raw=$('aiEndpoint').value.trim().replace(/\/$/,'');const u=new URL(raw);if(!['http:','https:'].includes(u.protocol)||!['localhost','127.0.0.1','::1'].includes(u.hostname))throw new Error('For safety, the API endpoint must be localhost or 127.0.0.1.');return raw;}
 async function aiRequest(messages,tools){const provider=$('aiProvider').value,endpoint=aiNormalizeEndpoint(),model=$('aiModel').value.trim();if(!model)throw new Error('Enter the exact model ID shown by your local model app.');if(!window.projectLog?.localAIRequest)throw new Error('Local AI bridge is unavailable. Restart ProjectLog after applying the updated main.js and preload.js.');return window.projectLog.localAIRequest({provider,endpoint,model,messages,tools});}
 function aiExtract(response){if(response?.provider==='ollama')return response.message||{};const choice=response?.choices?.[0]?.message||{};return {role:choice.role||'assistant',content:choice.content||'',tool_calls:choice.tool_calls||[]};}
-async function aiSend(prompt){const provider=$('aiProvider').value,model=$('aiModel').value.trim();aiConversation.push({role:'user',content:prompt});aiAddMessage('user',prompt);persistPogoConversation();$('aiPrompt').value='';$('aiSendBtn').disabled=true;aiStatus('Connecting to '+(provider==='ollama'?'Ollama':'LM Studio')+'…');try{const system={role:'system',content:'You are Pogo, the helpful local AI assistant built into ProjectLog v1.6.0. You have tools to inspect projects, versions, recent activity and journal shells, and to create projects, versions and shells or edit existing shells. Use the supplied tools to inspect actual saved data before answering about it. Never claim a change was saved unless a tool returns success. Do not invent IDs or entries. Ask for clarification before destructive operations; deletion tools do not exist. Be proactive and practical: summarize progress, identify blockers, suggest next steps, compare versions, and turn vague requests into clear development checkpoints. When useful, ask one concise clarifying question. For project-specific claims, inspect the actual saved project data first. Before creating or editing entries, confirm user intent if the request is ambiguous. Keep answers clear and structured. Active ProjectLog data is local to this app. You may use get_project_memory and save_project_memory to retain durable project-specific context across conversations. Only save useful non-secret facts and decisions. Project memory currently saved: '+(projectMemory()||'None')};let messages=[system,...aiConversation];let finalText='';for(let step=0;step<10;step++){const res=await aiRequest(messages,aiTools);const msg=aiExtract(res);if(!msg||(!msg.content&&!msg.tool_calls?.length))throw new Error('The model returned no text or tool calls. Try a model with tool-calling support.');messages.push(msg);if(msg.tool_calls?.length){for(const call of msg.tool_calls){const fn=call.function||{};let args=fn.arguments||{};if(typeof args==='string'){try{args=JSON.parse(args)}catch{args={}}}aiStatus('Running tool: '+fn.name);let result;try{result=await aiRunTool(fn.name,args);}catch(err){result={error:err.message||String(err)};}messages.push(provider==='ollama'?{role:'tool',tool_name:fn.name,content:JSON.stringify(result)}:{role:'tool',tool_call_id:call.id,content:JSON.stringify(result)});}continue;}finalText=typeof msg.content==='string'?msg.content:JSON.stringify(msg.content);break;}if(!finalText)finalText='I reached the tool-call limit for this turn. Please ask a narrower question.';aiConversation.push({role:'assistant',content:finalText});aiAddMessage('assistant',finalText);persistPogoConversation();aiStatus('Connected · '+model+' · Local inference');}catch(err){aiStatus('Connection or model error');aiAddMessage('system','Error: '+(err.message||String(err))+'\n\nCheck that the model server is running, the endpoint is correct, and the model supports tool calling.');}finally{$('aiSendBtn').disabled=false;$('aiPrompt').focus();}}
+async function aiSend(prompt){const provider=$('aiProvider').value,model=$('aiModel').value.trim();aiConversation.push({role:'user',content:prompt});aiAddMessage('user',prompt);persistPogoConversation();$('aiPrompt').value='';$('aiSendBtn').disabled=true;aiStatus('Connecting to '+(provider==='ollama'?'Ollama':'LM Studio')+'…');try{const system={role:'system',content:'You are Pogo, the helpful local AI assistant built into ProjectLog v1.7.0. You have tools to inspect projects, versions, recent activity and journal shells, and to create projects, versions and shells or edit existing shells. Use the supplied tools to inspect actual saved data before answering about it. Never claim a change was saved unless a tool returns success. Do not invent IDs or entries. Ask for clarification before destructive operations; deletion tools do not exist. Be proactive and practical: summarize progress, identify blockers, suggest next steps, compare versions, and turn vague requests into clear development checkpoints. When useful, ask one concise clarifying question. For project-specific claims, inspect the actual saved project data first. Before creating or editing entries, confirm user intent if the request is ambiguous. Keep answers clear and structured. Active ProjectLog data is local to this app. You may use get_project_memory and save_project_memory to retain durable project-specific context across conversations. Only save useful non-secret facts and decisions. Project memory currently saved: '+(projectMemory()||'None')};let messages=[system,...aiConversation];let finalText='';for(let step=0;step<10;step++){const res=await aiRequest(messages,aiTools);const msg=aiExtract(res);if(!msg||(!msg.content&&!msg.tool_calls?.length))throw new Error('The model returned no text or tool calls. Try a model with tool-calling support.');messages.push(msg);if(msg.tool_calls?.length){for(const call of msg.tool_calls){const fn=call.function||{};let args=fn.arguments||{};if(typeof args==='string'){try{args=JSON.parse(args)}catch{args={}}}aiStatus('Running tool: '+fn.name);let result;try{result=await aiRunTool(fn.name,args);}catch(err){result={error:err.message||String(err)};}messages.push(provider==='ollama'?{role:'tool',tool_name:fn.name,content:JSON.stringify(result)}:{role:'tool',tool_call_id:call.id,content:JSON.stringify(result)});}continue;}finalText=typeof msg.content==='string'?msg.content:JSON.stringify(msg.content);break;}if(!finalText)finalText='I reached the tool-call limit for this turn. Please ask a narrower question.';aiConversation.push({role:'assistant',content:finalText});aiAddMessage('assistant',finalText);persistPogoConversation();aiStatus('Connected · '+model+' · Local inference');}catch(err){aiStatus('Connection or model error');aiAddMessage('system','Error: '+(err.message||String(err))+'\n\nCheck that the model server is running, the endpoint is correct, and the model supports tool calling.');}finally{$('aiSendBtn').disabled=false;$('aiPrompt').focus();}}
 $('aiProvider')?.addEventListener('change',aiEndpointDefault);
 $('aiConnectBtn')?.addEventListener('click',async()=>{try{aiStatus('Testing connection…');const provider=$('aiProvider').value;const r=await aiRequest([{role:'user',content:'Reply with exactly: connected'}],[]);const msg=aiExtract(r);aiStatus('Connected · '+($('aiModel').value.trim()||'model')+' · '+(msg.content||'response received').toString().slice(0,100));}catch(e){aiStatus('Connection failed: '+(e.message||String(e)));}});
 $('aiClearBtn')?.addEventListener('click',()=>{aiConversation.length=0;activeChatId='';$('aiChat').innerHTML='';aiAddMessage('system','Conversation cleared. Saved chats remain available in the conversation library.');aiStatus('Conversation cleared');});
@@ -539,6 +622,9 @@ function showAppView(view){
 }
 try{setTheme(localStorage.getItem('projectlog-theme')||'dark')}catch{setTheme('dark')}
 loadPogoPreferences();initDashboardLayout();
+/* Pogo sidebar toggle */
+(function(){const lay=$('aiLayout'),btn=$('aiSideToggle');if(!lay||!btn)return;const KEY='projectlog-pogo-side-collapsed';let collapsed=true;try{collapsed=localStorage.getItem(KEY)!=='0'}catch{}const apply=()=>{lay.classList.toggle('side-collapsed',collapsed);btn.setAttribute('aria-expanded',String(!collapsed));};btn.addEventListener('click',()=>{collapsed=!collapsed;try{localStorage.setItem(KEY,collapsed?'1':'0')}catch{}apply();});apply();})();
+
 $('settingsNav')?.addEventListener('click',()=>showAppView('settings'));
 $('upcomingNav')?.addEventListener('click',()=>showAppView('upcoming'));
 
@@ -567,9 +653,9 @@ $('settingsExportBtn')?.addEventListener('click',()=>$('exportJsonBtn')?.click()
 window.projectLog?.onUpdateState?.((update)=>{
   const status=$('updateStatus'),hint=$('updateHint');
   if(!status||!hint)return;
-  if(update.status==='available'){status.textContent='Update available';hint.textContent=`ProjectLog ${update.version} is available. Use the themed update window to download it.`;}
+  if(update.status==='available'){status.textContent='Update available';hint.textContent=`ProjectLog ${update.version} is available. Open the update details to download it.`;}
   else if(update.status==='downloading'){status.textContent=`Downloading · ${Math.round(update.percent||0)}%`;hint.textContent=`${update.transferred||''} ${update.total?'of '+update.total:''} ${update.speed||''}`;}
-  else if(update.status==='downloaded'){status.textContent='Ready to install';hint.textContent=`ProjectLog ${update.version} is downloaded. Restart from the update window to install.`;}
+  else if(update.status==='downloaded'){status.textContent='Ready to install';hint.textContent=`ProjectLog ${update.version} is downloaded. Open the update details to restart and install.`;}
   else if(update.status==='current'){status.textContent='Up to date';hint.textContent=`ProjectLog ${update.version||'current version'} is installed.`;}
   else if(update.status==='error'){status.textContent='Update error';hint.textContent=update.message||'The update failed.';}
 });
@@ -586,7 +672,309 @@ $('checkUpdatesBtn')?.addEventListener('click',async()=>{
   finally{btn.disabled=false}
 });
 
-init();
+
+/* ===== ProjectLog additions ===== */
+const LS={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch{return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch{}}};
+
+// Shell tags + filters
+const parseTags=v=>String(v||'').split(',').map(t=>t.trim().replace(/\s+/g,'-').toLowerCase()).filter((t,i,a)=>t&&a.indexOf(t)===i).slice(0,12);
+let tagFilter='',statusFilter='';
+function enhanceShells(){
+  const p=current();if(!p)return;
+  const all=new Set();p.shells.forEach(s=>(s.tags||[]).forEach(t=>all.add(t)));
+  if(tagFilter&&!all.has(tagFilter))tagFilter='';
+  const chips=$('tagChips');
+  if(chips)chips.innerHTML=[...all].sort().map(t=>`<button type="button" class="tag-chip ${t===tagFilter?'on':''}" data-tag-filter="${esc(t)}">#${esc(t)}</button>`).join('');
+  document.querySelectorAll('#shells [data-shell]').forEach(el=>{
+    const sh=p.shells.find(s=>s.id===el.dataset.shell);if(!sh)return;
+    const tags=Array.isArray(sh.tags)?sh.tags:[];
+    el.querySelectorAll('.tag-row').forEach(n=>n.remove());
+    if(sh.editing){
+      const meta=el.querySelector('.shell-meta');
+      if(meta&&!el.querySelector('[data-tags-input]')){const d=document.createElement('div');d.style.gridColumn='1/-1';d.innerHTML=`<label class="fieldlabel">Tags · comma separated</label><input class="input" data-tags-input placeholder="e.g. bug, ui, release" value="${esc(tags.join(', '))}">`;meta.appendChild(d);}
+    }else if(tags.length){
+      const foot=el.querySelector('.shell-foot');
+      if(foot){const row=document.createElement('div');row.className='tag-row';row.innerHTML=tags.map(t=>`<button type="button" class="tag-chip ${t===tagFilter?'on':''}" data-tag-filter="${esc(t)}">#${esc(t)}</button>`).join('');foot.parentNode.insertBefore(row,foot);}
+    }
+    el.style.display=((tagFilter&&!tags.includes(tagFilter))||(statusFilter&&sh.status!==statusFilter))?'none':'';
+  });
+}
+const _render=render;render=function(){_render();enhanceShells();};
+$('search')?.addEventListener('input',enhanceShells);
+$('statusFilter')?.addEventListener('change',e=>{statusFilter=e.target.value;enhanceShells();});
+document.addEventListener('click',e=>{const b=e.target.closest('[data-tag-filter]');if(!b)return;tagFilter=tagFilter===b.dataset.tagFilter?'':b.dataset.tagFilter;enhanceShells();});
+$('shells')?.addEventListener('input',e=>{const i=e.target.closest('[data-tags-input]');if(!i)return;const sh=findShell(i.closest('[data-shell]').dataset.shell);if(sh&&sh.editing)sh.tags=parseTags(i.value);});
+
+// Auto backups (stored in the same IndexedDB store under separate keys)
+const BK_MAX=5,BK_GAP=10*60*1000;let bkTimer;
+const idb=(mode,fn)=>new Promise((res,rej)=>{const tx=db.transaction(STORE,mode);let out;try{out=fn(tx.objectStore(STORE))}catch(e){rej(e);return}tx.oncomplete=()=>res(out&&'result' in out?out.result:out);tx.onerror=tx.onabort=()=>rej(tx.error);});
+const bkIndex=async()=>(await idb('readonly',s=>s.get('backup-index')))||[];
+function bkSize(st){let n=0;for(const p of st.projects)for(const v of p.versions||[])for(const sh of v.shells||[])for(const a of sh.attachments||[])n+=(a.data||'').length;return n;}
+async function makeBackup(reason='auto'){
+  if(!state||!db)return;
+  const p=current(),v=activeVersion(p);if(v)v.shells=p.shells;
+  const strip=bkSize(state)>120*1024*1024,ts=Date.now(),key='backup:'+ts;
+  const snap=JSON.parse(JSON.stringify(state,(k,val)=>strip&&k==='data'&&typeof val==='string'&&val.startsWith('data:')?'':val));
+  const shells=state.projects.reduce((n,pr)=>n+(pr.versions||[]).reduce((m,vv)=>m+(vv.shells||[]).length,0),0);
+  await idb('readwrite',s=>s.put(snap,key));
+  const idx=await bkIndex();idx.unshift({key,ts,reason,projects:state.projects.length,shells,stripped:strip});
+  const drop=idx.splice(BK_MAX);
+  await idb('readwrite',s=>{s.put(idx,'backup-index');drop.forEach(d=>s.delete(d.key));});
+  LS.set('projectlog-last-backup',ts);
+}
+async function autoBackup(){try{if(!LS.get('projectlog-auto-backup',true)||Date.now()-LS.get('projectlog-last-backup',0)<BK_GAP)return;await makeBackup('auto');renderBackups();}catch(e){console.error('Backup failed',e);}}
+const _persist=persist;persist=async function(m){await _persist(m);clearTimeout(bkTimer);bkTimer=setTimeout(autoBackup,8000);};
+async function renderBackups(){
+  const el=$('backupList');if(!el||!db)return;
+  const idx=await bkIndex();
+  el.innerHTML=idx.length?idx.map(b=>`<div class="bk-row"><div><strong>${esc(formatDate(b.ts))}</strong><small>${b.projects} project${b.projects===1?'':'s'} · ${b.shells} shells · ${esc(b.reason)}${b.stripped?' · attachment files not included':''}</small></div><div class="bk-actions"><button type="button" data-bk-restore="${esc(b.key)}">Restore</button><button type="button" class="danger" data-bk-del="${esc(b.key)}">Delete</button></div></div>`).join(''):'<p class="settings-hint">No backups yet.</p>';
+}
+async function restoreBackup(key){
+  const snap=await idb('readonly',s=>s.get(key));if(!snap){notify('Backup not found');return;}
+  if(!confirm('Restore this backup? Your current data is backed up first.'))return;
+  await makeBackup('before-restore');
+  const files=new Map();
+  for(const p of state.projects)for(const v of p.versions||[])for(const sh of v.shells||[])for(const a of sh.attachments||[])if(a.data)files.set(a.id,a.data);
+  const next=normalizeState(snap);
+  for(const p of next.projects)for(const v of p.versions||[])for(const sh of v.shells||[])for(const a of sh.attachments||[])if(!a.data&&files.has(a.id))a.data=files.get(a.id);
+  state=next;await dbPut(state);render();renderBackups();notify('Backup restored');
+}
+$('backupNowBtn')?.addEventListener('click',async()=>{try{await makeBackup('manual');await renderBackups();notify('Backup created');}catch(e){notify('Backup failed');console.error(e);}});
+$('autoBackupToggle')?.addEventListener('change',e=>LS.set('projectlog-auto-backup',e.target.checked));
+if($('autoBackupToggle'))$('autoBackupToggle').checked=LS.get('projectlog-auto-backup',true);
+$('backupList')?.addEventListener('click',async e=>{
+  const r=e.target.closest('[data-bk-restore]'),d=e.target.closest('[data-bk-del]');
+  if(r)await restoreBackup(r.dataset.bkRestore);
+  if(d&&confirm('Delete this backup?')){const idx=(await bkIndex()).filter(b=>b.key!==d.dataset.bkDel);await idb('readwrite',s=>{s.put(idx,'backup-index');s.delete(d.dataset.bkDel);});renderBackups();}
+});
+$('settingsNav')?.addEventListener('click',renderBackups);
+
+// Saved AI models
+const MK='projectlog-ai-models',aiModels=()=>LS.get(MK,[]);
+function saveAIModel(provider,model,label,endpoint){
+  model=String(model||'').trim();if(!model){notify('Enter a model ID first');return;}
+  const list=aiModels().filter(m=>!(m.provider===provider&&m.model===model));
+  list.unshift({id:uid(),provider,model,endpoint:endpoint||'',label:String(label||'').trim()||model});
+  LS.set(MK,list.slice(0,50));renderAIModels();notify('Model saved');
+}
+const provName=p=>p==='ollama'?'Ollama':'LM Studio';
+function renderAIModels(){
+  const list=aiModels();
+  const sel=$('aiSavedModels');if(sel)sel.innerHTML='<option value="">Saved models</option>'+list.map(m=>`<option value="${esc(m.id)}">${esc(m.label)} · ${provName(m.provider)}</option>`).join('');
+  const box=$('aiModelList');if(box)box.innerHTML=list.length?list.map(m=>`<div class="bk-row"><div><strong>${esc(m.label)}</strong><small>${provName(m.provider)} · ${esc(m.model)}</small></div><div class="bk-actions"><button type="button" data-model-use="${esc(m.id)}">Use</button><button type="button" class="danger" data-model-del="${esc(m.id)}">Delete</button></div></div>`).join(''):'<p class="settings-hint">No saved models yet.</p>';
+}
+function useAIModel(id){
+  const m=aiModels().find(x=>x.id===id);if(!m)return;
+  $('aiProvider').value=m.provider;$('aiEndpoint').value=m.provider==='ollama'?'http://127.0.0.1:11434':'http://127.0.0.1:1234';if(m.endpoint)$('aiEndpoint').value=m.endpoint;$('aiModel').value=m.model;
+  saveModelPreferences();aiStatus('Using '+m.label+' ('+provName(m.provider)+')');
+}
+$('aiSavedModels')?.addEventListener('change',e=>{if(e.target.value)useAIModel(e.target.value);});
+$('aiSaveModel')?.addEventListener('click',()=>saveAIModel($('aiProvider').value,$('aiModel').value,'',$('aiEndpoint').value));
+$('mdlAdd')?.addEventListener('click',()=>{saveAIModel($('mdlProvider').value,$('mdlId').value,$('mdlLabel').value);$('mdlId').value='';$('mdlLabel').value='';});
+$('aiModelList')?.addEventListener('click',e=>{
+  const u=e.target.closest('[data-model-use]'),d=e.target.closest('[data-model-del]');
+  if(u){useAIModel(u.dataset.modelUse);showAppView('ai');}
+  if(d){LS.set(MK,aiModels().filter(m=>m.id!==d.dataset.modelDel));renderAIModels();}
+});
+
+// Prompt templates
+const TK='projectlog-ai-templates',DEFAULT_TPLS=[
+ {id:'t1',name:'Weekly progress report',text:'Write a short progress report for the active project covering the last 7 days: what was done, what broke, and what is next.'},
+ {id:'t2',name:'Find open bugs',text:'Search all shells for items that are not working or need fixing and list them with their project and version.'},
+ {id:'t3',name:'Suggest next steps',text:'Read the active project and suggest the 5 most valuable next steps, ordered by priority.'}];
+const tpls=()=>LS.get(TK,DEFAULT_TPLS);
+function renderTpls(){const sel=$('aiTemplates');if(sel)sel.innerHTML='<option value="">Prompt templates</option>'+tpls().map(t=>`<option value="${esc(t.id)}">${esc(t.name)}</option>`).join('');}
+$('aiTemplates')?.addEventListener('change',e=>{const t=tpls().find(x=>x.id===e.target.value);if(t){$('aiPrompt').value=t.text;$('aiTplName').value=t.name;$('aiPrompt').focus();}});
+$('aiTplSave')?.addEventListener('click',()=>{const text=$('aiPrompt').value.trim(),name=$('aiTplName').value.trim();if(!text||!name){notify('Type a prompt and a template name');return;}const list=tpls().filter(t=>t.name!==name);list.unshift({id:uid(),name:name.slice(0,60),text:text.slice(0,4000)});LS.set(TK,list.slice(0,50));renderTpls();notify('Template saved');});
+$('aiTplDel')?.addEventListener('click',()=>{const id=$('aiTemplates').value;if(!id){notify('Pick a template to delete');return;}LS.set(TK,tpls().filter(t=>t.id!==id));renderTpls();$('aiTplName').value='';notify('Template deleted');});
+
+// Streaming replies
+const _aiRequest=aiRequest,_aiAdd=aiAddMessage;let pendingFinal=null,streamSeq=0;
+aiAddMessage=function(role,text){if(role==='assistant'&&pendingFinal){pendingFinal.remove();pendingFinal=null;}return _aiAdd(role,text);};
+aiRequest=async function(messages,tools){
+  pendingFinal=null;
+  if(!tools?.length||!$('aiStream')?.checked||!window.projectLog?.localAIStream)return _aiRequest(messages,tools);
+  const provider=$('aiProvider').value,endpoint=aiNormalizeEndpoint(),model=$('aiModel').value.trim();
+  if(!model)throw new Error('Enter the exact model ID shown by your local model app.');
+  const id='s'+(++streamSeq)+'-'+Date.now();let el=null,buf='';
+  const off=window.projectLog.onAIChunk?.(c=>{if(c.id!==id)return;buf+=c.delta||'';if(!el){el=document.createElement('div');el.className='ai-msg assistant';$('aiChat').appendChild(el);}el.textContent=buf;$('aiChat').scrollTop=$('aiChat').scrollHeight;});
+  try{const res=await window.projectLog.localAIStream({id,provider,endpoint,model,messages,tools});if(el&&!aiExtract(res).tool_calls?.length)pendingFinal=el;return res;}
+  finally{off?.();}
+};
+
+
+/* ===== 1.7.0 additions ===== */
+const APP_VERSION='1.7.0';
+
+// Markdown components
+let mdExport=false;
+const _markdown=markdown;
+const MD_CALLOUTS={note:'Note',tip:'Tip',important:'Important',warning:'Warning',caution:'Caution',danger:'Danger',success:'Done'};
+markdown=function(src=''){
+  let text=String(src??'');
+  const fences=[],blocks=[];
+  text=text.replace(/```[\s\S]*?```/g,m=>{fences.push(m);return '@@MDFENCE'+(fences.length-1)+'@@';});
+  const restore=t=>t.replace(/@@MDFENCE(\d+)@@/g,(_,i)=>fences[i]);
+  const stash=html=>{blocks.push(html);return '\n\n@@MDBLOCK'+(blocks.length-1)+'@@\n\n';};
+  const callout=(type,title,inner)=>{
+    const body=markdown(restore(inner).trim());
+    if(mdExport)return `<blockquote><strong>${esc(title)}</strong>${body}</blockquote>`;
+    return `<div class="md-callout md-${type}"><div class="md-callout-title">${esc(title)}</div><div class="md-callout-body">${body}</div></div>`;
+  };
+  text=text.replace(/^>[ \t]*\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION|DANGER|SUCCESS)\][ \t]*\n((?:>[^\n]*(?:\n|$))*)/gim,(_,t,body)=>{
+    const type=t.toLowerCase();return stash(callout(type,MD_CALLOUTS[type],body.replace(/^>[ \t]?/gm,'')));});
+  text=text.replace(/^:::(\w+)[ \t]*([^\n]*)\n([\s\S]*?)\n:::[ \t]*$/gm,(all,kind,title,inner)=>{
+    kind=kind.toLowerCase();title=title.trim();
+    if(kind==='details'||kind==='collapse'){
+      const body=markdown(restore(inner).trim());
+      return stash(`<details class="md-details"${mdExport?' open':''}><summary>${esc(title||'Details')}</summary><div class="md-details-body">${body}</div></details>`);
+    }
+    if(MD_CALLOUTS[kind])return stash(callout(kind,title||MD_CALLOUTS[kind],inner));
+    return all;
+  });
+  let html=_markdown(restore(text));
+  html=html.replace(/<p>@@MDBLOCK(\d+)@@<\/p>|@@MDBLOCK(\d+)@@/g,(_,a,b)=>blocks[a??b]);html=html.replace(/<p><\/p>/g,'');
+  return html.split(/(<pre>[\s\S]*?<\/pre>)/).map((part,i)=>{
+    if(i%2){
+      if(mdExport)return part;
+      const m=part.match(/^<pre><code(?: data-language="([^"]*)")?>/);
+      return `<div class="md-code"><div class="md-code-head"><span>${m&&m[1]?m[1]:'code'}</span><button type="button" class="md-copy" data-copy-code>Copy</button></div>${part}</div>`;
+    }
+    return part
+      .replace(/==([^=\n<]+?)==/g,'<mark>$1</mark>')
+      .replace(/\[\[([^\]\n<]{1,24})\]\]/g,'<kbd>$1</kbd>')
+      .replace(/\{progress:(\d{1,3})\}/g,(_,n)=>{const v=Math.min(100,+n);return `<span class="md-progress"><span class="md-progress-track"><span class="md-progress-bar" style="width:${v}%"></span></span><span class="md-progress-label">${v}%</span></span>`;})
+      .replace(/\{(ok|warn|fail|info|todo):([^}\n<]{1,40})\}/g,'<span class="md-badge md-badge-$1">$2</span>');
+  }).join('');
+};
+const _exportHTML=exportReadableHTML;
+exportReadableHTML=function(...a){mdExport=true;try{return _exportHTML(...a);}finally{mdExport=false;}};
+document.addEventListener('click',async e=>{
+  const b=e.target.closest('[data-copy-code]');if(!b)return;
+  const code=b.closest('.md-code')?.querySelector('code')?.textContent||'';
+  try{await navigator.clipboard.writeText(code);}catch{const t=document.createElement('textarea');t.value=code;document.body.appendChild(t);t.select();document.execCommand('copy');t.remove();}
+  b.textContent='Copied';setTimeout(()=>{b.textContent='Copy';},1400);
+});
+const MD_SNIPPETS={
+  callout:'\n> [!NOTE]\n> Text\n',
+  warning:'\n> [!WARNING]\n> Text\n',
+  details:'\n:::details Title\nContent\n:::\n',
+  progress:'{progress:50}',
+  badge:'{ok:Done}',
+  table:'\n| Column | Column |\n| --- | --- |\n| Value | Value |\n',
+  checklist:'\n- [ ] Task\n- [ ] Task\n',
+  code:'\n```js\ncode\n```\n'
+};
+const MD_LABELS=[['callout','Note'],['warning','Warning'],['details','Collapsible'],['progress','Progress'],['badge','Badge'],['table','Table'],['checklist','Checklist'],['code','Code']];
+const _enhanceShells=enhanceShells;
+enhanceShells=function(){
+  _enhanceShells();
+  document.querySelectorAll('#shells [data-shell]').forEach(el=>{
+    const ta=el.querySelector('textarea.notes');
+    if(!ta||el.querySelector('.md-toolbar'))return;
+    const bar=document.createElement('div');bar.className='md-toolbar';
+    bar.innerHTML=MD_LABELS.map(([k,l])=>`<button type="button" data-md-insert="${k}">${l}</button>`).join('');
+    ta.parentNode.insertBefore(bar,ta);
+  });
+};
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-md-insert]');if(!b)return;
+  const ta=b.closest('[data-shell]')?.querySelector('textarea.notes');if(!ta)return;
+  const snip=MD_SNIPPETS[b.dataset.mdInsert]||'',s=ta.selectionStart??ta.value.length,en=ta.selectionEnd??s;
+  ta.value=ta.value.slice(0,s)+snip+ta.value.slice(en);ta.selectionStart=ta.selectionEnd=s+snip.length;
+  ta.dispatchEvent(new Event('input',{bubbles:true}));ta.focus();
+});
+
+// Additional Pogo tools
+const shellLoc=id=>{const p=current();for(const v of p?.versions||[]){const sh=(v.shells||[]).find(x=>x.id===String(id||''));if(sh)return {p,v,sh};}throw new Error('Shell not found in the active project. Search the active project first.');};
+const keepHistory=sh=>{sh.history=[...(sh.history||[]),{title:sh.title,notes:sh.notes,status:sh.status,color:sh.color,date:sh.date,savedAt:now()}].slice(-20);};
+const shellBrief=(sh,v)=>({id:sh.id,title:sh.title,status:sh.status,date:sh.date,version:v?.name,tags:sh.tags||[]});
+const verByRef=(p,ref)=>(p.versions||[]).find(v=>v.id===ref||String(v.name).toLowerCase()===String(ref||'').toLowerCase()||String(v.version||'').toLowerCase()===String(ref||'').toLowerCase());
+const obj=(properties,required=[])=>({type:'object',properties,required});
+const S={type:'string'};
+aiTools.push(
+ {type:'function',function:{name:'get_shell',description:'Read one shell in the active project in full, including notes, tags and attachment names.',parameters:obj({shell_id:S},['shell_id'])}},
+ {type:'function',function:{name:'append_to_shell',description:'Add text to the end of an existing shell\'s notes without replacing what is there. The previous version is kept in the shell history.',parameters:obj({shell_id:S,text:S},['shell_id','text'])}},
+ {type:'function',function:{name:'set_shell_tags',description:'Replace the tags of a shell in the active project.',parameters:obj({shell_id:S,tags:{type:'string',description:'Comma separated tags'}},['shell_id','tags'])}},
+ {type:'function',function:{name:'find_shells_by_tag',description:'List shells in the active project that carry a tag.',parameters:obj({tag:S},['tag'])}},
+ {type:'function',function:{name:'project_statistics',description:'Counts of shells by status for each version of the active project, plus tag usage and the latest activity date.',parameters:obj({})}},
+ {type:'function',function:{name:'list_unresolved',description:'List shells in the active project whose status is not working, oldest first.',parameters:obj({limit:{type:'integer',description:'Maximum results, 1 to 30'}})}},
+ {type:'function',function:{name:'compare_versions',description:'Compare two versions of the active project by id, name or version label.',parameters:obj({version_a:S,version_b:S},['version_a','version_b'])}},
+ {type:'function',function:{name:'list_attachments',description:'List attachment names, types and sizes in the active project, or for one shell.',parameters:obj({shell_id:S})}},
+ {type:'function',function:{name:'update_project_details',description:'Update the description and technologies of the active project.',parameters:obj({description:S,technologies:S})}},
+ {type:'function',function:{name:'create_backup',description:'Create a backup snapshot of the whole workspace.',parameters:obj({})}}
+);
+const _aiRunTool=aiRunTool;
+aiRunTool=async function(name,args={}){
+  const p=current();
+  switch(name){
+    case 'get_shell':{const {v,sh}=shellLoc(args.shell_id);return {...shellBrief(sh,v),notes:sh.notes,attachments:(sh.attachments||[]).map(a=>({name:a.name,type:a.type,size:a.size}))};}
+    case 'append_to_shell':{const {sh}=shellLoc(args.shell_id);const add=String(args.text||'').trim();if(!add)throw new Error('Text is required.');keepHistory(sh);sh.notes=(sh.notes?sh.notes.replace(/\s+$/,'')+'\n\n':'')+add;sh.notes=sh.notes.slice(0,50000);sh.date=now();await persist('AI added to a shell');return {success:true,id:sh.id,length:sh.notes.length};}
+    case 'set_shell_tags':{const {sh}=shellLoc(args.shell_id);sh.tags=parseTags(args.tags);await persist('AI updated tags');return {success:true,id:sh.id,tags:sh.tags};}
+    case 'find_shells_by_tag':{const t=parseTags(args.tag)[0];if(!t)throw new Error('Tag is required.');const out=[];for(const v of p?.versions||[])for(const sh of v.shells||[])if((sh.tags||[]).includes(t))out.push(shellBrief(sh,v));return out;}
+    case 'project_statistics':{if(!p)throw new Error('No active project.');const tags={};let latest='';const versions=(p.versions||[]).map(v=>{const c={working:0,broken:0,fix:0};for(const sh of v.shells||[]){c[sh.status]=(c[sh.status]||0)+1;(sh.tags||[]).forEach(t=>tags[t]=(tags[t]||0)+1);if(String(sh.date||'')>latest)latest=sh.date;}return {version:v.name,total:(v.shells||[]).length,...c};});return {project:p.name,versions,tags,latestActivity:latest||null};}
+    case 'list_unresolved':{const limit=Math.max(1,Math.min(30,Number(args.limit)||15));const out=[];for(const v of p?.versions||[])for(const sh of v.shells||[])if(sh.status!=='working')out.push(shellBrief(sh,v));return out.sort((a,b)=>String(a.date||'').localeCompare(String(b.date||''))).slice(0,limit);}
+    case 'compare_versions':{const a=verByRef(p,args.version_a),b=verByRef(p,args.version_b);if(!a||!b)throw new Error('Both versions must exist in the active project. Use list_versions to see them.');const sum=v=>{const c={working:0,broken:0,fix:0};(v.shells||[]).forEach(s=>c[s.status]=(c[s.status]||0)+1);return {name:v.name,version:v.version,total:(v.shells||[]).length,...c};};const ta=new Set((a.shells||[]).map(s=>s.title.toLowerCase())),tb=new Set((b.shells||[]).map(s=>s.title.toLowerCase()));return {a:sum(a),b:sum(b),onlyInA:(a.shells||[]).filter(s=>!tb.has(s.title.toLowerCase())).map(s=>s.title).slice(0,30),onlyInB:(b.shells||[]).filter(s=>!ta.has(s.title.toLowerCase())).map(s=>s.title).slice(0,30)};}
+    case 'list_attachments':{const out=[];for(const v of p?.versions||[])for(const sh of v.shells||[]){if(args.shell_id&&sh.id!==args.shell_id)continue;for(const a of sh.attachments||[])out.push({shell:sh.title,shellId:sh.id,name:a.name,type:a.type,size:a.size});}return out.slice(0,100);}
+    case 'update_project_details':{if(!p)throw new Error('No active project.');if(args.description!==undefined)p.description=String(args.description).slice(0,2000);if(args.technologies!==undefined)p.technologies=String(args.technologies).slice(0,500);await persist('AI updated project details');return {success:true,name:p.name,description:p.description,technologies:p.technologies};}
+    case 'create_backup':{await makeBackup('assistant');renderBackups();return {success:true};}
+  }
+  return _aiRunTool(name,args);
+};
+
+// In-app update dialog
+let upd={};
+const updEl=id=>$(id);
+function updRender(){
+  const st=upd.status;
+  const busy=st==='downloading';
+  updEl('updTitle').textContent=st==='downloaded'?'Ready to install':st==='downloading'?'Downloading update':st==='error'?'Update failed':'Update available';
+  updEl('updSub').textContent=st==='downloaded'?'Restart ProjectLog to finish installing.':st==='downloading'?'You can keep working while it downloads.':st==='error'?'':`You have ${APP_VERSION}. Download the new version when you are ready.`;
+  updEl('updVersion').textContent=upd.version?'Version '+upd.version:'';
+  updEl('updDate').textContent=upd.releaseDate?new Date(upd.releaseDate).toLocaleDateString(undefined,{year:'numeric',month:'short',day:'numeric'}):'';
+  updEl('updNotes').innerHTML=upd.notes?markdown(upd.notes):'<p class="muted">No release notes were published for this version.</p>';
+  updEl('updProgress').hidden=!(busy||st==='downloaded');
+  const pct=Math.round(st==='downloaded'?100:upd.percent||0);
+  updEl('updBar').style.width=pct+'%';updEl('updPct').textContent=pct+'%';
+  updEl('updDetail').textContent=busy?[upd.transferred&&upd.total?upd.transferred+' of '+upd.total:'',upd.speed||''].filter(Boolean).join(' · '):'';
+  updEl('updError').hidden=st!=='error';updEl('updError').textContent=upd.message||'';
+  const pr=updEl('updPrimary');
+  pr.disabled=busy;pr.textContent=st==='downloaded'?'Restart and install':busy?'Downloading…':st==='error'?(upd.version?'Try again':'Close'):'Download update';
+  const view=updEl('viewUpdateBtn');if(view)view.hidden=!['available','downloading','downloaded'].includes(st);
+}
+const updOpen=()=>{updRender();updEl('updateModal').hidden=false;updEl('updPrimary').focus();};
+const updClose=()=>{updEl('updateModal').hidden=true;};
+window.projectLog?.onUpdateState?.(u=>{
+  if(u.status==='current')return;
+  upd={...upd,...u};
+  if(u.status==='available'||u.status==='downloaded'){upd.message='';}
+  updRender();
+  if(u.open||(u.status==='error'&&!updEl('updateModal').hidden))updOpen();
+});
+updEl('updPrimary')?.addEventListener('click',async()=>{
+  const st=upd.status;
+  if(st==='downloaded'){try{await window.projectLog.updateAction('install');}catch(e){upd={...upd,status:'error',message:e.message};updRender();}return;}
+  if(st==='error'&&!upd.version){updClose();return;}
+  upd={...upd,status:'downloading',percent:0,message:''};updRender();
+  try{await window.projectLog.updateAction('download');}catch(e){upd={...upd,status:'error',message:(e&&e.message)||'Download failed.'};updRender();}
+});
+['updLater','updClose'].forEach(i=>updEl(i)?.addEventListener('click',updClose));
+$('viewUpdateBtn')?.addEventListener('click',updOpen);
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!updEl('updateModal').hidden)updClose();});
+
+function postInit(){
+  if(!state)return;
+  const last=LS.get('projectlog-ai-last',null);
+  if(last&&last.provider){$('aiProvider').value=last.provider;aiEndpointDefault();if(last.endpoint)$('aiEndpoint').value=last.endpoint;if(last.model)$('aiModel').value=last.model;}
+  renderAIModels();renderTpls();renderBackups();setTimeout(autoBackup,5000);
+}
+
+function postInit(){
+  if(!state)return;
+  renderAIModels();renderTpls();renderBackups();setTimeout(autoBackup,5000);
+}
+
+init().then(postInit);
 })();
 </script>
 </body></html>
