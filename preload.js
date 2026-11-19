@@ -5,6 +5,13 @@ contextBridge.exposeInMainWorld('projectLog', Object.freeze({
   exportPDF: (html, suggestedName) => ipcRenderer.invoke('projectlog:export-pdf', html, suggestedName),
   checkForUpdates: () => ipcRenderer.invoke('projectlog:check-for-updates'),
   localAIRequest: (payload) => ipcRenderer.invoke('projectlog:local-ai-request', payload),
+  localAIStream: (payload) => ipcRenderer.invoke('projectlog:local-ai-stream', payload),
+  onAIChunk: (callback) => {
+    if (typeof callback !== 'function') return () => {};
+    const listener = (_event, chunk) => callback(chunk);
+    ipcRenderer.on('projectlog:ai-chunk', listener);
+    return () => ipcRenderer.removeListener('projectlog:ai-chunk', listener);
+  },
   updateAction: (action) => ipcRenderer.invoke('projectlog:update-action', action),
   onUpdateState: (callback) => {
     if (typeof callback !== 'function') return () => {};
